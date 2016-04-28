@@ -15,13 +15,13 @@ namespace BingoWallpaper.Services.UnitTests
             _service = new WallpaperService();
         }
 
-        public Task TestGetImageAsync()
+        public Task TestGetArchivesAsync()
         {
             throw new NotImplementedException();
         }
 
         [TestMethod]
-        public async Task TestGetImageAsync2()
+        public async Task TestGetArchivesAsync2()
         {
             await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentOutOfRangeException>(async () =>
             {
@@ -34,6 +34,14 @@ namespace BingoWallpaper.Services.UnitTests
             await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentException>(async () =>
             {
                 await _service.GetArchivesAsync(2015, 1, string.Empty);
+            });
+        }
+
+        public async Task TestGetImageAsync()
+        {
+            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentNullException>(async () =>
+            {
+                await _service.GetImageAsync(null);
             });
         }
     }
