@@ -107,9 +107,15 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Archive.cs" />
     <Compile Include="Models\AVObject.cs" />
+    <Compile Include="Models\CoverStory.cs" />
+    <Compile Include="Models\Hotspot.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\LeanCloudPointer.cs" />
     <Compile Include="Models\LeanCloudResultBase.cs" />
     <Compile Include="Models\LeanCloudResultCollection.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\BingoWallpaper.Models.rd.xml" />
   </ItemGroup>
