@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BingoWallpaper.Services
 {
-    public class WallpaperService
+    public class WallpaperService : IWallpaperService
     {
         private static readonly DateTime MinimunViewMonth = new DateTime(2015, 1, 1);
 
