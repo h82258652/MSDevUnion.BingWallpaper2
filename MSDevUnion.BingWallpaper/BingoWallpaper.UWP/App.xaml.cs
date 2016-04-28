@@ -1,4 +1,4 @@
-﻿using BingoWallpaper.Views;
+﻿using BingoWallpaper.UWP.Views;
 using System;
 using UmengSDK;
 using Windows.ApplicationModel;
@@ -7,12 +7,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace BingoWallpaper
+namespace BingoWallpaper.UWP
 {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
     /// </summary>
-    public sealed partial class App
+    sealed partial class App
     {
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
@@ -21,7 +21,15 @@ namespace BingoWallpaper
         public App()
         {
             InitializeComponent();
+            Resuming += OnResuming;
             Suspending += OnSuspending;
+        }
+
+        protected override async void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            await UmengAnalytics.StartTrackAsync(Constants.UmengAppkey);
         }
 
         /// <summary>
@@ -31,12 +39,11 @@ namespace BingoWallpaper
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 DebugSettings.EnableFrameRateCounter = true;
             }
-#endif
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
@@ -83,10 +90,8 @@ namespace BingoWallpaper
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
-        protected override async void OnActivated(IActivatedEventArgs args)
+        private async void OnResuming(object sender, object e)
         {
-            base.OnActivated(args);
-
             await UmengAnalytics.StartTrackAsync(Constants.UmengAppkey);
         }
 
@@ -102,9 +107,14 @@ namespace BingoWallpaper
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
 
-            await UmengAnalytics.EndTrackAsync();
-
-            deferral.Complete();
+            try
+            {
+                await UmengAnalytics.EndTrackAsync();
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
     }
 }

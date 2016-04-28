@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="035ac1d6-bd56-4574-b421-54d750c86ef7" Publisher="CN=h8225" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="035ac1d6-bd56-4574-b421-54d750c86ef7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="347e7952-7c26-4f87-913c-86ecafc427d8" Publisher="CN=h8225" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="347e7952-7c26-4f87-913c-86ecafc427d8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>BingoWallpaper</DisplayName>
+    <DisplayName>BingoWallpaper.UWP</DisplayName>
     <PublisherDisplayName>h8225</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BingoWallpaper.App">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BingoWallpaper.UWP.App">
       <uap:VisualElements DisplayName="ms-resource:DisplayName" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="ms-resource:Description" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
