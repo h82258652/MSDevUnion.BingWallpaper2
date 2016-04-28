@@ -107,7 +107,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AVObject.cs" />
     <Compile Include="Models\LeanCloudResultBase.cs" />
+    <Compile Include="Models\LeanCloudResultCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\BingoWallpaper.Models.rd.xml" />
   </ItemGroup>
