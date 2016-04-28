@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingoWallpaper.Views;
+using System;
 using UmengSDK;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -63,7 +64,7 @@ namespace BingoWallpaper
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(MainView), e.Arguments);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
