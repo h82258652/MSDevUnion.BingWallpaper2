@@ -44,14 +44,9 @@ namespace BingoWallpaper.Services
 
             using (var client = CreateHttpClient())
             {
-                var json = await client.GetStringAsync(new Uri(requestUrl));
+                var json = await client.GetStringAsync(requestUrl);
                 return JsonConvert.DeserializeObject<LeanCloudResultCollection<Archive>>(json);
             }
-        }
-
-        public Task<LeanCloudResultCollection<Image>> GetImagesAsync(params string[] objectIds)
-        {
-            return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
         public async Task<Image> GetImageAsync(string objectId)
@@ -65,7 +60,7 @@ namespace BingoWallpaper.Services
                 throw new ArgumentException("objectId 不能为空字符串。");
             }
 
-            var requestUrl = $"{Constants.UrlBase}/1.1/classes/Image/{objectId}";
+            string requestUrl = $"{Constants.UrlBase}/1.1/classes/Image/{objectId}";
 
             using (var client = CreateHttpClient())
             {
@@ -101,7 +96,12 @@ namespace BingoWallpaper.Services
             }
         }
 
-        private HttpClient CreateHttpClient()
+        public Task<LeanCloudResultCollection<Image>> GetImagesAsync(params string[] objectIds)
+        {
+            return GetImagesAsync((IEnumerable<string>)objectIds);
+        }
+
+        private static HttpClient CreateHttpClient()
         {
             var client = new HttpClient();
             var headers = client.DefaultRequestHeaders;
