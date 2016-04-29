@@ -160,9 +160,17 @@
     <Folder Include="Styles\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
+      <Project>{d194530c-a362-4bcb-861f-5c089aad00b7}</Project>
+      <Name>BingoWallpaper.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BingoWallpaper.Services\BingoWallpaper.Services.csproj">
       <Project>{ef6354d0-5e42-439e-bb6c-9f2e317a7f89}</Project>
       <Name>BingoWallpaper.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BingoWallpaper.Utils\BingoWallpaper.Utils.csproj">
+      <Project>{94813fa8-4a95-474e-93fb-1e9c9eab9bf7}</Project>
+      <Name>BingoWallpaper.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
