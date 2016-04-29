@@ -39,9 +39,19 @@ namespace BingoWallpaper.Services.UnitTests
 
         public async Task TestGetImageAsync()
         {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public async Task TestGetImageAsync2()
+        {
             await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentNullException>(async () =>
             {
                 await _service.GetImageAsync(null);
+            });
+            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentException>(async () =>
+            {
+                await _service.GetImageAsync(string.Empty);
             });
         }
     }
