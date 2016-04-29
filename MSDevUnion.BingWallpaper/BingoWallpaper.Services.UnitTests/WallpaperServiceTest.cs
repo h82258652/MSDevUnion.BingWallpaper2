@@ -1,58 +1,42 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
 namespace BingoWallpaper.Services.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class WallpaperServiceTest
     {
-        private static WallpaperService _service;
+        private IWallpaperService _service;
 
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        [SetUp]
+        public void SetUp()
         {
             _service = new WallpaperService();
         }
 
-        public Task TestGetArchivesAsync()
+        [Test]
+        public async Task TestGetArchivesAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
-        public async Task TestGetArchivesAsync2()
-        {
-            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentOutOfRangeException>(async () =>
+            var result = await _service.GetArchivesAsync(2015, 1, "zh-CN");
+            Assert.AreEqual(result.ErrorCode, 0);
+            Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
             {
                 await _service.GetArchivesAsync(2014, 12, "zh-CN");
             });
-            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentNullException>(async () =>
+            Assert.ThrowsAsync<ArgumentNullException>(async () =>
             {
                 await _service.GetArchivesAsync(2015, 1, null);
             });
-            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentException>(async () =>
+            Assert.ThrowsAsync<ArgumentException>(async () =>
             {
                 await _service.GetArchivesAsync(2015, 1, string.Empty);
             });
         }
 
-        public async Task TestGetImageAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
-        public async Task TestGetImageAsync2()
-        {
-            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentNullException>(async () =>
-            {
-                await _service.GetImageAsync(null);
-            });
-            await Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer.Assert.ThrowsException<ArgumentException>(async () =>
-            {
-                await _service.GetImageAsync(string.Empty);
-            });
-        }
+        //public async Task TestGetImagesAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
