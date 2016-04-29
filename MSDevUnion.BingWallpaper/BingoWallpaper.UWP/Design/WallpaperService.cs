@@ -8,7 +8,7 @@ namespace BingoWallpaper.UWP.Design
 {
     public class WallpaperService : IWallpaperService
     {
-        public Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string market)
+        public Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
         {
             throw new NotImplementedException();
         }
