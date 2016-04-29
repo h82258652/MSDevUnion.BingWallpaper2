@@ -40,7 +40,7 @@ namespace BingoWallpaper.Services
                 }
             };
 
-            string requestUrl = $"{Constants.UrlBase}/1.1/classes/Archive?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-date";
+            string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Archive?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-date";
 
             using (var client = CreateHttpClient())
             {
@@ -60,7 +60,7 @@ namespace BingoWallpaper.Services
                 throw new ArgumentException("objectId 不能为空字符串。");
             }
 
-            string requestUrl = $"{Constants.UrlBase}/1.1/classes/Image/{objectId}";
+            string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Image/{objectId}";
 
             using (var client = CreateHttpClient())
             {
@@ -87,7 +87,7 @@ namespace BingoWallpaper.Services
                 }
             };
 
-            string requestUrl = $"{Constants.UrlBase}/1.1/classes/Image?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-updatedAt";
+            string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Image?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-updatedAt";
 
             using (var client = CreateHttpClient())
             {
