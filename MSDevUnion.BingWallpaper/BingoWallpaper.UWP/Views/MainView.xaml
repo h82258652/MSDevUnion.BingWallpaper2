@@ -35,7 +35,8 @@
                 </AppBarButton>
                 <AppBarButton Grid.Column="2"
                               x:Uid="/Main/Setting"
-                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}">
+                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}"
+                              Command="{x:Bind ViewModel.SettingCommand}">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                   Glyph="&#xE946;" />
@@ -43,7 +44,8 @@
                 </AppBarButton>
                 <AppBarButton Grid.Column="3"
                               x:Uid="/Main/About"
-                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}">
+                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}"
+                              Command="{x:Bind ViewModel.AboutCommand}">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xF1F0;"
                                   FontFamily="ms-appx:/Assets/Fonts/Material-Design-Iconic-Font.ttf#Material-Design-Iconic-Font"></FontIcon>
