@@ -1,16 +1,25 @@
 ﻿using BingoWallpaper.Services;
+using BingoWallpaper.UWP.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
 namespace BingoWallpaper.UWP.ViewModels
 {
     public class ViewModelLocator
     {
+        public const string DetailViewKey = @"Detail";
+
+        public const string SettingViewKey = @"Setting";
+
+        public const string AboutViewKey = @"About";
+
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SimpleIoc.Default.Register<INavigationService>(CreateNavigationService);
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 SimpleIoc.Default.Register<IWallpaperService, Design.WallpaperService>();
@@ -26,36 +35,21 @@ namespace BingoWallpaper.UWP.ViewModels
             SimpleIoc.Default.Register<AboutViewModel>();
         }
 
-        public AboutViewModel About
+        private static INavigationService CreateNavigationService()
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<AboutViewModel>();
-            }
+            var navigationService = new NavigationService();
+            navigationService.Configure(DetailViewKey, typeof(DetailView));
+            navigationService.Configure(SettingViewKey, typeof(SettingView));
+            navigationService.Configure(AboutViewKey, typeof(AboutView));
+            return navigationService;
         }
 
-        public DetailViewModel Detail
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<DetailViewModel>();
-            }
-        }
+        public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
 
-        public SettingViewModel Setting
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<SettingViewModel>();
-            }
-        }
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public SettingViewModel Setting => ServiceLocator.Current.GetInstance<SettingViewModel>();
     }
 }

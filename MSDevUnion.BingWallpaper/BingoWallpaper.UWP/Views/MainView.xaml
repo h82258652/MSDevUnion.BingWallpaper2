@@ -54,13 +54,5 @@
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <!--<FlipView Background="Transparent"></FlipView>-->
-        <FontIcon Glyph="&#xF1F0;"
-                  RenderTransformOrigin="0.5,0.5"
-                  FontFamily="ms-appx:/Assets/Fonts/Material-Design-Iconic-Font.ttf#Material-Design-Iconic-Font">
-            <FontIcon.RenderTransform>
-                <ScaleTransform ScaleX="3"
-                                ScaleY="3"></ScaleTransform>
-            </FontIcon.RenderTransform>
-        </FontIcon>
     </Grid>
 </Page>
