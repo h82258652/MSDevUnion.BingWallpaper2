@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 
-namespace BingoWallpaper.UWP.Converters
+namespace BingoWallpaper.Uwp.Converters
 {
     /// <summary>
     /// 反转布尔值转换器。

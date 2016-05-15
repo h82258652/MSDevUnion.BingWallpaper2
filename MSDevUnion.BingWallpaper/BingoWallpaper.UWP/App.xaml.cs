@@ -1,4 +1,4 @@
-﻿using BingoWallpaper.UWP.View;
+﻿using BingoWallpaper.Uwp.View;
 using System;
 using UmengSDK;
 using Windows.ApplicationModel;
@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace BingoWallpaper.UWP
+namespace BingoWallpaper.Uwp
 {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。

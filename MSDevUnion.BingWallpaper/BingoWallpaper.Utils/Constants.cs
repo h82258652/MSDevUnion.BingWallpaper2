@@ -1,4 +1,6 @@
-﻿namespace BingoWallpaper
+﻿using System;
+
+namespace BingoWallpaper
 {
     public static class Constants
     {
@@ -13,5 +15,7 @@
         public const string UmengAppkey = @"56137ba2e0f55adb22005d2b";
 
         public const string WechatAppId = @"wxff94ab33c2c89267";
+
+        public static readonly DateTimeOffset MinimumViewMonth = new DateTimeOffset(new DateTime(2015, 1, 1));
     }
 }

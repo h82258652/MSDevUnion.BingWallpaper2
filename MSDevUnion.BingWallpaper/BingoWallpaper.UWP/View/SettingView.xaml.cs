@@ -1,4 +1,4 @@
-﻿namespace BingoWallpaper.UWP.View
+﻿namespace BingoWallpaper.Uwp.View
 {
     public sealed partial class SettingView
     {

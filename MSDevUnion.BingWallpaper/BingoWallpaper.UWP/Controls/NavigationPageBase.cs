@@ -3,7 +3,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace BingoWallpaper.UWP.Controls
+namespace BingoWallpaper.Uwp.Controls
 {
     public abstract class NavigationPageBase : Page
     {

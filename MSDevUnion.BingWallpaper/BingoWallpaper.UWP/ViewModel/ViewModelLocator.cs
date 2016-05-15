@@ -1,11 +1,12 @@
 ﻿using BingoWallpaper.Service;
-using BingoWallpaper.UWP.View;
+using BingoWallpaper.Uwp.Service;
+using BingoWallpaper.Uwp.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
-namespace BingoWallpaper.UWP.ViewModel
+namespace BingoWallpaper.Uwp.ViewModel
 {
     public class ViewModelLocator
     {
@@ -28,6 +29,7 @@ namespace BingoWallpaper.UWP.ViewModel
             {
                 SimpleIoc.Default.Register<IWallpaperService, WallpaperService>();
             }
+            SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DetailViewModel>();

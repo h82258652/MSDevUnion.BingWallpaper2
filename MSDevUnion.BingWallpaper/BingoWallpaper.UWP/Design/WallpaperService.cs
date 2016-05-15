@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BingoWallpaper.UWP.Design
+namespace BingoWallpaper.Uwp.Design
 {
     public class WallpaperService : IWallpaperService
     {

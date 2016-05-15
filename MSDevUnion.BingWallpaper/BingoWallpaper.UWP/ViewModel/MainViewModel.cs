@@ -1,8 +1,12 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BingoWallpaper.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace BingoWallpaper.UWP.ViewModel
+namespace BingoWallpaper.Uwp.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
@@ -17,6 +21,8 @@ namespace BingoWallpaper.UWP.ViewModel
         public MainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            Initialize();
         }
 
         public RelayCommand AboutCommand
@@ -40,6 +46,20 @@ namespace BingoWallpaper.UWP.ViewModel
             private set
             {
                 Set(ref _isBusy, value);
+            }
+        }
+
+        public IList<ObservableCollection<Model.Archive>> Temp;
+
+        private void Initialize()
+        {
+            // TODO
+            Temp = new List<ObservableCollection<Archive>>();
+            var date = Constants.MinimumViewMonth.Date;
+            while (date <= DateTime.Now)
+            {
+                Temp.Add(new ObservableCollection<Archive>());
+                date = date.AddMonths(1);
             }
         }
 

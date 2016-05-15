@@ -7,8 +7,8 @@
     <ProjectGuid>{57DD34BD-9E87-462E-98A4-07D64D96B807}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BingoWallpaper.UWP</RootNamespace>
-    <AssemblyName>BingoWallpaper.UWP</AssemblyName>
+    <RootNamespace>BingoWallpaper.Uwp</RootNamespace>
+    <AssemblyName>BingoWallpaper.Uwp.10586</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -105,6 +105,8 @@
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ISystemSettingService.cs" />
+    <Compile Include="Service\SystemSettingService.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\DetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

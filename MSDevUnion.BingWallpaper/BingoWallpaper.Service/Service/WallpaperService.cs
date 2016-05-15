@@ -10,12 +10,10 @@ namespace BingoWallpaper.Service
 {
     public class WallpaperService : IWallpaperService
     {
-        private static readonly DateTime MinimunViewMonth = new DateTime(2015, 1, 1);
-
         public async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
         {
             var viewMonth = new DateTime(year, month, 1);
-            if (viewMonth < MinimunViewMonth)
+            if (viewMonth < Constants.MinimumViewMonth)
             {
                 throw new ArgumentOutOfRangeException(nameof(viewMonth), "请求的时间不能早于 2015 年 1 月。");
             }

@@ -1,7 +1,7 @@
-﻿<Application x:Class="BingoWallpaper.UWP.App"
+﻿<Application x:Class="BingoWallpaper.Uwp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewModel="using:BingoWallpaper.UWP.ViewModel">
+             xmlns:viewModel="using:BingoWallpaper.Uwp.ViewModel">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

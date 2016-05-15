@@ -1,10 +1,14 @@
-﻿namespace BingoWallpaper.UWP.View
+﻿using BingoWallpaper.Uwp.ViewModel;
+
+namespace BingoWallpaper.Uwp.View
 {
     public sealed partial class DetailView
     {
         public DetailView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
+
+        public DetailViewModel ViewModel => (DetailViewModel)DataContext;
     }
 }

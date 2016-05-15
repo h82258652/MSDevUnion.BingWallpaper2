@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BingoWallpaper.UWP.Controls
+namespace BingoWallpaper.Uwp.Controls
 {
     public sealed class NavigationBackRequestedEventArgs : EventArgs
     {

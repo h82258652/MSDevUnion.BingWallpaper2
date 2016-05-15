@@ -1,7 +1,7 @@
-﻿using BingoWallpaper.UWP.ViewModel;
+﻿using BingoWallpaper.Uwp.ViewModel;
 using Windows.UI.Xaml.Controls;
 
-namespace BingoWallpaper.UWP.View
+namespace BingoWallpaper.Uwp.View
 {
     public sealed partial class MainView
     {

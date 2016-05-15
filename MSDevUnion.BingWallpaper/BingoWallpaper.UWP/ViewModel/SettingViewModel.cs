@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace BingoWallpaper.UWP.ViewModel
+namespace BingoWallpaper.Uwp.ViewModel
 {
     public class SettingViewModel : ViewModelBase
     {
