@@ -1,4 +1,4 @@
-﻿using BingoWallpaper.UWP.Views;
+﻿using BingoWallpaper.UWP.View;
 using System;
 using UmengSDK;
 using Windows.ApplicationModel;
