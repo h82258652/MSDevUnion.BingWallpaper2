@@ -91,6 +91,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\Fonts\Material-Design-Iconic-Font.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-CN\Detail.resw" />
+    <PRIResource Include="Strings\en-US\Detail.resw" />
     <PRIResource Include="Strings\en-US\Main.resw" />
     <PRIResource Include="Strings\zh-CN\Main.resw" />
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
@@ -100,8 +102,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NavigationBackRequestedEventArgs.cs" />
-    <Compile Include="Controls\NavigationPageBase.cs" />
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,9 +121,11 @@
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\NavigationBackRequestedEventArgs.cs" />
     <Compile Include="View\SettingView.xaml.cs">
       <DependentUpon>SettingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -168,7 +170,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BingoWallpaper.Model\BingoWallpaper.Model.csproj">
       <Project>{ecd5108f-3420-4436-a7fa-bfe7c8a23e4e}</Project>
