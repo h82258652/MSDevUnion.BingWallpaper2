@@ -12,29 +12,13 @@ namespace BingoWallpaper.Uwp.ViewModel
     {
         private readonly INavigationService _navigationService;
 
-        private RelayCommand _aboutCommand;
-
         private bool _isBusy;
-
-        private RelayCommand _settingCommand;
 
         public MainViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
 
             Initialize();
-        }
-
-        public RelayCommand AboutCommand
-        {
-            get
-            {
-                _aboutCommand = _aboutCommand ?? new RelayCommand(() =>
-                {
-                    _navigationService.NavigateTo(ViewModelLocator.AboutViewKey);
-                });
-                return _aboutCommand;
-            }
         }
 
         public bool IsBusy
@@ -60,18 +44,6 @@ namespace BingoWallpaper.Uwp.ViewModel
             {
                 Temp.Add(new ObservableCollection<Archive>());
                 date = date.AddMonths(1);
-            }
-        }
-
-        public RelayCommand SettingCommand
-        {
-            get
-            {
-                _settingCommand = _settingCommand ?? new RelayCommand(() =>
-                {
-                    _navigationService.NavigateTo(ViewModelLocator.SettingViewKey);
-                });
-                return _settingCommand;
             }
         }
     }

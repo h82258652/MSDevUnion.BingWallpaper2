@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Uwp.ViewModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace BingoWallpaper.Uwp.View
