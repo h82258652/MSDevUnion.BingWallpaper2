@@ -10,9 +10,6 @@
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Main}">
-    <!--<VisualStateManager.VisualStateGroups>
-        <VisualStateGroup></VisualStateGroup>
-    </VisualStateManager.VisualStateGroups>-->
     <Page.Resources>
         <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
         <Storyboard x:Key="RefreshBusyStoryboard">
@@ -85,13 +82,16 @@
                     </AppBarButton.Icon>
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.Views.AboutView" />
+                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.View.AboutView" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
             </Grid>
         </AppBar>
     </Page.BottomAppBar>
+    <!--<VisualStateManager.VisualStateGroups>
+        <VisualStateGroup></VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <FlipView Background="Transparent">
             <Grid Background="DarkGreen"></Grid>
