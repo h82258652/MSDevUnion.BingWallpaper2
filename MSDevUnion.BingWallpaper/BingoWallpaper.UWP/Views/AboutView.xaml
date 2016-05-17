@@ -6,5 +6,10 @@
                 xmlns:local="using:BingoWallpaper.Uwp.Views"
                 mc:Ignorable="d"
                 DataContext="{Binding Source={StaticResource Locator},Path=About}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <EdgeUIThemeTransition Edge="Right" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Grid>
 </local:ViewBase>
