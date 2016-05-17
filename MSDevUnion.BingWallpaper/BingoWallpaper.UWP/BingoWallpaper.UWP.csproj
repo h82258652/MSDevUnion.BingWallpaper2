@@ -91,6 +91,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\Fonts\Material-Design-Iconic-Font.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-CN\Setting.resw" />
+    <PRIResource Include="Strings\en-US\Setting.resw" />
     <PRIResource Include="Strings\zh-CN\Detail.resw" />
     <PRIResource Include="Strings\en-US\Detail.resw" />
     <PRIResource Include="Strings\en-US\Main.resw" />
