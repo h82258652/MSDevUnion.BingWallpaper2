@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{215057C0-8F38-4B43-9969-87242AA39EBA}</ProjectGuid>
+    <ProjectGuid>{749FDCA3-8782-441F-A8D3-7C95E3CA00AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BingoWallpaper</RootNamespace>
-    <AssemblyName>BingoWallpaper.Service</AssemblyName>
+    <AssemblyName>BingoWallpaper.Services</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,10 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\IWallpaperService.cs" />
-    <Compile Include="Service\WallpaperService.cs" />
+    <Compile Include="Services\IWallpaperService.cs" />
+    <Compile Include="Services\WallpaperService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
+      <Project>{0b0bf029-a7ea-44db-8ba4-3cb52e7d4093}</Project>
+      <Name>BingoWallpaper.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BingoWallpaper.Utils\BingoWallpaper.Utils.csproj">
       <Project>{94813fa8-4a95-474e-93fb-1e9c9eab9bf7}</Project>
       <Name>BingoWallpaper.Utils</Name>

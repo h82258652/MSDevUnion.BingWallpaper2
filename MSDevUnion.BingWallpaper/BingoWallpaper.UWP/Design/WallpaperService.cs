@@ -1,5 +1,5 @@
-﻿using BingoWallpaper.Model;
-using BingoWallpaper.Service;
+﻿using BingoWallpaper.Models;
+using BingoWallpaper.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

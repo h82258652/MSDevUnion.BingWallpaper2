@@ -1,13 +1,13 @@
 ﻿<Application x:Class="BingoWallpaper.Uwp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewModel="using:BingoWallpaper.Uwp.ViewModel">
+             xmlns:viewModels="using:BingoWallpaper.Uwp.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperBrushStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <viewModel:ViewModelLocator x:Key="Locator" />
+            <viewModels:ViewModelLocator x:Key="Locator" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
