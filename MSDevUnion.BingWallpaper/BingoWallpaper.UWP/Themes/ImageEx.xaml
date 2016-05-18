@@ -6,7 +6,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ImageEx">
                     <Grid>
-                        <Image x:Name="PART_Image" />
+                        <Image x:Name="PART_Image"
+                               Stretch="{TemplateBinding Stretch}"
+                               NineGrid="{TemplateBinding NineGrid}" />
                         <ContentControl x:Name="PART_PlaceholderContentControl"
                                         ContentTemplate="{TemplateBinding PlaceholderTemplate}"
                                         Visibility="Collapsed" />

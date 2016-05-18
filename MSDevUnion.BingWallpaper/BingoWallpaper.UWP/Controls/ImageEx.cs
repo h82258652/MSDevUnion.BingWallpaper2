@@ -14,11 +14,10 @@ namespace BingoWallpaper.Uwp.Controls
 
         private const string PartPlaceholderContentControlName = "PART_PlaceholderContentControl";
 
-        public static readonly DependencyProperty NineGridProperty = DependencyProperty.Register(nameof(NineGrid), typeof(Thickness), typeof(ImageEx), new PropertyMetadata(null));
+        public static readonly DependencyProperty NineGridProperty = DependencyProperty.Register(nameof(NineGrid), typeof(Thickness), typeof(ImageEx), new PropertyMetadata(default(Thickness)));
 
         public static readonly DependencyProperty PlaceholderTemplateProperty = DependencyProperty.Register(nameof(PlaceholderTemplate), typeof(DataTemplate), typeof(ImageEx), new PropertyMetadata(null));
 
-        // TODO set default value.
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(nameof(Source), typeof(string), typeof(ImageEx), new PropertyMetadata(null, SourceChanged));
 
         public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(ImageEx), new PropertyMetadata(Stretch.Uniform));
@@ -69,6 +68,8 @@ namespace BingoWallpaper.Uwp.Controls
                 if (source == null || Uri.TryCreate(source, UriKind.Absolute, out uri) == false)
                 {
                     _image.Source = null;
+                    _image.Visibility = Visibility.Visible;
+                    _placeholderContentControl.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
