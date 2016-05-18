@@ -64,6 +64,28 @@ namespace BingoWallpaper.Uwp.Controls
         {
             if (_image != null && _placeholderContentControl != null)
             {
+                //if (source == null)
+                //{
+                //    _image.Source = null;
+
+                //}
+                //else
+                //{
+                //    Uri uri;
+                //    if (Uri.TryCreate(source, UriKind.Absolute, out uri))
+                //    {
+                //        if (uri.Scheme == "http" || uri.Scheme == "https")
+                //        {
+                //            UpdateHttpSource(uri);
+                //            return;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        Uri.TryCreate("ms-appx:///" + source, UriKind.Absolute, out uri);
+                //    }
+                //}
+
                 Uri uri;
                 if (source == null || Uri.TryCreate(source, UriKind.Absolute, out uri) == false)
                 {
