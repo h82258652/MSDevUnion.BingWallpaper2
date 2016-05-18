@@ -58,23 +58,37 @@ namespace BingoWallpaper.Uwp.Controls
 
             _image = (Image)GetTemplateChild(PartImageName);
             _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
+            UpdateSource(Source);
         }
 
         private void UpdateSource(string source)
         {
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.DownloadProgress += (sender, e) =>
+            if (_image != null && _placeholderContentControl != null)
             {
-                DownloadProgress?.Invoke(this, e);
-            };
-            bitmap.ImageOpened += (sender, e) =>
-            {
-                ImageOpened?.Invoke(this, e);
-            };
-            bitmap.ImageFailed += (sender, e) =>
-            {
-                ImageFailed?.Invoke(this, e);
-            };
+                Uri uri;
+                if (source == null || Uri.TryCreate(source, UriKind.Absolute, out uri) == false)
+                {
+                    _image.Source = null;
+                }
+                else
+                {
+                    var bitmap = new BitmapImage();
+                    bitmap.DownloadProgress += (sender, e) =>
+                    {
+                        DownloadProgress?.Invoke(this, e);
+                    };
+                    bitmap.ImageOpened += (sender, e) =>
+                    {
+                        ImageOpened?.Invoke(this, e);
+                    };
+                    bitmap.ImageFailed += (sender, e) =>
+                    {
+                        ImageFailed?.Invoke(this, e);
+                    };
+                    bitmap.UriSource = uri;
+                    _image.Source = bitmap;
+                }
+            }
         }
 
         public event ExceptionRoutedEventHandler ImageFailed;
@@ -113,7 +127,10 @@ namespace BingoWallpaper.Uwp.Controls
 
         private static void SourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            var obj = (ImageEx)d;
+            var value = (string)e.NewValue;
+
+            obj.UpdateSource(value);
         }
     }
 }
