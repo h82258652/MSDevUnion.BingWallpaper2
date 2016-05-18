@@ -104,6 +104,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Controls\ImageEx.cs" />
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -155,6 +158,15 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ImageEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Views\AboutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -172,9 +184,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
       <Project>{0b0bf029-a7ea-44db-8ba4-3cb52e7d4093}</Project>

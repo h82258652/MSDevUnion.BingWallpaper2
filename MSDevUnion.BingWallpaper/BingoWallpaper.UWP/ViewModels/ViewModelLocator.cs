@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Services;
+using BingoWallpaper.Uwp.Configuration;
 using BingoWallpaper.Uwp.Services;
 using BingoWallpaper.Uwp.Views;
 using GalaSoft.MvvmLight;
@@ -19,6 +20,8 @@ namespace BingoWallpaper.Uwp.ViewModels
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SimpleIoc.Default.Register<ISettings>(() => AppSettings.Current);
 
             SimpleIoc.Default.Register<INavigationService>(CreateNavigationService);
             if (ViewModelBase.IsInDesignModeStatic)
