@@ -45,25 +45,6 @@ namespace BingoWallpaper.Uwp.Controls
             DefaultStyleKey = typeof(ImageEx);
         }
 
-        public bool ContainsCache(Uri uri)
-        {
-            return File.Exists(GetCacheFileName(uri));
-        }
-
-        public void RemoveAllCache()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveCache(Uri uri)
-        {
-            var cacheFileName = GetCacheFileName(uri);
-            if (File.Exists(cacheFileName))
-            {
-                File.Delete(cacheFileName);
-            }
-        }
-
         public event DownloadProgressEventHandler DownloadProgress;
 
         public event EventHandler<ExceptionEventArgs> ImageFailed;
@@ -143,13 +124,32 @@ namespace BingoWallpaper.Uwp.Controls
             }
         }
 
+        public bool ContainsCache(Uri uri)
+        {
+            return File.Exists(GetCacheFileName(uri));
+        }
+
+        public void RemoveAllCache()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveCache(Uri uri)
+        {
+            var cacheFileName = GetCacheFileName(uri);
+            if (File.Exists(cacheFileName))
+            {
+                File.Delete(cacheFileName);
+            }
+        }
+
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             _image = (Image)GetTemplateChild(PartImageName);
             _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
-            UpdateSource(Source);
+            SetSource(Source);
         }
 
         private static void CacheFolderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -187,7 +187,7 @@ namespace BingoWallpaper.Uwp.Controls
             var obj = (ImageEx)d;
             var value = (string)e.NewValue;
 
-            obj.UpdateSource(value);
+            obj.SetSource(value);
         }
 
         private string GetCacheFileName(Uri uri)
@@ -257,7 +257,7 @@ namespace BingoWallpaper.Uwp.Controls
             _image.Source = bitmap;
         }
 
-        private void UpdateSource(string source)
+        private void SetSource(string source)
         {
             if (_image != null && _placeholderContentControl != null)
             {
