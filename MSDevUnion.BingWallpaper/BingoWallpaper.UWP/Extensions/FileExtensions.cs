@@ -18,6 +18,8 @@ namespace BingoWallpaper.Uwp.Extensions
             var currentLockTcs = _lockTcs;
             await Task.Run(() =>
             {
+                var directory = Path.GetDirectoryName(path);
+                Directory.CreateDirectory(directory);
                 File.WriteAllBytes(path, bytes);
             });
             _lockTcs = null;

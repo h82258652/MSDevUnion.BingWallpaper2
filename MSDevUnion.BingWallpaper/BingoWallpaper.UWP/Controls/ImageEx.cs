@@ -45,6 +45,25 @@ namespace BingoWallpaper.Uwp.Controls
             DefaultStyleKey = typeof(ImageEx);
         }
 
+        public bool ContainsCache(Uri uri)
+        {
+            return File.Exists(GetCacheFileName(uri));
+        }
+
+        public void RemoveAllCache()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveCache(Uri uri)
+        {
+            var cacheFileName = GetCacheFileName(uri);
+            if (File.Exists(cacheFileName))
+            {
+                File.Delete(cacheFileName);
+            }
+        }
+
         public event DownloadProgressEventHandler DownloadProgress;
 
         public event EventHandler<ExceptionEventArgs> ImageFailed;
@@ -71,6 +90,7 @@ namespace BingoWallpaper.Uwp.Controls
             }
             private set
             {
+                throw new NotImplementedException();
                 SetValue(DownloadPercentProperty, value);
             }
         }
@@ -196,6 +216,7 @@ namespace BingoWallpaper.Uwp.Controls
                         task.Progress = (info, progressInfo) =>
                         {
                             // TODO downloading
+                            throw new NotImplementedException();
                         };
                         var buffer = await task;
                         bytes = buffer.ToArray();
@@ -203,6 +224,7 @@ namespace BingoWallpaper.Uwp.Controls
                     catch (Exception ex)
                     {
                         // TODO download failed
+                        throw new NotImplementedException();
 
                         _image.Visibility = Visibility.Visible;
                         _placeholderContentControl.Visibility = Visibility.Collapsed;
