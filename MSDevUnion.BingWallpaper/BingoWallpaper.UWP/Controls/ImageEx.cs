@@ -1,7 +1,9 @@
-﻿using System;
+﻿using BingoWallpaper.Uwp.Extensions;
+using BingoWallpaper.Uwp.Utils;
+using System;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Storage.Streams;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -14,9 +16,9 @@ namespace BingoWallpaper.Uwp.Controls
     [TemplatePart(Name = PartPlaceholderContentControlName, Type = typeof(ContentControl))]
     public sealed class ImageEx : Control
     {
-        private const string PartImageName = "PART_Image";
+        public static readonly DependencyProperty CacheFolderProperty = DependencyProperty.Register(nameof(CacheFolder), typeof(StorageFolder), typeof(ImageEx), new PropertyMetadata(GetCacheFolderDefaultValue(), CacheFolderChanged));
 
-        private const string PartPlaceholderContentControlName = "PART_PlaceholderContentControl";
+        public static readonly DependencyProperty DownloadPercentProperty = DependencyProperty.Register(nameof(DownloadPercent), typeof(double), typeof(ImageEx), new PropertyMetadata(0.0d));
 
         public static readonly DependencyProperty NineGridProperty = DependencyProperty.Register(nameof(NineGrid), typeof(Thickness), typeof(ImageEx), new PropertyMetadata(default(Thickness)));
 
@@ -26,7 +28,40 @@ namespace BingoWallpaper.Uwp.Controls
 
         public static readonly DependencyProperty StretchProperty = DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(ImageEx), new PropertyMetadata(Stretch.Uniform));
 
-        public static readonly DependencyProperty DownloadPercentProperty = DependencyProperty.Register(nameof(DownloadPercent), typeof(double), typeof(ImageEx), new PropertyMetadata(0.0d));
+        private const string DefaultCacheFolderName = "ImageExCache";
+
+        private const string PartImageName = "PART_Image";
+
+        private const string PartPlaceholderContentControlName = "PART_PlaceholderContentControl";
+
+        private static StorageFolder _defaultCacheFolder;
+
+        private Image _image;
+
+        private ContentControl _placeholderContentControl;
+
+        public ImageEx()
+        {
+            DefaultStyleKey = typeof(ImageEx);
+        }
+
+        public event DownloadProgressEventHandler DownloadProgress;
+
+        public event EventHandler<ExceptionEventArgs> ImageFailed;
+
+        public event RoutedEventHandler ImageOpened;
+
+        public StorageFolder CacheFolder
+        {
+            get
+            {
+                return (StorageFolder)GetValue(CacheFolderProperty);
+            }
+            set
+            {
+                SetValue(CacheFolderProperty, value);
+            }
+        }
 
         public double DownloadPercent
         {
@@ -34,11 +69,10 @@ namespace BingoWallpaper.Uwp.Controls
             {
                 return (double)GetValue(DownloadPercentProperty);
             }
-        }
-
-        public ImageEx()
-        {
-            DefaultStyleKey = typeof(ImageEx);
+            private set
+            {
+                SetValue(DownloadPercentProperty, value);
+            }
         }
 
         public Thickness NineGrid
@@ -65,114 +99,6 @@ namespace BingoWallpaper.Uwp.Controls
             }
         }
 
-        protected override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _image = (Image)GetTemplateChild(PartImageName);
-            _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
-            UpdateSource(Source);
-        }
-
-        private async void UpdateHttpSource(Uri uri)
-        {
-            IBuffer buffer;
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    var task = client.GetBufferAsync(uri);
-                    task.Progress = (info, progressInfo) =>
-                    {
-                        // TODO
-                        // Downloading.
-
-                        DownloadProgress?.Invoke(this, new DownloadProgressEventArgs());
-                    };
-                    buffer = await task;
-                }
-                catch (Exception ex)
-                {
-                    // TODO
-                    // Download Failed.
-
-                    _image.Visibility = Visibility.Visible;
-                    _placeholderContentControl.Visibility = Visibility.Collapsed;
-                    ImageFailed?.Invoke(this, new ExceptionRoutedEventArgs(ex));
-                    return;
-                }
-            }
-
-            var bitmap = new BitmapImage();
-            await bitmap.SetSourceAsync(buffer.AsStream().AsRandomAccessStream());
-            _image.Source = bitmap;
-            _image.Visibility = Visibility.Visible;
-            _placeholderContentControl.Visibility = Visibility.Collapsed;
-        }
-
-        private static bool IsHttpUri(Uri uri)
-        {
-            if (uri == null)
-            {
-                throw new ArgumentNullException(nameof(uri));
-            }
-
-            return uri.IsAbsoluteUri && (uri.Scheme == "http" || uri.Scheme == "https");
-        }
-
-        private void UpdateSource(string source)
-        {
-            if (_image != null && _placeholderContentControl != null)
-            {
-                if (source == null)
-                {
-                    _image.Source = null;
-                }
-                else
-                {
-                    Uri uri;
-                    if (Uri.TryCreate(source, UriKind.RelativeOrAbsolute, out uri))
-                    {
-                        if (IsHttpUri(uri))
-                        {
-                            UpdateHttpSource(uri);
-                        }
-                        else
-                        {
-                            if (uri.IsAbsoluteUri == false)
-                            {
-                                Uri.TryCreate("ms-appx:///" + (source.StartsWith("/") ? source.Substring(1) : source), UriKind.Absolute, out uri);
-                            }
-
-                            UpdateLocalSource(uri);
-                        }
-                    }
-                    else
-                    {
-                        _image.Source = null;
-                    }
-                }
-            }
-        }
-
-        private void UpdateLocalSource(Uri uri)
-        {
-            // TODO
-
-            BitmapImage bitmap = new BitmapImage(uri);
-            _image.Source = bitmap;
-        }
-
-        public event ExceptionRoutedEventHandler ImageFailed;
-
-        public event DownloadProgressEventHandler DownloadProgress;
-
-        public event RoutedEventHandler ImageOpened;
-
-        private Image _image;
-
-        private ContentControl _placeholderContentControl;
-
         public string Source
         {
             get
@@ -197,12 +123,151 @@ namespace BingoWallpaper.Uwp.Controls
             }
         }
 
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _image = (Image)GetTemplateChild(PartImageName);
+            _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
+            UpdateSource(Source);
+        }
+
+        private static void CacheFolderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var newValue = e.NewValue;
+            if (newValue == null)
+            {
+                throw new ArgumentNullException(nameof(newValue));
+            }
+
+            d.SetValue(e.Property, e.OldValue);
+        }
+
+        private static StorageFolder GetCacheFolderDefaultValue()
+        {
+            if (_defaultCacheFolder == null)
+            {
+                _defaultCacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
+            }
+            return _defaultCacheFolder;
+        }
+
+        private static bool IsHttpUri(Uri uri)
+        {
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            return uri.IsAbsoluteUri && (uri.Scheme == "http" || uri.Scheme == "https");
+        }
+
         private static void SourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var obj = (ImageEx)d;
             var value = (string)e.NewValue;
 
             obj.UpdateSource(value);
+        }
+
+        private string GetCacheFileName(Uri uri)
+        {
+            var originalString = uri.OriginalString;
+            var extension = Path.GetExtension(originalString);
+            var cacheFileName = HashHelper.GenerateMd5Hash(originalString) + extension;
+            return Path.Combine(CacheFolder.Path, cacheFileName);
+        }
+
+        private async void SetHttpSource(Uri uri)
+        {
+            var cacheFileName = GetCacheFileName(uri);
+            if (File.Exists(cacheFileName) == false)
+            {
+                _image.Source = null;
+                _image.Visibility = Visibility.Collapsed;
+                _placeholderContentControl.Visibility = Visibility.Visible;
+
+                byte[] bytes;
+                using (var client = new HttpClient())
+                {
+                    try
+                    {
+                        var task = client.GetBufferAsync(uri);
+                        task.Progress = (info, progressInfo) =>
+                        {
+                            // TODO downloading
+                        };
+                        var buffer = await task;
+                        bytes = buffer.ToArray();
+                    }
+                    catch (Exception ex)
+                    {
+                        // TODO download failed
+
+                        _image.Visibility = Visibility.Visible;
+                        _placeholderContentControl.Visibility = Visibility.Collapsed;
+                        return;
+                    }
+                }
+
+                await FileExtensions.WriteAllBytesAsync(cacheFileName, bytes);
+
+                var bitmap = new BitmapImage();
+                await bitmap.SetSourceAsync(new MemoryStream(bytes).AsRandomAccessStream());
+                _image.Source = bitmap;
+                _image.Visibility = Visibility.Visible;
+                _placeholderContentControl.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var bitmap = new BitmapImage(new Uri(cacheFileName));
+                _image.Source = bitmap;
+            }
+        }
+
+        private void SetLocalSource(Uri uri)
+        {
+            var bitmap = new BitmapImage(uri);
+            bitmap.ImageFailed += (sender, e) =>
+            {
+                ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
+            };
+            _image.Source = bitmap;
+        }
+
+        private void UpdateSource(string source)
+        {
+            if (_image != null && _placeholderContentControl != null)
+            {
+                if (source == null)
+                {
+                    _image.Source = null;
+                }
+                else
+                {
+                    Uri uri;
+                    if (Uri.TryCreate(source, UriKind.RelativeOrAbsolute, out uri))
+                    {
+                        if (IsHttpUri(uri))
+                        {
+                            SetHttpSource(uri);
+                        }
+                        else
+                        {
+                            if (uri.IsAbsoluteUri == false)
+                            {
+                                Uri.TryCreate("ms-appx:///" + (source.StartsWith("/") ? source.Substring(1) : source), UriKind.Absolute, out uri);
+                            }
+
+                            SetLocalSource(uri);
+                        }
+                    }
+                    else
+                    {
+                        _image.Source = null;
+                    }
+                }
+            }
         }
     }
 }
