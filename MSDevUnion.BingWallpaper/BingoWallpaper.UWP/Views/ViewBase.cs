@@ -13,6 +13,7 @@ namespace BingoWallpaper.Uwp.Views
         {
             base.OnNavigatedFrom(e);
 
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             SystemNavigationManager.GetForCurrentView().BackRequested -= SystemNavigationManager_BackRequested;
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
@@ -24,6 +25,7 @@ namespace BingoWallpaper.Uwp.Views
         {
             base.OnNavigatedTo(e);
 
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {

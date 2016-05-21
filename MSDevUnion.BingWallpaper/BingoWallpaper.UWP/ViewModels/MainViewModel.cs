@@ -10,6 +10,8 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public IList<ObservableCollection<Models.Archive>> Temp;
+
         private readonly INavigationService _navigationService;
 
         private bool _isBusy;
@@ -18,7 +20,7 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             _navigationService = navigationService;
 
-            Initialize();
+            //Initialize();
         }
 
         public bool IsBusy
@@ -33,7 +35,19 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public IList<ObservableCollection<Models.Archive>> Temp;
+        private RelayCommand _clickCommand;
+
+        public RelayCommand ClickCommand
+        {
+            get
+            {
+                _clickCommand = _clickCommand ?? new RelayCommand(() =>
+                {
+                    _navigationService.NavigateTo(ViewModelLocator.DetailViewKey);
+                });
+                return _clickCommand;
+            }
+        }
 
         private void Initialize()
         {

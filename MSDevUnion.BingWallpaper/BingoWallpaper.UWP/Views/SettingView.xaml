@@ -5,8 +5,13 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:system="using:System"
+                xmlns:converters="using:BingoWallpaper.Uwp.Converters"
+                xmlns:models="using:BingoWallpaper.Models"
                 mc:Ignorable="d"
                 DataContext="{Binding Source={StaticResource Locator},Path=Setting}">
+    <Page.Resources>
+        <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+    </Page.Resources>
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition Edge="Right" />
@@ -16,7 +21,15 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
                 <ComboBox x:Uid="/Setting/SaveLocation"
-                          Margin="10,10,10,0" />
+                          Margin="10,10,10,0"
+                          ItemsSource="{Binding Path=SaveLocations,Mode=OneWay}"
+                          SelectedItem="{Binding Path=SaveLocation,Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="models:SaveLocation">
+                            <TextBlock Text="{Binding Converter={StaticResource EnumToStringConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <ComboBox x:Uid="/Setting/WallpaperSize"
                           Margin="10,10,10,0"></ComboBox>
                 <ComboBox x:Uid="/Setting/Area"

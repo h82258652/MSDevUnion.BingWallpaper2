@@ -11,20 +11,26 @@
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Main}">
     <Page.Resources>
-        <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
-        <Storyboard x:Key="RefreshBusyStoryboard">
-            <DoubleAnimation Storyboard.TargetName="RefreshIconRotateTransform"
-                             Storyboard.TargetProperty="Angle"
-                             From="0"
-                             To="360"
-                             Duration="0:0:1"
-                             RepeatBehavior="Forever"
-                             FillBehavior="HoldEnd" />
-        </Storyboard>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperFlipViewStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
+            <Storyboard x:Key="RefreshBusyStoryboard">
+                <DoubleAnimation Storyboard.TargetName="RefreshIconRotateTransform"
+                                 Storyboard.TargetProperty="Angle"
+                                 From="0"
+                                 To="360"
+                                 Duration="0:0:1"
+                                 RepeatBehavior="Forever"
+                                 FillBehavior="HoldEnd" />
+            </Storyboard>
+        </ResourceDictionary>
     </Page.Resources>
     <Page.BottomAppBar>
         <AppBar x:Name="AppBar"
-                ClosedDisplayMode="Compact">
+                ClosedDisplayMode="Compact"
+                Background="{ThemeResource SystemAccentBrush}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -69,7 +75,7 @@
                     </AppBarButton.Icon>
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.View.SettingView" />
+                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.Views.SettingView" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
@@ -82,7 +88,7 @@
                     </AppBarButton.Icon>
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Click">
-                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.View.AboutView" />
+                            <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.Views.AboutView" />
                         </core:EventTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
@@ -93,9 +99,18 @@
         <VisualStateGroup></VisualStateGroup>
     </VisualStateManager.VisualStateGroups>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView Background="Transparent">
-            <Grid Background="DarkGreen"></Grid>
-            <Grid Background="Blue"></Grid>
+        <FlipView Style="{StaticResource BingoWallpaperFlipViewStyle}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <GridView>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel></StackPanel>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
         </FlipView>
     </Grid>
 </Page>

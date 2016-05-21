@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
 
@@ -55,18 +56,22 @@ namespace BingoWallpaper.Uwp.Configuration
             switch (dataLocality)
             {
                 case ApplicationDataLocality.Local:
-                    if (ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
                     {
-                        return (T)ApplicationData.Current.LocalSettings.Values[key];
+                        if (ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
+                        {
+                            return (T)ApplicationData.Current.LocalSettings.Values[key];
+                        }
+                        return defaultValue != null ? defaultValue() : default(T);
                     }
-                    return defaultValue != null ? defaultValue() : default(T);
 
                 case ApplicationDataLocality.Roaming:
-                    if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
                     {
-                        return (T)ApplicationData.Current.RoamingSettings.Values[key];
+                        if (ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
+                        {
+                            return (T)ApplicationData.Current.RoamingSettings.Values[key];
+                        }
+                        return defaultValue != null ? defaultValue() : default(T);
                     }
-                    return defaultValue != null ? defaultValue() : default(T);
 
                 case ApplicationDataLocality.Temporary:
                     throw new NotImplementedException();
@@ -122,13 +127,27 @@ namespace BingoWallpaper.Uwp.Configuration
             switch (dataLocality)
             {
                 case ApplicationDataLocality.Local:
-                    ApplicationData.Current.LocalSettings.Values[key] = value;
-                    break;
+                    {
+                        object set = value;
+                        if (typeof(T).GetTypeInfo().IsEnum)
+                        {
+                            set = Convert.ChangeType(value, Enum.GetUnderlyingType(typeof(T)));
+                        }
+                        ApplicationData.Current.LocalSettings.Values[key] = set;
+                        break;
+                    }
 
                 case ApplicationDataLocality.Roaming:
-                    ApplicationData.Current.RoamingSettings.Values[key] = value;
-                    ApplicationData.Current.SignalDataChanged();
-                    break;
+                    {
+                        object set = value;
+                        if (typeof(T).GetTypeInfo().IsEnum)
+                        {
+                            set = Convert.ChangeType(value, Enum.GetUnderlyingType(typeof(T)));
+                        }
+                        ApplicationData.Current.RoamingSettings.Values[key] = set;
+                        ApplicationData.Current.SignalDataChanged();
+                        break;
+                    }
 
                 case ApplicationDataLocality.Temporary:
                     throw new NotImplementedException();

@@ -91,6 +91,8 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\Fonts\Material-Design-Iconic-Font.ttf" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\en-US\Enums.resw" />
+    <PRIResource Include="Strings\zh-CN\Enums.resw" />
     <PRIResource Include="Strings\zh-CN\Setting.resw" />
     <PRIResource Include="Strings\en-US\Setting.resw" />
     <PRIResource Include="Strings\zh-CN\Detail.resw" />
@@ -109,6 +111,7 @@
     <Compile Include="Controls\ExceptionEventArgs.cs" />
     <Compile Include="Controls\ImageEx.cs" />
     <Compile Include="Converters\BooleanInverseConverter.cs" />
+    <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

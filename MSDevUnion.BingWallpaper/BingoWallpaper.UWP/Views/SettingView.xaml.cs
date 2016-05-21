@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Input;
+﻿using BingoWallpaper.Uwp.ViewModels;
+using Windows.UI.Xaml.Input;
 
 namespace BingoWallpaper.Uwp.Views
 {
@@ -8,6 +9,8 @@ namespace BingoWallpaper.Uwp.Views
         {
             InitializeComponent();
         }
+
+        public SettingViewModel ViewModel => (SettingViewModel)DataContext;
 
         protected override void OnNavigationBackRequested(NavigationBackRequestedEventArgs e)
         {

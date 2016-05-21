@@ -1,5 +1,9 @@
-﻿using BingoWallpaper.Uwp.Configuration;
+﻿using BingoWallpaper.Models;
+using BingoWallpaper.Uwp.Configuration;
 using GalaSoft.MvvmLight;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.ViewModels
@@ -26,11 +30,19 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public string SaveLocation
+        public IReadOnlyList<string> Areas
         {
             get
             {
-                return _settings.Get(nameof(SaveLocation), () => "");
+                throw new NotImplementedException();
+            }
+        }
+
+        public SaveLocation SaveLocation
+        {
+            get
+            {
+                return _settings.Get(nameof(SaveLocation), () => SaveLocation.PictureLibrary);
             }
             set
             {
@@ -38,6 +50,11 @@ namespace BingoWallpaper.Uwp.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public IReadOnlyList<SaveLocation> SaveLocations
+        {
+            get;
+        } = Enum.GetValues(typeof(SaveLocation)).Cast<SaveLocation>().ToList();
 
         public string WallpaperSize
         {
@@ -49,6 +66,14 @@ namespace BingoWallpaper.Uwp.ViewModels
             {
                 _settings.Set(nameof(WallpaperSize), value);
                 RaisePropertyChanged();
+            }
+        }
+
+        public IReadOnlyList<string> WallpaperSizes
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
     }

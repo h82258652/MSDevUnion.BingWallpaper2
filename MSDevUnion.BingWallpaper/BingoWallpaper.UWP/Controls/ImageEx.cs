@@ -16,8 +16,6 @@ namespace BingoWallpaper.Uwp.Controls
     [TemplatePart(Name = PartPlaceholderContentControlName, Type = typeof(ContentControl))]
     public sealed class ImageEx : Control
     {
-        public static readonly DependencyProperty CacheFolderProperty = DependencyProperty.Register(nameof(CacheFolder), typeof(StorageFolder), typeof(ImageEx), new PropertyMetadata(GetCacheFolderDefaultValue(), CacheFolderChanged));
-
         public static readonly DependencyProperty DownloadPercentProperty = DependencyProperty.Register(nameof(DownloadPercent), typeof(double), typeof(ImageEx), new PropertyMetadata(0.0d));
 
         public static readonly DependencyProperty NineGridProperty = DependencyProperty.Register(nameof(NineGrid), typeof(Thickness), typeof(ImageEx), new PropertyMetadata(default(Thickness)));
@@ -34,7 +32,7 @@ namespace BingoWallpaper.Uwp.Controls
 
         private const string PartPlaceholderContentControlName = "PART_PlaceholderContentControl";
 
-        private static StorageFolder _defaultCacheFolder;
+        private static StorageFolder _cacheFolder;
 
         private Image _image;
 
@@ -51,16 +49,29 @@ namespace BingoWallpaper.Uwp.Controls
 
         public event RoutedEventHandler ImageOpened;
 
-        public StorageFolder CacheFolder
+        public static StorageFolder CacheFolder
         {
             get
             {
-                return (StorageFolder)GetValue(CacheFolderProperty);
+                return GetCacheFolder();
             }
             set
             {
-                SetValue(CacheFolderProperty, value);
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+                _cacheFolder = value;
             }
+        }
+
+        private static StorageFolder GetCacheFolder()
+        {
+            if (_cacheFolder == null)
+            {
+                _cacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
+            }
+            return _cacheFolder;
         }
 
         public double DownloadPercent
@@ -150,26 +161,6 @@ namespace BingoWallpaper.Uwp.Controls
             _image = (Image)GetTemplateChild(PartImageName);
             _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
             SetSource(Source);
-        }
-
-        private static void CacheFolderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var newValue = e.NewValue;
-            if (newValue == null)
-            {
-                throw new ArgumentNullException(nameof(newValue));
-            }
-
-            d.SetValue(e.Property, e.OldValue);
-        }
-
-        private static StorageFolder GetCacheFolderDefaultValue()
-        {
-            if (_defaultCacheFolder == null)
-            {
-                _defaultCacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
-            }
-            return _defaultCacheFolder;
         }
 
         private static bool IsHttpUri(Uri uri)

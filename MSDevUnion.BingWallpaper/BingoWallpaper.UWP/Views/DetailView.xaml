@@ -4,6 +4,7 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:local="using:BingoWallpaper.Uwp.Views"
+                xmlns:uwp="using:FontAwesome.UWP"
                 mc:Ignorable="d"
                 DataContext="{Binding Source={StaticResource Locator},Path=Detail}">
     <Page.Transitions>
@@ -16,7 +17,7 @@
         </TransitionCollection>
     </Page.Transitions>
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar Background="{ThemeResource SystemAccentBrush}">
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="/Detail/OpenWallpaperSetting"
                               Command="{x:Bind ViewModel.OpenWallpaperSettingCommand}" />
@@ -24,7 +25,11 @@
                               Command="{x:Bind ViewModel.OpenLockScreenSettingCommand}" />
             </CommandBar.SecondaryCommands>
             <AppBarButton x:Uid="/Detail/Save"
-                          Command="{x:Bind ViewModel.SaveCommand}"></AppBarButton>
+                          Command="{x:Bind ViewModel.SaveCommand}">
+                <AppBarButton.Icon>
+                    <uwp:FontAwesome Icon="Save" />
+                </AppBarButton.Icon>
+            </AppBarButton>
             <AppBarButton x:Uid="/Detail/SetWallpaper"
                           Command="{x:Bind ViewModel.SetWallpaperCommand}"></AppBarButton>
             <AppBarButton x:Uid="/Detail/SetLockScreen"

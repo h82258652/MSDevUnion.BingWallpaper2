@@ -48,6 +48,7 @@
     <Compile Include="Models\LeanCloudResultBase.cs" />
     <Compile Include="Models\LeanCloudResultCollection.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\SaveLocation.cs" />
     <Compile Include="Models\Wallpaper.cs" />
     <Compile Include="Models\WallpaperCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
