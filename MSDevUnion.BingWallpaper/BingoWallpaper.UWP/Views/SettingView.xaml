@@ -11,6 +11,7 @@
                 DataContext="{Binding Source={StaticResource Locator},Path=Setting}">
     <Page.Resources>
         <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+        <converters:StringFormatConverter x:Key="StringFormatConverter" />
     </Page.Resources>
     <Page.Transitions>
         <TransitionCollection>
@@ -40,7 +41,7 @@
                                 <Image x:Name="FlagImage"
                                        RelativePanel.AlignLeftWithPanel="True"
                                        RelativePanel.AlignVerticalCenterWithPanel="True"
-                                       Source="{Binding}" />
+                                       Source="{Binding Converter={StaticResource StringFormatConverter},ConverterParameter='ms-appx:///Assets/Images/flags/{0}.png'}" />
                                 <TextBlock RelativePanel.RightOf="FlagImage"
                                            RelativePanel.AlignVerticalCenterWith="FlagImage"
                                            Margin="5,0,0,0"

@@ -112,10 +112,13 @@
     <Compile Include="Controls\ImageEx.cs" />
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IShareService.cs" />
     <Compile Include="Services\ISystemSettingService.cs" />
+    <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\SystemSettingService.cs" />
     <Compile Include="Utils\HashHelper.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
@@ -145,6 +148,17 @@
     <None Include="BingoWallpaper.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\flags\de-DE.png" />
+    <Content Include="Assets\Images\flags\en-AU.png" />
+    <Content Include="Assets\Images\flags\en-CA.png" />
+    <Content Include="Assets\Images\flags\en-GB.png" />
+    <Content Include="Assets\Images\flags\en-IN.png" />
+    <Content Include="Assets\Images\flags\en-US.png" />
+    <Content Include="Assets\Images\flags\fr-CA.png" />
+    <Content Include="Assets\Images\flags\fr-FR.png" />
+    <Content Include="Assets\Images\flags\ja-JP.png" />
+    <Content Include="Assets\Images\flags\pt-BR.png" />
+    <Content Include="Assets\Images\flags\zh-CN.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

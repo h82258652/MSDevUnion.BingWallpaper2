@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OpenLockScreenSetting.Label" xml:space="preserve">
-    <value />
+    <value>打开锁屏设置</value>
   </data>
   <data name="OpenWallpaperSetting.Label" xml:space="preserve">
-    <value />
+    <value>打开壁纸设置</value>
   </data>
   <data name="Save.Label" xml:space="preserve">
     <value>保存</value>
   </data>
   <data name="SetLockScreen.Label" xml:space="preserve">
-    <value />
+    <value>设置为锁屏</value>
   </data>
   <data name="SetWallpaper.Label" xml:space="preserve">
-    <value />
+    <value>设置为壁纸</value>
   </data>
   <data name="Share.Label" xml:space="preserve">
     <value>分享</value>
