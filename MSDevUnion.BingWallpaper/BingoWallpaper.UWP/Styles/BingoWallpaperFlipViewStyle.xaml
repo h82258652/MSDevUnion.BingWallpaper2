@@ -4,12 +4,34 @@
            TargetType="FlipView">
         <Setter Property="Background"
                 Value="Transparent" />
-        <!--<Setter Property="Template">
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="FlipView">
-                    <Grid></Grid>
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.Resources>
+                            <ControlTemplate x:Key="HorizontalNextTemplate"
+                                             TargetType="Button">
+                                <!--TODO-->
+                            </ControlTemplate>
+                            <ControlTemplate x:Key="HorizontalPreviousTemplate"
+                                             TargetType="Button">
+                                <!--TODO-->
+                            </ControlTemplate>
+                            <ControlTemplate x:Key="VerticalNextTemplate"
+                                             TargetType="Button">
+                                <!--TODO-->
+                            </ControlTemplate>
+                            <ControlTemplate x:Key="VerticalPreviousTemplate"
+                                             TargetType="Button">
+                                <!--TODO-->
+                            </ControlTemplate>
+                        </Grid.Resources>
+                        <ScrollViewer x:Name="ScrollingHost"></ScrollViewer>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>-->
+        </Setter>
     </Style>
 </ResourceDictionary>
