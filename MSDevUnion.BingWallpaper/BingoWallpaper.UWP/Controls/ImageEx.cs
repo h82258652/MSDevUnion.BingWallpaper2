@@ -12,8 +12,8 @@ using Windows.Web.Http;
 
 namespace BingoWallpaper.Uwp.Controls
 {
-    [TemplatePart(Name = PartImageName, Type = typeof(Image))]
-    [TemplatePart(Name = PartPlaceholderContentControlName, Type = typeof(ContentControl))]
+    [TemplatePart(Name = ImageTemplateName, Type = typeof(Image))]
+    [TemplatePart(Name = PlaceholderContentControlTemplateName, Type = typeof(ContentControl))]
     public sealed class ImageEx : Control
     {
         public static readonly DependencyProperty DownloadPercentProperty = DependencyProperty.Register(nameof(DownloadPercent), typeof(double), typeof(ImageEx), new PropertyMetadata(0.0d));
@@ -28,9 +28,9 @@ namespace BingoWallpaper.Uwp.Controls
 
         private const string DefaultCacheFolderName = "ImageExCache";
 
-        private const string PartImageName = "PART_Image";
+        private const string ImageTemplateName = "PART_Image";
 
-        private const string PartPlaceholderContentControlName = "PART_PlaceholderContentControl";
+        private const string PlaceholderContentControlTemplateName = "PART_PlaceholderContentControl";
 
         private static StorageFolder _cacheFolder;
 
@@ -63,15 +63,6 @@ namespace BingoWallpaper.Uwp.Controls
                 }
                 _cacheFolder = value;
             }
-        }
-
-        private static StorageFolder GetCacheFolder()
-        {
-            if (_cacheFolder == null)
-            {
-                _cacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
-            }
-            return _cacheFolder;
         }
 
         public double DownloadPercent
@@ -158,9 +149,18 @@ namespace BingoWallpaper.Uwp.Controls
         {
             base.OnApplyTemplate();
 
-            _image = (Image)GetTemplateChild(PartImageName);
-            _placeholderContentControl = (ContentControl)GetTemplateChild(PartPlaceholderContentControlName);
+            _image = (Image)GetTemplateChild(ImageTemplateName);
+            _placeholderContentControl = (ContentControl)GetTemplateChild(PlaceholderContentControlTemplateName);
             SetSource(Source);
+        }
+
+        private static StorageFolder GetCacheFolder()
+        {
+            if (_cacheFolder == null)
+            {
+                _cacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
+            }
+            return _cacheFolder;
         }
 
         private static bool IsHttpUri(Uri uri)

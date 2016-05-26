@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using WinRTXamlToolkit.Controls.Extensions;
 
 namespace BingoWallpaper.Uwp.Helpers
@@ -33,13 +34,24 @@ namespace BingoWallpaper.Uwp.Helpers
 
         private static void HorizontalScrollBarStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            var scrollViewer = d.GetFirstDescendantOfType<ScrollViewer>();
+            var horizontalScrollBar = scrollViewer?.GetDescendantsOfType<ScrollBar>().FirstOrDefault(temp => temp.Orientation == Orientation.Horizontal);
+            if (horizontalScrollBar != null)
+            {
+                var value = (Style)e.NewValue;
+                horizontalScrollBar.Style = value;
+            }
         }
 
         private static void VerticalScrollBarStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ScrollViewer scrollViewer = d.GetFirstDescendantOfType<ScrollViewer>();
-            throw new NotImplementedException();
+            var scrollViewer = d.GetFirstDescendantOfType<ScrollViewer>();
+            var verticalScrollBar = scrollViewer?.GetDescendantsOfType<ScrollBar>().FirstOrDefault(temp => temp.Orientation == Orientation.Vertical);
+            if (verticalScrollBar != null)
+            {
+                var value = (Style)e.NewValue;
+                verticalScrollBar.Style = value;
+            }
         }
     }
 }
