@@ -1,5 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using WinRTXamlToolkit.Controls.Extensions;
 
 namespace BingoWallpaper.Uwp.Helpers
 {
@@ -36,6 +38,7 @@ namespace BingoWallpaper.Uwp.Helpers
 
         private static void VerticalScrollBarStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            ScrollViewer scrollViewer = d.GetFirstDescendantOfType<ScrollViewer>();
             throw new NotImplementedException();
         }
     }
