@@ -106,6 +106,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\VisualStateChangedBehavior.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />

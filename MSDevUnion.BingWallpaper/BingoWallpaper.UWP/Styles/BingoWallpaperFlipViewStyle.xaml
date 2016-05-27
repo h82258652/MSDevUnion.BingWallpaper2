@@ -3,7 +3,9 @@
                     xmlns:uwp="using:FontAwesome.UWP"
                     xmlns:controls="using:BingoWallpaper.Uwp.Controls"
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                    xmlns:core="using:Microsoft.Xaml.Interactions.Core">
+                    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+                    xmlns:behaviors="using:BingoWallpaper.Uwp.Behaviors">
     <Style x:Key="BingoWallpaperFlipViewStyle"
            TargetType="FlipView">
         <Setter Property="Background"
@@ -47,15 +49,15 @@
                         <Grid.Resources>
                             <ControlTemplate x:Key="HorizontalPreviousTemplate"
                                              TargetType="Button">
-                                <Grid>
+                                <Grid Background="Transparent">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="CommonState">
                                             <VisualState x:Name="Normal" />
                                             <VisualState x:Name="PointerOver">
-                                                <VisualState.Setters>
+                                                <!--<VisualState.Setters>
                                                     <Setter Target="Semicircle.Background"
                                                             Value="#80000000" />
-                                                </VisualState.Setters>
+                                                </VisualState.Setters>-->
                                             </VisualState>
                                             <VisualState x:Name="Pressed">
                                                 <!--<Storyboard>
@@ -71,11 +73,12 @@
                                                                      Duration="0:0:0.3" />
                                                 </Storyboard>-->
                                             </VisualState>
-                                            <VisualStateGroup.Transitions>
+                                            <!--<VisualStateGroup.Transitions>
                                                 <VisualTransition From="Pressed"
                                                                   To="Normal"
-                                                                  GeneratedDuration="0:0:1">
-                                                    <Storyboard>
+                                                                  GeneratedDuration="0:0:10">
+                                                    -->
+                                            <!--<Storyboard>
                                                         <DoubleAnimation Storyboard.TargetName="SemicircleScaleTransform"
                                                                          Storyboard.TargetProperty="ScaleX"
                                                                          From="1"
@@ -86,12 +89,13 @@
                                                                          From="1"
                                                                          To="15"
                                                                          Duration="0:0:1"></DoubleAnimation>
-                                                    </Storyboard>
+                                                    </Storyboard>-->
+                                            <!--
                                                 </VisualTransition>
-                                            </VisualStateGroup.Transitions>
+                                            </VisualStateGroup.Transitions>-->
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <Border x:Name="Semicircle"
+                                    <!--<Border x:Name="Semicircle"
                                             CornerRadius="0,20,20,0"
                                             Background="#40000000"
                                             RenderTransformOrigin="0,0.5">
@@ -105,7 +109,7 @@
                                                      HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      MirroredWhenRightToLeft="True"
-                                                     UseLayoutRounding="False" />
+                                                     UseLayoutRounding="False" />-->
                                 </Grid>
                                 <!--TODO-->
                             </ControlTemplate>
@@ -143,6 +147,18 @@
                                       AutomationProperties.AccessibilityView="Raw">
                             <ItemsPresenter />
                         </ScrollViewer>
+                        <Border x:Name="PreviousHorizontalSemicircle"
+                                Width="20"
+                                Height="40"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="#40000000"
+                                CornerRadius="0,20,20,0"
+                                RenderTransformOrigin="0,0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="PreviousHorizontalSemicircleScaleTransform" />
+                            </Border.RenderTransform>
+                        </Border>
                         <Button x:Name="PreviousButtonHorizontal"
                                 Template="{StaticResource HorizontalPreviousTemplate}"
                                 Width="20"
@@ -152,9 +168,27 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
                             <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Click">
-                                    <core:NavigateToPageAction TargetPage="BingoWallpaper.Uwp.Views.AboutView"></core:NavigateToPageAction>
-                                </core:EventTriggerBehavior>
+                                <behaviors:VisualStateChangedBehavior To="PointerOver">
+                                    <core:ChangePropertyAction TargetObject="{Binding ElementName=PreviousHorizontalSemicircle}"
+                                                               PropertyName="Background"
+                                                               Value="#80000000" />
+                                </behaviors:VisualStateChangedBehavior>
+                                <behaviors:VisualStateChangedBehavior From="Pressed"
+                                                                      To="Normal">
+                                    <media:ControlStoryboardAction ControlStoryboardOption="Play">
+                                        <media:ControlStoryboardAction.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="PreviousHorizontalSemicircleScaleTransform"
+                                                                 Storyboard.TargetProperty="ScaleX"
+                                                                 From="1"
+                                                                 To="15"
+                                                                 Duration="0:0:1" />
+                                            </Storyboard>
+                                        </media:ControlStoryboardAction.Storyboard>
+                                    </media:ControlStoryboardAction>
+                                </behaviors:VisualStateChangedBehavior>
+                                <core:DataTriggerBehavior Binding="{Binding ElementName=PreviousButtonHorizontal,Path=Visibility}"
+                                                          Value="Collapsed"></core:DataTriggerBehavior>
                             </interactivity:Interaction.Behaviors>
                         </Button>
                         <Button x:Name="NextButtonHorizontal"
@@ -166,11 +200,19 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center" />
                         <Button x:Name="PreviousButtonVertical"
+                                Template="{StaticResource VerticalPreviousTemplate}"
+                                Width="40"
+                                Height="20"
                                 IsTabStop="False"
+                                UseSystemFocusVisuals="False"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Top" />
                         <Button x:Name="NextButtonVertical"
+                                Template="{StaticResource VerticalNextTemplate}"
+                                Width="40"
+                                Height="20"
                                 IsTabStop="False"
+                                UseSystemFocusVisuals="False"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom" />
                     </Grid>
