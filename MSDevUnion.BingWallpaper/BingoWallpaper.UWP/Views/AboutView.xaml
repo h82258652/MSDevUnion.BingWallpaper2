@@ -11,5 +11,10 @@
             <EdgeUIThemeTransition Edge="Right" />
         </TransitionCollection>
     </Page.Transitions>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Grid>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Border Width="20"
+                Height="36"
+                CornerRadius="18,0,0,18"
+                Background="Red"></Border>
+    </Grid>
 </local:ViewBase>

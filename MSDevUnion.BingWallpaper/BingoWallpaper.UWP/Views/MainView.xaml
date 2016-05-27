@@ -16,15 +16,6 @@
                 <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperFlipViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
-            <Storyboard x:Key="RefreshBusyStoryboard">
-                <DoubleAnimation Storyboard.TargetName="RefreshIconRotateTransform"
-                                 Storyboard.TargetProperty="Angle"
-                                 From="0"
-                                 To="360"
-                                 Duration="0:0:1"
-                                 RepeatBehavior="Forever"
-                                 FillBehavior="HoldEnd" />
-            </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
     <Page.BottomAppBar>
@@ -41,7 +32,8 @@
                 <StackPanel Grid.Column="0"></StackPanel>
                 <AppBarButton Grid.Column="1"
                               x:Uid="/Main/Refresh"
-                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}">
+                              IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}"
+                              Click="ButtonBase_OnClick">
                     <AppBarButton.Icon>
                         <PathIcon HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
@@ -55,13 +47,13 @@
                     <interactivity:Interaction.Behaviors>
                         <core:DataTriggerBehavior Binding="{Binding Path=IsBusy}"
                                                   Value="True">
-                            <media:ControlStoryboardAction Storyboard="{StaticResource RefreshBusyStoryboard}"
-                                                           ControlStoryboardOption="Play" />
+                            <core:CallMethodAction TargetObject="{x:Bind _timer}"
+                                                   MethodName="Start" />
                         </core:DataTriggerBehavior>
                         <core:DataTriggerBehavior Binding="{Binding Path=IsBusy}"
                                                   Value="False">
-                            <media:ControlStoryboardAction Storyboard="{StaticResource RefreshBusyStoryboard}"
-                                                           ControlStoryboardOption="Pause" />
+                            <core:CallMethodAction TargetObject="{x:Bind _timer}"
+                                                   MethodName="Stop" />
                         </core:DataTriggerBehavior>
                     </interactivity:Interaction.Behaviors>
                 </AppBarButton>
@@ -100,7 +92,10 @@
     </VisualStateManager.VisualStateGroups>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <FlipView Style="{StaticResource BingoWallpaperFlipViewStyle}">
-            <FlipView.ItemTemplate>
+            <Grid Background="Red"></Grid>
+            <Grid Background="Blue"></Grid>
+            <Grid Background="Green"></Grid>
+            <!--<FlipView.ItemTemplate>
                 <DataTemplate>
                     <GridView>
                         <GridView.ItemsPanel>
@@ -110,7 +105,7 @@
                         </GridView.ItemsPanel>
                     </GridView>
                 </DataTemplate>
-            </FlipView.ItemTemplate>
+            </FlipView.ItemTemplate>-->
         </FlipView>
     </Grid>
 </Page>

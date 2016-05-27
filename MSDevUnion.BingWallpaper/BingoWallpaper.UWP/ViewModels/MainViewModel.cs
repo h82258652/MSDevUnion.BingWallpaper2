@@ -29,7 +29,7 @@ namespace BingoWallpaper.Uwp.ViewModels
             {
                 return _isBusy;
             }
-            private set
+            set
             {
                 Set(ref _isBusy, value);
             }

@@ -109,6 +109,7 @@
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />
+    <Compile Include="Controls\FlipViewButton.cs" />
     <Compile Include="Controls\ImageEx.cs" />
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
