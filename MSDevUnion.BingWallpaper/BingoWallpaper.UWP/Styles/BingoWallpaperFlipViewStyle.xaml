@@ -198,7 +198,12 @@
                                 IsTabStop="False"
                                 UseSystemFocusVisuals="False"
                                 HorizontalAlignment="Right"
-                                VerticalAlignment="Center" />
+                                VerticalAlignment="Center">
+                            <interactivity:Interaction.Behaviors>
+                                <core:DataTriggerBehavior Binding="{Binding ElementName=NextButtonHorizontal,Path=IsPressed}"
+                                                          Value="True"></core:DataTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </Button>
                         <Button x:Name="PreviousButtonVertical"
                                 Template="{StaticResource VerticalPreviousTemplate}"
                                 Width="40"

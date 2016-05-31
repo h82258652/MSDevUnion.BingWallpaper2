@@ -1,29 +1,46 @@
-﻿using System.IO;
+﻿using System.Collections.Concurrent;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BingoWallpaper.Uwp.Extensions
 {
     public static class FileExtensions
     {
-        private static TaskCompletionSource<object> _lockTcs;
+        private static readonly ConcurrentDictionary<string, TaskCompletionSource<object>> LockTcses = new ConcurrentDictionary<string, TaskCompletionSource<object>>();
 
         public static async Task WriteAllBytesAsync(string path, byte[] bytes)
         {
-            while (_lockTcs != null)
+            TaskCompletionSource<object> tcs;
+            while (true)
             {
-                await _lockTcs.Task;
+                if (LockTcses.TryGetValue(path, out tcs))
+                {
+                    await tcs.Task;
+                }
+                else
+                {
+                    break;
+                }
             }
 
-            _lockTcs = new TaskCompletionSource<object>();
-            var currentLockTcs = _lockTcs;
+            while (true)
+            {
+                tcs = new TaskCompletionSource<object>();
+                if (LockTcses.TryAdd(path, tcs))
+                {
+                    break;
+                }
+            }
+
             await Task.Run(() =>
             {
                 var directory = Path.GetDirectoryName(path);
                 Directory.CreateDirectory(directory);
                 File.WriteAllBytes(path, bytes);
             });
-            _lockTcs = null;
-            currentLockTcs.SetResult(null);
+
+            tcs.SetResult(null);
+            LockTcses.TryRemove(path, out tcs);
         }
     }
 }

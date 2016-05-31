@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 using WinRTXamlToolkit.AwaitableUI;
 
@@ -20,6 +21,8 @@ namespace BingoWallpaper.Uwp.Behaviors
         {
             get
             {
+                Button x = new Button();
+
                 var actionCollection = (ActionCollection)GetValue(ActionsProperty);
                 if (actionCollection == null)
                 {
