@@ -10,9 +10,8 @@ namespace BingoWallpaper.Services
 {
     public class WallpaperService : IWallpaperService
     {
-        public async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
+        protected void ValidateGetArchivesAsyncParameters(DateTime viewMonth, string area)
         {
-            var viewMonth = new DateTime(year, month, 1);
             if (viewMonth < Constants.MinimumViewMonth)
             {
                 throw new ArgumentOutOfRangeException(nameof(viewMonth), "请求的时间不能早于 2015 年 1 月。");
@@ -25,6 +24,11 @@ namespace BingoWallpaper.Services
             {
                 throw new ArgumentException("请填写 area。", nameof(area));
             }
+        }
+
+        protected async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(DateTime viewMonth, string area)
+        {
+            ValidateGetArchivesAsyncParameters(viewMonth, area);
 
             var where = new
             {
@@ -45,6 +49,12 @@ namespace BingoWallpaper.Services
                 var json = await client.GetStringAsync(requestUrl);
                 return JsonConvert.DeserializeObject<LeanCloudResultCollection<Archive>>(json);
             }
+        }
+
+        public virtual Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
+        {
+            var viewMonth = new DateTime(year, month, 1);
+            return GetArchivesAsync(viewMonth, area);
         }
 
         public async Task<Image> GetImageAsync(string objectId)

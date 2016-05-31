@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xaml.Interactivity;
+using System.Linq;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
+using WinRTXamlToolkit.AwaitableUI;
 
 namespace BingoWallpaper.Uwp.Behaviors
 {
@@ -51,11 +54,14 @@ namespace BingoWallpaper.Uwp.Behaviors
             }
         }
 
-        protected override void OnAttached()
+        protected override async void OnAttached()
         {
             base.OnAttached();
 
-            var visualStateGroups = VisualStateManager.GetVisualStateGroups(AssociatedObject);
+            await Task.Delay(3000);
+            await AssociatedObject.WaitForLoadedAsync();
+
+            var visualStateGroups = VisualStateManager.GetVisualStateGroups(AssociatedObject).ToList();
             foreach (var visualStateGroup in visualStateGroups)
             {
                 visualStateGroup.CurrentStateChanged += VisualStateGroup_CurrentStateChanged;
