@@ -126,17 +126,17 @@ namespace BingoWallpaper.Uwp.Controls
             }
         }
 
-        public bool ContainsCache(Uri uri)
+        public static bool ContainsCache(Uri uri)
         {
             return File.Exists(GetCacheFileName(uri));
         }
 
-        public void RemoveAllCache()
+        public static void RemoveAllCache()
         {
-            throw new NotImplementedException();
+            Directory.Delete(GetCacheFolder().Path, true);
         }
 
-        public void RemoveCache(Uri uri)
+        public static void RemoveCache(Uri uri)
         {
             var cacheFileName = GetCacheFileName(uri);
             if (File.Exists(cacheFileName))
@@ -181,7 +181,7 @@ namespace BingoWallpaper.Uwp.Controls
             obj.SetSource(value);
         }
 
-        private string GetCacheFileName(Uri uri)
+        private static string GetCacheFileName(Uri uri)
         {
             var originalString = uri.OriginalString;
             var extension = Path.GetExtension(originalString);
