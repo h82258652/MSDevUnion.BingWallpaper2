@@ -1,4 +1,6 @@
-﻿using BingoWallpaper.Uwp.Views;
+﻿using BingoWallpaper.Uwp.Repositories;
+using BingoWallpaper.Uwp.Views;
+using Microsoft.EntityFrameworkCore;
 using System;
 using UmengSDK;
 using Windows.ApplicationModel;
@@ -23,6 +25,11 @@ namespace BingoWallpaper.Uwp
             InitializeComponent();
             Resuming += OnResuming;
             Suspending += OnSuspending;
+
+            using (var db = new WallpaperContext())
+            {
+                db.Database.Migrate();
+            }
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)

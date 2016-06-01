@@ -214,9 +214,7 @@ namespace BingoWallpaper.Uwp.Controls
                     }
                     catch (Exception ex)
                     {
-                        // TODO download failed
-                        throw new NotImplementedException();
-
+                        ImageFailed?.Invoke(this, new ExceptionEventArgs(ex.Message));
                         _image.Visibility = Visibility.Visible;
                         _placeholderContentControl.Visibility = Visibility.Collapsed;
                         return;

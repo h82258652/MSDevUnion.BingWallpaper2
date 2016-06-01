@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -116,6 +117,20 @@ namespace BingoWallpaper.Services
             headers.Add("X-AVOSCloud-Application-Id", Constants.LeanCloudAppId);
             headers.Add("X-AVOSCloud-Application-Key", Constants.LeanCloudAppKey);
             return client;
+        }
+
+        public async Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area)
+        {
+            var archives = await GetArchivesAsync(year, month, area);
+            var imageIds = archives.Select(temp => temp.Image.ObjectId);
+            var images = await GetImagesAsync(imageIds);
+            return from archive in archives
+                   let image = images.FirstOrDefault(temp => temp.ObjectId == archive.Image.ObjectId)
+                   select new Wallpaper()
+                   {
+                       Archive = archive,
+                       Image = image
+                   };
         }
     }
 }

@@ -11,12 +11,10 @@ namespace BingoWallpaper.Uwp.Repositories
             set;
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<Image> Images
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Archive>().HasKey(temp => temp.ObjectId);
-            modelBuilder.Entity<Image>().HasKey(temp => temp.ObjectId);
+            get;
+            set;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,6 +23,14 @@ namespace BingoWallpaper.Uwp.Repositories
 
             // TODO
             optionsBuilder.UseSqlite("");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Archive>().HasKey(temp => temp.ObjectId);
+            modelBuilder.Entity<Image>().HasKey(temp => temp.ObjectId);
         }
     }
 }
