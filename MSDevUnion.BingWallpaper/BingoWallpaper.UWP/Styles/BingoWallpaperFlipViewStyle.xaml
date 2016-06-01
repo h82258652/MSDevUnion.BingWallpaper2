@@ -228,17 +228,17 @@
                                                                  Storyboard.TargetProperty="Opacity"
                                                                  From="1"
                                                                  To="0"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="PreviousHorizontalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleX"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="PreviousHorizontalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleY"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                             </Storyboard>
                                         </media:ControlStoryboardAction.Storyboard>
                                     </media:ControlStoryboardAction>
@@ -275,17 +275,17 @@
                                                                  Storyboard.TargetProperty="Opacity"
                                                                  From="1"
                                                                  To="0"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="NextHorizontalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleX"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="NextHorizontalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleY"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                             </Storyboard>
                                         </media:ControlStoryboardAction.Storyboard>
                                     </media:ControlStoryboardAction>
@@ -322,17 +322,17 @@
                                                                  Storyboard.TargetProperty="Opacity"
                                                                  From="1"
                                                                  To="0"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="PreviousVerticalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleX"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="PreviousVerticalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleY"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                             </Storyboard>
                                         </media:ControlStoryboardAction.Storyboard>
                                     </media:ControlStoryboardAction>
@@ -369,17 +369,17 @@
                                                                  Storyboard.TargetProperty="Opacity"
                                                                  From="1"
                                                                  To="0"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="NextVerticalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleX"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                                 <DoubleAnimation Storyboard.TargetName="NextVerticalSemicircleScaleTransform"
                                                                  Storyboard.TargetProperty="ScaleY"
                                                                  From="1"
                                                                  To="5"
-                                                                 Duration="0:0:0.3" />
+                                                                 Duration="0:0:0.25" />
                                             </Storyboard>
                                         </media:ControlStoryboardAction.Storyboard>
                                     </media:ControlStoryboardAction>

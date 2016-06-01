@@ -1,10 +1,18 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace BingoWallpaper.Models
 {
     [JsonObject]
     public class Hotspot
     {
+        [JsonIgnore]
+        public Guid Id
+        {
+            get;
+            set;
+        }
+
         [JsonProperty("desc")]
         public string Description
         {

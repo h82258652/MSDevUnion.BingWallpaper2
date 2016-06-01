@@ -23,8 +23,8 @@
             <StackPanel Orientation="Vertical">
                 <ComboBox x:Uid="/Setting/SaveLocation"
                           Margin="10,10,10,0"
-                          ItemsSource="{Binding Path=SaveLocations,Mode=OneWay}"
-                          SelectedItem="{Binding Path=SaveLocation,Mode=TwoWay}">
+                          ItemsSource="{Binding Path=SaveLocations,Mode=OneTime}"
+                          SelectedItem="{Binding Path=SelectedSaveLocation,Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="models:SaveLocation">
                             <TextBlock Text="{Binding Converter={StaticResource EnumToStringConverter}}" />
@@ -34,7 +34,9 @@
                 <ComboBox x:Uid="/Setting/WallpaperSize"
                           Margin="10,10,10,0"></ComboBox>
                 <ComboBox x:Uid="/Setting/Area"
-                          Margin="10,10,10,0">
+                          Margin="10,10,10,0"
+                          ItemsSource="{x:Bind ViewModel.Areas}"
+                          SelectedItem="{x:Bind ViewModel.SelectedArea,Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="system:String">
                             <RelativePanel>

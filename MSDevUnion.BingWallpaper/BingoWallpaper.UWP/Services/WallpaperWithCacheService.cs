@@ -1,66 +1,123 @@
 ﻿using BingoWallpaper.Models;
 using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Repositories;
-using GalaSoft.MvvmLight.Messaging;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Networking.Connectivity;
 
 namespace BingoWallpaper.Uwp.Services
 {
-    //public class WallpaperWithCacheService : WallpaperService
-    //{
-    //    public override async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
-    //    {
-    //        var viewMonth = new DateTime(year, month, 1);
-    //        ValidateGetArchivesAsyncParameters(viewMonth, area);
+    public class WallpaperWithCacheService : WallpaperService
+    {
+        public override async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
+        {
+            var viewMonth = new DateTime(year, month, 1);
+            ValidateGetArchivesAsyncParameters(viewMonth, area);
 
-    //        using (var db = new WallpaperContext())
-    //        {
-    //            var result = await db.Archives.Where(temp => temp.Market == area && temp.Date.StartsWith(viewMonth.ToString("yyyyMM"))).ToListAsync();
-    //            if (result.Count >= DateTime.DaysInMonth(year, month))
-    //            {
-    //                // 该月数据已全部在缓存当中。
-    //                return new LeanCloudResultCollection<Archive>()
-    //                {
-    //                    Results = result
-    //                };
-    //            }
+            using (var db = new WallpaperContext())
+            {
+                var result = await db.Archives.Where(temp => temp.Market == area && temp.Date.StartsWith(viewMonth.ToString("yyyyMM"))).OrderByDescending(temp => temp.Date).ToListAsync();
+                if (result.Count >= DateTime.DaysInMonth(year, month))
+                {
+                    // 该月数据已全部在缓存当中。
+                    return new LeanCloudResultCollection<Archive>()
+                    {
+                        Results = result
+                    };
+                }
 
-    //            if (NetworkInterface.GetIsNetworkAvailable())
-    //            {
-    //                // 网络可用，下载数据并存储到数据库中。
-    //                var collection = await base.GetArchivesAsync(viewMonth, area);
-    //                foreach (var archive in collection)
-    //                {
-    //                    if (db.Archives.All(temp => temp.ObjectId != archive.ObjectId))
-    //                    {
-    //                        db.Archives.Add(archive);
-    //                    }
-    //                }
-    //                await db.SaveChangesAsync();
-    //            }
-    //            return collection;
-    //        }
+                // 下载数据并存储到数据库中。
+                var collection = await base.GetArchivesAsync(viewMonth, area);
+                var entityAdded = false;
+                foreach (var archive in collection)
+                {
+                    if (await db.Archives.AnyAsync(temp => temp.ObjectId == archive.ObjectId) == false)
+                    {
+                        db.Archives.Add(archive);
+                        entityAdded = true;
+                    }
+                }
+                if (entityAdded)
+                {
+                    await db.SaveChangesAsync();
+                }
 
-    //        using (var db = new WallpaperContext())
-    //        {
-    //            if (year == now.Year && month >= now.Month)
-    //            {
-    //                // 直接加载网络数据。
-    //            }
-    //            else
-    //            {
-    //                // 加载缓存
-    //            }
+                return collection;
+            }
+        }
 
-    //            var archives = db.Archives.Where(temp => temp.Market == area);
-    //        }
-    //    }
-    //}
+        public override async Task<Image> GetImageAsync(string objectId)
+        {
+            if (objectId == null)
+            {
+                throw new ArgumentNullException(nameof(objectId));
+            }
+            if (objectId.Length <= 0)
+            {
+                throw new ArgumentException($"{nameof(objectId)} 不能为空字符串。");
+            }
+
+            using (var db = new WallpaperContext())
+            {
+                var image = await db.Images.FirstOrDefaultAsync(temp => temp.ObjectId == objectId);
+                if (image != null)
+                {
+                    return image;
+                }
+
+                image = await base.GetImageAsync(objectId);
+                if (await db.Images.AnyAsync(temp => temp.ObjectId == objectId) == false)
+                {
+                    db.Images.Add(image);
+                    await db.SaveChangesAsync();
+                }
+                return image;
+            }
+        }
+
+        public override async Task<LeanCloudResultCollection<Image>> GetImagesAsync(IEnumerable<string> objectIds)
+        {
+            if (objectIds == null)
+            {
+                throw new ArgumentNullException(nameof(objectIds));
+            }
+
+            var objectIdArray = objectIds as string[] ?? objectIds.ToArray();
+            using (var db = new WallpaperContext())
+            {
+                var images = await db.Images.Where(temp => objectIdArray.Contains(temp.ObjectId)).ToListAsync();
+                if (images.Count >= objectIdArray.Length)
+                {
+                    // 请求的数据已全部缓存，直接返回。
+                    return new LeanCloudResultCollection<Image>()
+                    {
+                        Results = images
+                    };
+                }
+
+                // 筛选未缓存的 Id。
+                var uncacheImageIds = objectIdArray.Where(objectId => images.Any(image => image.ObjectId == objectId) == false);
+                var uncacheImageCollection = await base.GetImagesAsync(uncacheImageIds);
+                var entityAdded = false;
+                foreach (var image in uncacheImageCollection)
+                {
+                    if (await db.Images.AnyAsync(temp => temp.ObjectId == image.ObjectId) == false)
+                    {
+                        db.Images.Add(image);
+                        entityAdded = true;
+                    }
+                }
+                if (entityAdded)
+                {
+                    await db.SaveChangesAsync();
+                }
+
+                var resuls = uncacheImageCollection.Results;
+                uncacheImageCollection.Results = images.Concat(resuls).ToList();
+                return uncacheImageCollection;
+            }
+        }
+    }
 }

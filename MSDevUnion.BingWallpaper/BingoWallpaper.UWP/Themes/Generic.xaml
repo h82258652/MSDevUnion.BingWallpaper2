@@ -5,19 +5,4 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Themes/ImageEx.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="controls:FlipViewButton">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:FlipViewButton">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Rectangle Width="100"
-                                   Height="100"
-                                   Fill="Black"></Rectangle>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>

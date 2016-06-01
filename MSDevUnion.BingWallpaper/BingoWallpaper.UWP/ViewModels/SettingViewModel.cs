@@ -17,37 +17,12 @@ namespace BingoWallpaper.Uwp.ViewModels
             _settings = settings;
         }
 
-        public string Area
-        {
-            get
-            {
-                return _settings.Get(nameof(Area), () => "", ApplicationDataLocality.Roaming);
-            }
-            set
-            {
-                _settings.Set(nameof(Area), value, ApplicationDataLocality.Roaming);
-                RaisePropertyChanged();
-            }
-        }
-
         public IReadOnlyList<string> Areas
         {
             get
             {
+                // TODO
                 throw new NotImplementedException();
-            }
-        }
-
-        public SaveLocation SaveLocation
-        {
-            get
-            {
-                return _settings.Get(nameof(SaveLocation), () => SaveLocation.PictureLibrary);
-            }
-            set
-            {
-                _settings.Set(nameof(SaveLocation), value);
-                RaisePropertyChanged();
             }
         }
 
@@ -56,15 +31,43 @@ namespace BingoWallpaper.Uwp.ViewModels
             get;
         } = Enum.GetValues(typeof(SaveLocation)).Cast<SaveLocation>().ToList();
 
-        public string WallpaperSize
+        public string SelectedArea
         {
             get
             {
-                return _settings.Get(nameof(WallpaperSize), () => "");
+                // TODO
+                return _settings.Get(nameof(SelectedArea), () => "", ApplicationDataLocality.Roaming);
             }
             set
             {
-                _settings.Set(nameof(WallpaperSize), value);
+                _settings.Set(nameof(SelectedArea), value, ApplicationDataLocality.Roaming);
+                RaisePropertyChanged();
+            }
+        }
+
+        public SaveLocation SelectedSaveLocation
+        {
+            get
+            {
+                return _settings.Get(nameof(SelectedSaveLocation), () => SaveLocation.PictureLibrary);
+            }
+            set
+            {
+                _settings.Set(nameof(SelectedSaveLocation), value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public string SelectedWallpaperSize
+        {
+            get
+            {
+                // TODO
+                return _settings.Get(nameof(SelectedWallpaperSize), () => "");
+            }
+            set
+            {
+                _settings.Set(nameof(SelectedWallpaperSize), value);
                 RaisePropertyChanged();
             }
         }
@@ -73,6 +76,7 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
+                // TODO
                 throw new NotImplementedException();
             }
         }

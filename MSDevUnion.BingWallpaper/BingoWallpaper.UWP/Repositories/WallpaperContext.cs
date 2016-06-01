@@ -21,8 +21,7 @@ namespace BingoWallpaper.Uwp.Repositories
         {
             base.OnConfiguring(optionsBuilder);
 
-            // TODO
-            optionsBuilder.UseSqlite("");
+            optionsBuilder.UseSqlite($"Filename={Constants.DatabaseName}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +30,16 @@ namespace BingoWallpaper.Uwp.Repositories
 
             modelBuilder.Entity<Archive>().HasKey(temp => temp.ObjectId);
             modelBuilder.Entity<Image>().HasKey(temp => temp.ObjectId);
+
+            modelBuilder.Entity<CoverStory>().HasKey(temp => temp.Id);
+            modelBuilder.Entity<CoverStory>().Property(temp => temp.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Hotspot>().HasKey(temp => temp.Id);
+            modelBuilder.Entity<Hotspot>().Property(temp => temp.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<LeanCloudPointer>().HasKey(temp => temp.ObjectId);
+
+            modelBuilder.Entity<Message>().HasKey(temp => temp.Id);
         }
     }
 }

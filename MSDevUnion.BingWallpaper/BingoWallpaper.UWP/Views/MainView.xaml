@@ -8,6 +8,9 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+      xmlns:controls="using:BingoWallpaper.Uwp.Controls"
+      xmlns:models="using:BingoWallpaper.Models"
+      xmlns:bingoWallpaper="using:BingoWallpaper"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Main}">
     <Page.Resources>
@@ -16,6 +19,7 @@
                 <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperFlipViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
+            <converters:StringFormatConverter x:Key="StringFormatConverter" />
         </ResourceDictionary>
     </Page.Resources>
     <Page.BottomAppBar>
@@ -33,7 +37,7 @@
                 <AppBarButton Grid.Column="1"
                               x:Uid="/Main/Refresh"
                               IsCompact="{x:Bind AppBar.IsOpen,Converter={StaticResource BooleanInverseConverter},Mode=OneWay}"
-                              Click="ButtonBase_OnClick">
+                              Command="{x:Bind ViewModel.RefreshCommand}">
                     <AppBarButton.Icon>
                         <PathIcon HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
@@ -91,21 +95,39 @@
         <VisualStateGroup></VisualStateGroup>
     </VisualStateManager.VisualStateGroups>-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView Style="{StaticResource BingoWallpaperFlipViewStyle}">
-            <Grid Background="Red"></Grid>
-            <Grid Background="Blue"></Grid>
-            <Grid Background="Green"></Grid>
-            <!--<FlipView.ItemTemplate>
-                <DataTemplate>
-                    <GridView>
+        <FlipView Style="{StaticResource BingoWallpaperFlipViewStyle}"
+                  ItemsSource="{Binding Path=WallpaperCollections,Mode=OneTime}"
+                  SelectedItem="{Binding Path=SelectedWallpaperCollection,Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate x:DataType="models:WallpaperCollection">
+                    <Grid>
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="{x:Bind Year}" />
+                            <TextBlock Text="{x:Bind Month}" />
+                        </StackPanel>
+                        <!--#region 背景图片-->
+                        <Image Source="{Binding}"
+                               Opacity="0.5"></Image>
+                        <!--#endregion-->
+                        <GridView ItemsSource="{x:Bind}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Wallpaper">
+                                    <TextBlock Text="{x:Bind}"></TextBlock>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </Grid>
+                    <!--<GridView>
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel></StackPanel>
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
-                    </GridView>
+                    </GridView>-->
                 </DataTemplate>
-            </FlipView.ItemTemplate>-->
+            </FlipView.ItemTemplate>
         </FlipView>
     </Grid>
 </Page>

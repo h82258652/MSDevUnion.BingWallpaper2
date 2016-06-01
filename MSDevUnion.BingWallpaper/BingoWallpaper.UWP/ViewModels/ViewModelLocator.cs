@@ -30,7 +30,7 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
             else
             {
-                SimpleIoc.Default.Register<IWallpaperService, WallpaperService>();
+                SimpleIoc.Default.Register<IWallpaperService, WallpaperWithCacheService>();
             }
             SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
 

@@ -11,54 +11,13 @@ namespace BingoWallpaper.Services
 {
     public class WallpaperService : IWallpaperService
     {
-        protected void ValidateGetArchivesAsyncParameters(DateTime viewMonth, string area)
-        {
-            if (viewMonth < Constants.MinimumViewMonth)
-            {
-                throw new ArgumentOutOfRangeException(nameof(viewMonth), "请求的时间不能早于 2015 年 1 月。");
-            }
-            if (area == null)
-            {
-                throw new ArgumentNullException(nameof(area));
-            }
-            if (area.Length <= 0)
-            {
-                throw new ArgumentException("请填写 area。", nameof(area));
-            }
-        }
-
-        protected async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(DateTime viewMonth, string area)
-        {
-            ValidateGetArchivesAsyncParameters(viewMonth, area);
-
-            var where = new
-            {
-                market = area,
-                date = new Dictionary<string, string>()
-                {
-                    {
-                        "$regex",
-                        @"\Q" + viewMonth.ToString("yyyyMM") + @"\E"
-                    }
-                }
-            };
-
-            string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Archive?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-date";
-
-            using (var client = CreateHttpClient())
-            {
-                var json = await client.GetStringAsync(requestUrl);
-                return JsonConvert.DeserializeObject<LeanCloudResultCollection<Archive>>(json);
-            }
-        }
-
         public virtual Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
         {
             var viewMonth = new DateTime(year, month, 1);
             return GetArchivesAsync(viewMonth, area);
         }
 
-        public async Task<Image> GetImageAsync(string objectId)
+        public virtual async Task<Image> GetImageAsync(string objectId)
         {
             if (objectId == null)
             {
@@ -66,7 +25,7 @@ namespace BingoWallpaper.Services
             }
             if (objectId.Length <= 0)
             {
-                throw new ArgumentException("objectId 不能为空字符串。");
+                throw new ArgumentException($"{nameof(objectId)} 不能为空字符串。");
             }
 
             string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Image/{objectId}";
@@ -78,7 +37,7 @@ namespace BingoWallpaper.Services
             }
         }
 
-        public async Task<LeanCloudResultCollection<Image>> GetImagesAsync(IEnumerable<string> objectIds)
+        public virtual async Task<LeanCloudResultCollection<Image>> GetImagesAsync(IEnumerable<string> objectIds)
         {
             if (objectIds == null)
             {
@@ -110,15 +69,6 @@ namespace BingoWallpaper.Services
             return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
-        private static HttpClient CreateHttpClient()
-        {
-            var client = new HttpClient();
-            var headers = client.DefaultRequestHeaders;
-            headers.Add("X-AVOSCloud-Application-Id", Constants.LeanCloudAppId);
-            headers.Add("X-AVOSCloud-Application-Key", Constants.LeanCloudAppKey);
-            return client;
-        }
-
         public async Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area)
         {
             var archives = await GetArchivesAsync(year, month, area);
@@ -131,6 +81,56 @@ namespace BingoWallpaper.Services
                        Archive = archive,
                        Image = image
                    };
+        }
+
+        protected async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(DateTime viewMonth, string area)
+        {
+            ValidateGetArchivesAsyncParameters(viewMonth, area);
+
+            var where = new
+            {
+                market = area,
+                date = new Dictionary<string, string>()
+                {
+                    {
+                        "$regex",
+                        @"\Q" + viewMonth.ToString("yyyyMM") + @"\E"
+                    }
+                }
+            };
+
+            string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Archive?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-date";
+
+            using (var client = CreateHttpClient())
+            {
+                var json = await client.GetStringAsync(requestUrl);
+                return JsonConvert.DeserializeObject<LeanCloudResultCollection<Archive>>(json);
+            }
+        }
+
+        protected void ValidateGetArchivesAsyncParameters(DateTime viewMonth, string area)
+        {
+            if (viewMonth < Constants.MinimumViewMonth)
+            {
+                throw new ArgumentOutOfRangeException(nameof(viewMonth), "请求的时间不能早于 2015 年 1 月。");
+            }
+            if (area == null)
+            {
+                throw new ArgumentNullException(nameof(area));
+            }
+            if (area.Length <= 0)
+            {
+                throw new ArgumentException("请填写 area。", nameof(area));
+            }
+        }
+
+        private static HttpClient CreateHttpClient()
+        {
+            var client = new HttpClient();
+            var headers = client.DefaultRequestHeaders;
+            headers.Add("X-AVOSCloud-Application-Id", Constants.LeanCloudAppId);
+            headers.Add("X-AVOSCloud-Application-Key", Constants.LeanCloudAppKey);
+            return client;
         }
     }
 }
