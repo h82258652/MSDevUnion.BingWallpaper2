@@ -16,5 +16,11 @@ namespace BingoWallpaper.Uwp.Configuration
             get;
             set;
         }
+
+        WallpaperSize SelectedWallpaperSize
+        {
+            get;
+            set;
+        }
     }
 }

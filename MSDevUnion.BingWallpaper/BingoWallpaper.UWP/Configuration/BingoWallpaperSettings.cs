@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using System;
 using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.Configuration
@@ -34,6 +35,21 @@ namespace BingoWallpaper.Uwp.Configuration
             {
                 Set(nameof(SelectedSaveLocation), value);
                 RaisePropertyChanged();
+            }
+        }
+
+        public WallpaperSize SelectedWallpaperSize
+        {
+            get
+            {
+                // TODO
+                var temp = Get(nameof(SelectedWallpaperSize), () => "", ApplicationDataLocality.Local);
+                throw new NotImplementedException();
+            }
+            set
+            {
+                // TODO
+                Set(nameof(SelectedWallpaperSize), value);
             }
         }
     }

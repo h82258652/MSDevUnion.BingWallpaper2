@@ -11,11 +11,11 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class ViewModelLocator
     {
+        public const string AboutViewKey = @"About";
+
         public const string DetailViewKey = @"Detail";
 
         public const string SettingViewKey = @"Setting";
-
-        public const string AboutViewKey = @"About";
 
         static ViewModelLocator()
         {
@@ -40,6 +40,14 @@ namespace BingoWallpaper.Uwp.ViewModels
             SimpleIoc.Default.Register<AboutViewModel>();
         }
 
+        public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
+
+        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
+
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public SettingViewModel Setting => ServiceLocator.Current.GetInstance<SettingViewModel>();
+
         private static INavigationService CreateNavigationService()
         {
             var navigationService = new NavigationService();
@@ -48,13 +56,5 @@ namespace BingoWallpaper.Uwp.ViewModels
             navigationService.Configure(AboutViewKey, typeof(AboutView));
             return navigationService;
         }
-
-        public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
-
-        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
-
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
-        public SettingViewModel Setting => ServiceLocator.Current.GetInstance<SettingViewModel>();
     }
 }

@@ -4,7 +4,6 @@ using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.ViewModels
 {
@@ -39,7 +38,7 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
             set
             {
-                SelectedArea = value;
+                _settings.SelectedArea = value;
                 RaisePropertyChanged();
             }
         }
@@ -57,26 +56,24 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public string SelectedWallpaperSize
+        public WallpaperSize SelectedWallpaperSize
         {
             get
             {
-                // TODO
-                throw new NotImplementedException();
+                return _settings.SelectedWallpaperSize;
             }
             set
             {
-                throw new NotImplementedException();
+                _settings.SelectedWallpaperSize = value;
                 RaisePropertyChanged();
             }
         }
 
-        public IReadOnlyList<string> WallpaperSizes
+        public IReadOnlyList<WallpaperSize> WallpaperSizes
         {
             get
             {
-                // TODO
-                throw new NotImplementedException();
+                return WallpaperSize.SupportSizes;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using BingoWallpaper.Models;
 using BingoWallpaper.Services;
+using BingoWallpaper.Uwp.Configuration;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -13,6 +14,8 @@ namespace BingoWallpaper.Uwp.ViewModels
     {
         private readonly INavigationService _navigationService;
 
+        private readonly IBingoWallpaperSettings _settings;
+
         private readonly IWallpaperService _wallpaperService;
 
         private RelayCommand<Wallpaper> _clickCommand;
@@ -23,10 +26,11 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private WallpaperCollection _selectedWallpaperCollection;
 
-        public MainViewModel(INavigationService navigationService, IWallpaperService wallpaperService)
+        public MainViewModel(INavigationService navigationService, IWallpaperService wallpaperService, IBingoWallpaperSettings settings)
         {
             _navigationService = navigationService;
             _wallpaperService = wallpaperService;
+            _settings = settings;
 
             var wallpaperCollections = new List<WallpaperCollection>();
             var date = Constants.MinimumViewMonth;
@@ -66,19 +70,9 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                _refreshCommand = _refreshCommand ?? new RelayCommand(() =>
-                {
-                    // TODO
-                });
+                _refreshCommand = _refreshCommand ?? new RelayCommand(RefreshExecute);
                 return _refreshCommand;
             }
-        }
-
-        private void RefreshExecute()
-        {
-            var selectedWallpaperCollection = SelectedWallpaperCollection;
-            // TODO
-            _wallpaperService.GetWallpapersAsync(selectedWallpaperCollection.Year, selectedWallpaperCollection.Month, "");
         }
 
         public WallpaperCollection SelectedWallpaperCollection
@@ -100,6 +94,30 @@ namespace BingoWallpaper.Uwp.ViewModels
         public IReadOnlyList<WallpaperCollection> WallpaperCollections
         {
             get;
+        }
+
+        private async void RefreshExecute()
+        {
+            IsBusy = true;
+            try
+            {
+                var selectedWallpaperCollection = SelectedWallpaperCollection;
+                selectedWallpaperCollection.Clear();
+
+                var wallpapers = await _wallpaperService.GetWallpapersAsync(selectedWallpaperCollection.Year, selectedWallpaperCollection.Month, _settings.SelectedArea);
+                foreach (var wallpaper in wallpapers)
+                {
+                    selectedWallpaperCollection.Add(wallpaper);
+                }
+            }
+            catch
+            {
+                // TODO
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }
