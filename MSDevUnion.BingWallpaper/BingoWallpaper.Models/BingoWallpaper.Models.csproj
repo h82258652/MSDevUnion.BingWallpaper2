@@ -51,6 +51,7 @@
     <Compile Include="Models\SaveLocation.cs" />
     <Compile Include="Models\Wallpaper.cs" />
     <Compile Include="Models\WallpaperCollection.cs" />
+    <Compile Include="Models\WallpaperSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -74,6 +74,13 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
+        private void RefreshExecute()
+        {
+            var selectedWallpaperCollection = SelectedWallpaperCollection;
+            // TODO
+            _wallpaperService.GetWallpapersAsync(selectedWallpaperCollection.Year, selectedWallpaperCollection.Month, "");
+        }
+
         public WallpaperCollection SelectedWallpaperCollection
         {
             get

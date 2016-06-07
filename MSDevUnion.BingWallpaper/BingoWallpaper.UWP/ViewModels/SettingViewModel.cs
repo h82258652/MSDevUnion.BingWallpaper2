@@ -10,9 +10,9 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class SettingViewModel : ViewModelBase
     {
-        private readonly ISettings _settings;
+        private readonly IBingoWallpaperSettings _settings;
 
-        public SettingViewModel(ISettings settings)
+        public SettingViewModel(IBingoWallpaperSettings settings)
         {
             _settings = settings;
         }
@@ -35,12 +35,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                // TODO
-                return _settings.Get(nameof(SelectedArea), () => "", ApplicationDataLocality.Roaming);
+                return _settings.SelectedArea;
             }
             set
             {
-                _settings.Set(nameof(SelectedArea), value, ApplicationDataLocality.Roaming);
+                SelectedArea = value;
                 RaisePropertyChanged();
             }
         }
@@ -49,11 +48,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.Get(nameof(SelectedSaveLocation), () => SaveLocation.PictureLibrary);
+                return _settings.SelectedSaveLocation;
             }
             set
             {
-                _settings.Set(nameof(SelectedSaveLocation), value);
+                _settings.SelectedSaveLocation = value;
                 RaisePropertyChanged();
             }
         }
@@ -63,11 +62,11 @@ namespace BingoWallpaper.Uwp.ViewModels
             get
             {
                 // TODO
-                return _settings.Get(nameof(SelectedWallpaperSize), () => "");
+                throw new NotImplementedException();
             }
             set
             {
-                _settings.Set(nameof(SelectedWallpaperSize), value);
+                throw new NotImplementedException();
                 RaisePropertyChanged();
             }
         }

@@ -4,7 +4,7 @@ using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.Configuration
 {
-    public interface ISettings : INotifyPropertyChanged
+    public interface IAppSettings : INotifyPropertyChanged
     {
         bool Contains(string key, ApplicationDataLocality dataLocality = ApplicationDataLocality.Local);
 

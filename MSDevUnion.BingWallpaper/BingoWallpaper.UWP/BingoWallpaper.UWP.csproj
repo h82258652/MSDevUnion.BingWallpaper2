@@ -107,8 +107,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\VisualStateChangedBehavior.cs" />
-    <Compile Include="Configuration\ISettings.cs" />
-    <Compile Include="Configuration\AppSettings.cs" />
+    <Compile Include="Configuration\AppSettingsBase.cs" />
+    <Compile Include="Configuration\BingoWallpaperSettings.cs" />
+    <Compile Include="Configuration\IAppSettings.cs" />
+    <Compile Include="Configuration\IBingoWallpaperSettings.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />
     <Compile Include="Controls\FirstDoubleSizePanel.cs" />
     <Compile Include="Controls\ImageEx.cs" />

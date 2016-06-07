@@ -6,19 +6,14 @@ using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.Configuration
 {
-    public class AppSettings : ISettings
+    public abstract class AppSettingsBase : IAppSettings
     {
-        private AppSettings()
+        protected AppSettingsBase()
         {
             ApplicationData.Current.DataChanged += RoamingApplicationDataChanged;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public static ISettings Current
-        {
-            get;
-        } = new AppSettings();
 
         public bool Contains(string key, ApplicationDataLocality dataLocality = ApplicationDataLocality.Local)
         {
@@ -36,10 +31,10 @@ namespace BingoWallpaper.Uwp.Configuration
                     return ApplicationData.Current.RoamingSettings.Values.ContainsKey(key);
 
                 case ApplicationDataLocality.Temporary:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 case ApplicationDataLocality.LocalCache:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(dataLocality));
@@ -74,10 +69,10 @@ namespace BingoWallpaper.Uwp.Configuration
                     }
 
                 case ApplicationDataLocality.Temporary:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 case ApplicationDataLocality.LocalCache:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(dataLocality));
@@ -99,15 +94,16 @@ namespace BingoWallpaper.Uwp.Configuration
                     break;
 
                 case ApplicationDataLocality.Roaming:
-                    result = ApplicationData.Current.RoamingSettings.Values.Remove(key);
-                    ApplicationData.Current.SignalDataChanged();
+                    var applicationData = ApplicationData.Current;
+                    result = applicationData.RoamingSettings.Values.Remove(key);
+                    applicationData.SignalDataChanged();
                     break;
 
                 case ApplicationDataLocality.Temporary:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 case ApplicationDataLocality.LocalCache:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(dataLocality));
@@ -134,6 +130,7 @@ namespace BingoWallpaper.Uwp.Configuration
                             set = Convert.ChangeType(value, Enum.GetUnderlyingType(typeof(T)));
                         }
                         ApplicationData.Current.LocalSettings.Values[key] = set;
+                        RaisePropertyChanged(key);
                         break;
                     }
 
@@ -144,22 +141,22 @@ namespace BingoWallpaper.Uwp.Configuration
                         {
                             set = Convert.ChangeType(value, Enum.GetUnderlyingType(typeof(T)));
                         }
-                        ApplicationData.Current.RoamingSettings.Values[key] = set;
-                        ApplicationData.Current.SignalDataChanged();
+                        var applicationData = ApplicationData.Current;
+                        applicationData.RoamingSettings.Values[key] = set;
+                        RaisePropertyChanged(key);
+                        applicationData.SignalDataChanged();
                         break;
                     }
 
                 case ApplicationDataLocality.Temporary:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 case ApplicationDataLocality.LocalCache:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(dataLocality));
             }
-
-            RaisePropertyChanged(key);
         }
 
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
