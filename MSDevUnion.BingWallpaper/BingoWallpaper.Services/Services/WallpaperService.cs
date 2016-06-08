@@ -69,6 +69,35 @@ namespace BingoWallpaper.Services
             return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
+        public virtual IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        {
+            return new[]
+            {
+                new WallpaperSize(150,150),
+                new WallpaperSize(200,200),
+                new WallpaperSize(240,240),
+                new WallpaperSize(240,400),
+                new WallpaperSize(310,150),
+                new WallpaperSize(320,180),
+                new WallpaperSize(400,240),
+                new WallpaperSize(480,800),
+                new WallpaperSize(640,360),
+                new WallpaperSize(720,1280),
+                new WallpaperSize(768,1024),
+                new WallpaperSize(768,1280),
+                new WallpaperSize(768,1366),
+                new WallpaperSize(800,480),
+                new WallpaperSize(800,600),
+                new WallpaperSize(1024,768),
+                new WallpaperSize(1080,1920),
+                new WallpaperSize(1280,720),
+                new WallpaperSize(1280,768),
+                new WallpaperSize(1366,768),
+                new WallpaperSize(1920,1080),
+                new WallpaperSize(1920,1200),
+            };
+        }
+
         public virtual string GetUrl(Image image, WallpaperSize size)
         {
             if (image == null)
@@ -141,35 +170,6 @@ namespace BingoWallpaper.Services
             headers.Add("X-AVOSCloud-Application-Id", Constants.LeanCloudAppId);
             headers.Add("X-AVOSCloud-Application-Key", Constants.LeanCloudAppKey);
             return client;
-        }
-
-        public virtual IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
-        {
-            return new[]
-            {
-                new WallpaperSize(150,150),
-                new WallpaperSize(200,200),
-                new WallpaperSize(240,240),
-                new WallpaperSize(240,400),
-                new WallpaperSize(310,150),
-                new WallpaperSize(320,180),
-                new WallpaperSize(400,240),
-                new WallpaperSize(480,800),
-                new WallpaperSize(640,360),
-                new WallpaperSize(720,1280),
-                new WallpaperSize(768,1024),
-                new WallpaperSize(768,1280),
-                new WallpaperSize(768,1366),
-                new WallpaperSize(800,480),
-                new WallpaperSize(800,600),
-                new WallpaperSize(1024,768),
-                new WallpaperSize(1080,1920),
-                new WallpaperSize(1280,720),
-                new WallpaperSize(1280,768),
-                new WallpaperSize(1366,768),
-                new WallpaperSize(1920,1080),
-                new WallpaperSize(1920,1200),
-            };
         }
     }
 }
