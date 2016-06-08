@@ -28,6 +28,11 @@ namespace BingoWallpaper.Uwp.Design
             throw new NotImplementedException();
         }
 
+        public string GetUrl(Image image, WallpaperSize size)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area)
         {
             throw new NotImplementedException();

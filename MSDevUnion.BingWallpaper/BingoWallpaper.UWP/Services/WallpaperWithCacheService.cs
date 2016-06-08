@@ -119,5 +119,20 @@ namespace BingoWallpaper.Uwp.Services
                 return uncacheImageCollection;
             }
         }
+
+        public override string GetUrl(Image image, WallpaperSize size)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException(nameof(image));
+            }
+
+            if (WallpaperSize.SupportSizes.Contains(size) == false)
+            {
+                throw new NotSupportedException($"not supported this wallpaper size {size}");
+            }
+
+            return Constants.QiNiuUrlBase + image.UrlBase + "_" + size.ToString() + ".jpg";
+        }
     }
 }

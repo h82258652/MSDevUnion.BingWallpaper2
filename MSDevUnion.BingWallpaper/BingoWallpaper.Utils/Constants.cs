@@ -12,6 +12,8 @@ namespace BingoWallpaper
 
         public const string QiNiuUrlBase = @"http://7u2lw5.com5.z0.glb.clouddn.com";
 
+        public const string BingUrlBase = @"http://www.bing.com";
+
         internal const string UmengAppkey = @"56137ba2e0f55adb22005d2b";
 
         public const string WechatAppId = @"wxff94ab33c2c89267";

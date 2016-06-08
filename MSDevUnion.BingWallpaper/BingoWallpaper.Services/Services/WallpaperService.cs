@@ -69,6 +69,16 @@ namespace BingoWallpaper.Services
             return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
+        public virtual string GetUrl(Image image, WallpaperSize size)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException(nameof(image));
+            }
+
+            return Constants.BingUrlBase + image.UrlBase + "_" + size.ToString() + ".jpg";
+        }
+
         public async Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area)
         {
             var archives = await GetArchivesAsync(year, month, area);
