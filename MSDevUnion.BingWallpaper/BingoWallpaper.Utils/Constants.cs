@@ -12,7 +12,7 @@ namespace BingoWallpaper
 
         public const string QiNiuUrlBase = @"http://7u2lw5.com5.z0.glb.clouddn.com";
 
-        public const string WechatAppId = @"wxff94ab33c2c89267";
+        internal const string WechatAppId = @"wxff94ab33c2c89267";
 
         public static readonly DateTimeOffset MinimumViewMonth = new DateTimeOffset(new DateTime(2015, 1, 1));
 
