@@ -20,14 +20,7 @@ namespace BingoWallpaper.Uwp.ViewModels
             _settings = settings;
         }
 
-        public IReadOnlyList<string> Areas
-        {
-            get
-            {
-                // TODO
-                throw new NotImplementedException();
-            }
-        }
+        public IReadOnlyList<string> Areas => _wallpaperService.GetSupportedAreas();
 
         public IReadOnlyList<SaveLocation> SaveLocations
         {
@@ -73,6 +66,6 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public IReadOnlyList<WallpaperSize> WallpaperSizes => _wallpaperService.GetSupportWallpaperSizes();
+        public IReadOnlyList<WallpaperSize> WallpaperSizes => _wallpaperService.GetSupportedWallpaperSizes();
     }
 }

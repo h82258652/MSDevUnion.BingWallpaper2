@@ -111,6 +111,16 @@
     <Compile Include="UpdateTileTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
+      <Project>{0b0bf029-a7ea-44db-8ba4-3cb52e7d4093}</Project>
+      <Name>BingoWallpaper.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BingoWallpaper.Services\BingoWallpaper.Services.csproj">
+      <Project>{749fdca3-8782-441f-a8d3-7c95e3ca00ad}</Project>
+      <Name>BingoWallpaper.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

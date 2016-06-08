@@ -11,6 +11,30 @@ namespace BingoWallpaper.Uwp.Configuration
             get;
         } = new BingoWallpaperSettings();
 
+        public bool AutoUpdateLockScreen
+        {
+            get
+            {
+                return Get(nameof(AutoUpdateLockScreen), () => false);
+            }
+            set
+            {
+                Set(nameof(AutoUpdateLockScreen), value);
+            }
+        }
+
+        public bool AutoUpdateWallpaper
+        {
+            get
+            {
+                return Get(nameof(AutoUpdateWallpaper), () => false);
+            }
+            set
+            {
+                Set(nameof(AutoUpdateWallpaper), value);
+            }
+        }
+
         public string SelectedArea
         {
             get

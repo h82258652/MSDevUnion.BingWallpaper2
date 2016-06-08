@@ -69,7 +69,25 @@ namespace BingoWallpaper.Services
             return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
-        public virtual IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        public IReadOnlyList<string> GetSupportedAreas()
+        {
+            return new[]
+            {
+                "de-DE",
+                "en-AU",
+                "en-CA",
+                "en-GB",
+                "en-IN",
+                "en-US",
+                "fr-CA",
+                "fr-FR",
+                "ja-JP",
+                "pt-BR",
+                "zh-CN",
+            };
+        }
+
+        public virtual IReadOnlyList<WallpaperSize> GetSupportedWallpaperSizes()
         {
             return new[]
             {

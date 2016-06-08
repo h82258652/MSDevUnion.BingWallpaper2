@@ -28,7 +28,12 @@ namespace BingoWallpaper.Uwp.Design
             throw new NotImplementedException();
         }
 
-        public IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        public IReadOnlyList<string> GetSupportedAreas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyList<WallpaperSize> GetSupportedWallpaperSizes()
         {
             throw new NotImplementedException();
         }

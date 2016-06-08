@@ -120,7 +120,7 @@ namespace BingoWallpaper.Uwp.Services
             }
         }
 
-        public override IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        public override IReadOnlyList<WallpaperSize> GetSupportedWallpaperSizes()
         {
             return new[]
             {
@@ -141,7 +141,7 @@ namespace BingoWallpaper.Uwp.Services
                 throw new ArgumentNullException(nameof(image));
             }
 
-            if (GetSupportWallpaperSizes().Contains(size) == false)
+            if (GetSupportedWallpaperSizes().Contains(size) == false)
             {
                 throw new NotSupportedException($"not supported this wallpaper size {size}");
             }

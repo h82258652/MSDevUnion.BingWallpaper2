@@ -5,6 +5,18 @@ namespace BingoWallpaper.Uwp.Configuration
 {
     public interface IBingoWallpaperSettings : INotifyPropertyChanged
     {
+        bool AutoUpdateLockScreen
+        {
+            get;
+            set;
+        }
+
+        bool AutoUpdateWallpaper
+        {
+            get;
+            set;
+        }
+
         string SelectedArea
         {
             get;
