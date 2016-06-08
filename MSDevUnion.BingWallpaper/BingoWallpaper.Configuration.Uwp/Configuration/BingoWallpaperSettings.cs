@@ -1,5 +1,4 @@
 ﻿using BingoWallpaper.Models;
-using System;
 using Windows.Storage;
 
 namespace BingoWallpaper.Configuration
@@ -68,14 +67,28 @@ namespace BingoWallpaper.Configuration
         {
             get
             {
+                var composite = Get(nameof(SelectedWallpaperSize), () => new ApplicationDataCompositeValue());
+                object width;
+                object height;
+                if (composite.TryGetValue(nameof(WallpaperSize.Width), out width) && composite.TryGetValue(nameof(WallpaperSize.Height), out height))
+                {
+                    if (width is int && height is int)
+                    {
+                        return new WallpaperSize((int)width, (int)height);
+                    }
+                }
+
                 // TODO
-                var temp = Get(nameof(SelectedWallpaperSize), () => "", ApplicationDataLocality.Local);
-                throw new NotImplementedException();
+                return new WallpaperSize(800, 480);
             }
             set
             {
-                // TODO
-                Set(nameof(SelectedWallpaperSize), value);
+                var composite = new ApplicationDataCompositeValue
+                {
+                    [nameof(WallpaperSize.Width)] = value.Width,
+                    [nameof(WallpaperSize.Height)] = value.Height
+                };
+                Set(nameof(SelectedWallpaperSize), composite);
             }
         }
     }
