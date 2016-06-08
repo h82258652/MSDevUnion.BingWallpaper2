@@ -2,7 +2,7 @@
 using System;
 using Windows.Storage;
 
-namespace BingoWallpaper.Uwp.Configuration
+namespace BingoWallpaper.Configuration
 {
     public class BingoWallpaperSettings : AppSettingsBase, IBingoWallpaperSettings
     {

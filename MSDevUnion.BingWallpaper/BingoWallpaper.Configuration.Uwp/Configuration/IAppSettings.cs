@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Windows.Storage;
 
-namespace BingoWallpaper.Uwp.Configuration
+namespace BingoWallpaper.Configuration
 {
     public interface IAppSettings : INotifyPropertyChanged
     {

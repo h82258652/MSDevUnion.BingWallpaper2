@@ -1,6 +1,6 @@
-﻿using BingoWallpaper.Models;
+﻿using BingoWallpaper.Configuration;
+using BingoWallpaper.Models;
 using BingoWallpaper.Services;
-using BingoWallpaper.Uwp.Configuration;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;

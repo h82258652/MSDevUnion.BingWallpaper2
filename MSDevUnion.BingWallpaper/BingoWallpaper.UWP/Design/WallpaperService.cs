@@ -28,6 +28,16 @@ namespace BingoWallpaper.Uwp.Design
             throw new NotImplementedException();
         }
 
+        public Task<Archive> GetNewestArchiveAsync(string area)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Wallpaper> GetNewestWallpaperAsync(string area)
+        {
+            throw new NotImplementedException();
+        }
+
         public IReadOnlyList<string> GetSupportedAreas()
         {
             throw new NotImplementedException();

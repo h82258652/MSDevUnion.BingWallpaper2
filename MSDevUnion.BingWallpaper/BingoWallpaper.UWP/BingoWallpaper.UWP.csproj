@@ -107,10 +107,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\VisualStateChangedBehavior.cs" />
-    <Compile Include="Configuration\AppSettingsBase.cs" />
-    <Compile Include="Configuration\BingoWallpaperSettings.cs" />
-    <Compile Include="Configuration\IAppSettings.cs" />
-    <Compile Include="Configuration\IBingoWallpaperSettings.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />
     <Compile Include="Controls\FirstDoubleSizePanel.cs" />
     <Compile Include="Controls\ImageEx.cs" />
@@ -233,6 +229,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\BingoWallpaper.Configuration.Uwp\BingoWallpaper.Configuration.Uwp.csproj">
+      <Project>{ef7a98ec-6e80-4ead-9d5b-85e217545bcf}</Project>
+      <Name>BingoWallpaper.Configuration.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BingoWallpaper.Configuration\BingoWallpaper.Configuration.csproj">
+      <Project>{c689cc5e-e392-4b2d-82f0-a62dd31a673c}</Project>
+      <Name>BingoWallpaper.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
       <Project>{0b0bf029-a7ea-44db-8ba4-3cb52e7d4093}</Project>
       <Name>BingoWallpaper.Models</Name>

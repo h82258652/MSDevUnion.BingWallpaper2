@@ -18,6 +18,8 @@ namespace BingoWallpaper.BackgroundTask
             try
             {
                 // TODO
+
+                _wallpaperService.GetNewestWallpaperAsync("TODO");
             }
             finally
             {

@@ -189,5 +189,36 @@ namespace BingoWallpaper.Services
             headers.Add("X-AVOSCloud-Application-Key", Constants.LeanCloudAppKey);
             return client;
         }
+
+        public async Task<Archive> GetNewestArchiveAsync(string area)
+        {
+            using (var client = CreateHttpClient())
+            {
+                var where = new
+                {
+                    market = area
+                };
+
+                string requestUrl = $"{Constants.LeanCloudUrlBase}/1.1/classes/Archive?where={WebUtility.UrlEncode(JsonConvert.SerializeObject(where))}&order=-date&limit=1";
+
+                var json = await client.GetStringAsync(requestUrl);
+                return JsonConvert.DeserializeObject<LeanCloudResultCollection<Archive>>(json).FirstOrDefault();
+            }
+        }
+
+        public async Task<Wallpaper> GetNewestWallpaperAsync(string area)
+        {
+            var archive = await GetNewestArchiveAsync(area);
+            if (archive == null)
+            {
+                return null;
+            }
+            var image = await GetImageAsync(archive.Image.ObjectId);
+            return new Wallpaper()
+            {
+                Archive = archive,
+                Image = image
+            };
+        }
     }
 }

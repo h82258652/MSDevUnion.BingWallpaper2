@@ -21,5 +21,9 @@ namespace BingoWallpaper.Services
         string GetUrl(Image image, WallpaperSize size);
 
         Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area);
+
+        Task<Archive> GetNewestArchiveAsync(string area);
+
+        Task<Wallpaper> GetNewestWallpaperAsync(string area);
     }
 }

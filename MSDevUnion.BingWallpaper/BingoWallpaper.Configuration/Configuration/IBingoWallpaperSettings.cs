@@ -1,7 +1,7 @@
 ﻿using BingoWallpaper.Models;
 using System.ComponentModel;
 
-namespace BingoWallpaper.Uwp.Configuration
+namespace BingoWallpaper.Configuration
 {
     public interface IBingoWallpaperSettings : INotifyPropertyChanged
     {

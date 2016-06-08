@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
 
-namespace BingoWallpaper.Uwp.Configuration
+namespace BingoWallpaper.Configuration
 {
     public abstract class AppSettingsBase : IAppSettings
     {

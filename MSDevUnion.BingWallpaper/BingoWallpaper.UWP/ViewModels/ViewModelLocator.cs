@@ -1,5 +1,5 @@
-﻿using BingoWallpaper.Services;
-using BingoWallpaper.Uwp.Configuration;
+﻿using BingoWallpaper.Configuration;
+using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Services;
 using BingoWallpaper.Uwp.Views;
 using GalaSoft.MvvmLight;
