@@ -22,6 +22,32 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         public IReadOnlyList<string> Areas => _wallpaperService.GetSupportedAreas();
 
+        public bool AutoUpdateLockScreen
+        {
+            get
+            {
+                return _settings.AutoUpdateLockScreen;
+            }
+            set
+            {
+                _settings.AutoUpdateLockScreen = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool AutoUpdateWallpaper
+        {
+            get
+            {
+                return _settings.AutoUpdateWallpaper;
+            }
+            set
+            {
+                _settings.AutoUpdateWallpaper = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public IReadOnlyList<SaveLocation> SaveLocations
         {
             get;

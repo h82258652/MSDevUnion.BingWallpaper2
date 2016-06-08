@@ -52,6 +52,12 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                <ToggleSwitch x:Uid="/Setting/AutoUpdateWallpaper"
+                              Margin="10,10,10,0"
+                              IsOn="{x:Bind ViewModel.AutoUpdateWallpaper}" />
+                <ToggleSwitch x:Uid="/Setting/AutoUpdateLockScreen"
+                              Margin="10,10,10,0"
+                              IsOn="{x:Bind ViewModel.AutoUpdateLockScreen}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

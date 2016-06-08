@@ -20,6 +20,7 @@ namespace BingoWallpaper.Uwp.Configuration
             set
             {
                 Set(nameof(AutoUpdateLockScreen), value);
+                RaisePropertyChanged();
             }
         }
 
@@ -32,6 +33,7 @@ namespace BingoWallpaper.Uwp.Configuration
             set
             {
                 Set(nameof(AutoUpdateWallpaper), value);
+                RaisePropertyChanged();
             }
         }
 
