@@ -6,6 +6,8 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class DetailViewModel : ViewModelBase
     {
+        private readonly IShareService _shareService;
+
         private readonly ISystemSettingService _systemSettingService;
 
         private RelayCommand _openLockScreenSettingCommand;
@@ -18,9 +20,10 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private RelayCommand _setWallpaperCommand;
 
-        public DetailViewModel(ISystemSettingService systemSettingService)
+        public DetailViewModel(ISystemSettingService systemSettingService, IShareService shareService)
         {
             _systemSettingService = systemSettingService;
+            _shareService = shareService;
         }
 
         public RelayCommand OpenLockScreenSettingCommand
