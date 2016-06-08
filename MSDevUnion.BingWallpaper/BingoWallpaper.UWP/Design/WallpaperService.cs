@@ -28,6 +28,11 @@ namespace BingoWallpaper.Uwp.Design
             throw new NotImplementedException();
         }
 
+        public IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetUrl(Image image, WallpaperSize size)
         {
             throw new NotImplementedException();

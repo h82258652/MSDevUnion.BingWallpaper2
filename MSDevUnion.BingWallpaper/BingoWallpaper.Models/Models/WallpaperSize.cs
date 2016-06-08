@@ -15,17 +15,6 @@ namespace BingoWallpaper.Models
             Height = height;
         }
 
-        public static IReadOnlyList<WallpaperSize> SupportSizes => new[]
-        {
-            new WallpaperSize(480,800),
-            new WallpaperSize(768,1280),
-            new WallpaperSize(800,480),
-            new WallpaperSize(1080,1920),
-            new WallpaperSize(1366,768),
-            new WallpaperSize(1920,1080),
-            new WallpaperSize(1920,1200),
-        };
-
         public override bool Equals(object obj)
         {
             if (obj is WallpaperSize == false)

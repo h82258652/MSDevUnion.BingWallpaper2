@@ -16,6 +16,8 @@ namespace BingoWallpaper.Services
 
         string GetUrl(Image image, WallpaperSize size);
 
+        IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes();
+
         Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area);
     }
 }

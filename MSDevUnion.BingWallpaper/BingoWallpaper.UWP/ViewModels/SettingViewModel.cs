@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Configuration;
 using GalaSoft.MvvmLight;
 using System;
@@ -11,8 +12,11 @@ namespace BingoWallpaper.Uwp.ViewModels
     {
         private readonly IBingoWallpaperSettings _settings;
 
-        public SettingViewModel(IBingoWallpaperSettings settings)
+        private readonly IWallpaperService _wallpaperService;
+
+        public SettingViewModel(IWallpaperService wallpaperService, IBingoWallpaperSettings settings)
         {
+            _wallpaperService = wallpaperService;
             _settings = settings;
         }
 
@@ -69,12 +73,6 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public IReadOnlyList<WallpaperSize> WallpaperSizes
-        {
-            get
-            {
-                return WallpaperSize.SupportSizes;
-            }
-        }
+        public IReadOnlyList<WallpaperSize> WallpaperSizes => _wallpaperService.GetSupportWallpaperSizes();
     }
 }

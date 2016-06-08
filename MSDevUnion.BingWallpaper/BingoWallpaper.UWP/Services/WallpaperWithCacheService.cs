@@ -120,6 +120,20 @@ namespace BingoWallpaper.Uwp.Services
             }
         }
 
+        public override IReadOnlyList<WallpaperSize> GetSupportWallpaperSizes()
+        {
+            return new[]
+            {
+                new WallpaperSize(480,800),
+                new WallpaperSize(768,1280),
+                new WallpaperSize(800,480),
+                new WallpaperSize(1080,1920),
+                new WallpaperSize(1366,768),
+                new WallpaperSize(1920,1080),
+                new WallpaperSize(1920,1200),
+            };
+        }
+
         public override string GetUrl(Image image, WallpaperSize size)
         {
             if (image == null)
@@ -127,7 +141,7 @@ namespace BingoWallpaper.Uwp.Services
                 throw new ArgumentNullException(nameof(image));
             }
 
-            if (WallpaperSize.SupportSizes.Contains(size) == false)
+            if (GetSupportWallpaperSizes().Contains(size) == false)
             {
                 throw new NotSupportedException($"not supported this wallpaper size {size}");
             }
