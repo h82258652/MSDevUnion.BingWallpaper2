@@ -89,6 +89,7 @@ namespace BingoWallpaper.Configuration
                     [nameof(WallpaperSize.Height)] = value.Height
                 };
                 Set(nameof(SelectedWallpaperSize), composite);
+                RaisePropertyChanged();
             }
         }
     }
