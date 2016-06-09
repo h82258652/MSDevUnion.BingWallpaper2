@@ -103,6 +103,9 @@
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\ConnectedAnimation.cs" />
+    <Compile Include="Animations\ConnectedAnimationHelper.cs" />
+    <Compile Include="Animations\ConnectedAnimationService.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
