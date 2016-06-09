@@ -155,6 +155,14 @@ namespace BingoWallpaper.Uwp.Controls
             SetSource(Source);
         }
 
+        private static string GetCacheFileName(Uri uri)
+        {
+            var originalString = uri.OriginalString;
+            var extension = Path.GetExtension(originalString);
+            var cacheFileName = HashHelper.GenerateMd5Hash(originalString) + extension;
+            return Path.Combine(CacheFolder.Path, cacheFileName);
+        }
+
         private static StorageFolder GetCacheFolder()
         {
             if (_cacheFolder == null)
@@ -180,14 +188,6 @@ namespace BingoWallpaper.Uwp.Controls
             var value = (string)e.NewValue;
 
             obj.SetSource(value);
-        }
-
-        private static string GetCacheFileName(Uri uri)
-        {
-            var originalString = uri.OriginalString;
-            var extension = Path.GetExtension(originalString);
-            var cacheFileName = HashHelper.GenerateMd5Hash(originalString) + extension;
-            return Path.Combine(CacheFolder.Path, cacheFileName);
         }
 
         private async void SetHttpSource(Uri uri)
