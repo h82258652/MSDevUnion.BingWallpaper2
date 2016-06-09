@@ -115,6 +115,7 @@ namespace BingoWallpaper.Uwp.Animations
             }
             else
             {
+                Cancel();
                 return false;
             }
         }
