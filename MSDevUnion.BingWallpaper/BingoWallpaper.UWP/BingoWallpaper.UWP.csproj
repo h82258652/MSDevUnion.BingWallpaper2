@@ -110,6 +110,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\VisualStateChangedBehavior.cs" />
+    <Compile Include="Controls\HttpDownloadProgressEventArgs.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />
     <Compile Include="Controls\FirstDoubleSizePanel.cs" />
     <Compile Include="Controls\ImageEx.cs" />

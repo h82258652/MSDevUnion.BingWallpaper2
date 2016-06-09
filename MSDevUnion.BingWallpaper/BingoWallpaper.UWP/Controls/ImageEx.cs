@@ -12,6 +12,8 @@ using Windows.Web.Http;
 
 namespace BingoWallpaper.Uwp.Controls
 {
+    public delegate void HttpDownloadProgressEventHandler(object sender, HttpDownloadProgressEventArgs e);
+
     [TemplatePart(Name = ImageTemplateName, Type = typeof(Image))]
     [TemplatePart(Name = PlaceholderContentControlTemplateName, Type = typeof(ContentControl))]
     public sealed class ImageEx : Control
@@ -43,7 +45,7 @@ namespace BingoWallpaper.Uwp.Controls
             DefaultStyleKey = typeof(ImageEx);
         }
 
-        public event DownloadProgressEventHandler DownloadProgress;
+        public event HttpDownloadProgressEventHandler DownloadProgress;
 
         public event EventHandler<ExceptionEventArgs> ImageFailed;
 
@@ -73,7 +75,6 @@ namespace BingoWallpaper.Uwp.Controls
             }
             private set
             {
-                throw new NotImplementedException();
                 SetValue(DownloadPercentProperty, value);
             }
         }
@@ -204,13 +205,18 @@ namespace BingoWallpaper.Uwp.Controls
                     try
                     {
                         var task = client.GetBufferAsync(uri);
+                        DownloadPercent = 0;
                         task.Progress = (info, progressInfo) =>
                         {
-                            // TODO downloading
-                            throw new NotImplementedException();
+                            DownloadProgress?.Invoke(this, new HttpDownloadProgressEventArgs(progressInfo));
+                            if (progressInfo.TotalBytesToReceive.HasValue)
+                            {
+                                DownloadPercent = progressInfo.BytesReceived * 100d / progressInfo.TotalBytesToReceive.Value;
+                            }
                         };
                         var buffer = await task;
                         bytes = buffer.ToArray();
+                        DownloadPercent = 100;
                     }
                     catch (Exception ex)
                     {
@@ -224,6 +230,14 @@ namespace BingoWallpaper.Uwp.Controls
                 await FileExtensions.WriteAllBytesAsync(cacheFileName, bytes);
 
                 var bitmap = new BitmapImage();
+                bitmap.ImageOpened += (sender, e) =>
+                {
+                    ImageOpened?.Invoke(this, e);
+                };
+                bitmap.ImageFailed += (sender, e) =>
+                {
+                    ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
+                };
                 await bitmap.SetSourceAsync(new MemoryStream(bytes).AsRandomAccessStream());
                 _image.Source = bitmap;
                 _image.Visibility = Visibility.Visible;
@@ -232,6 +246,14 @@ namespace BingoWallpaper.Uwp.Controls
             else
             {
                 var bitmap = new BitmapImage(new Uri(cacheFileName));
+                bitmap.ImageOpened += (sender, e) =>
+                {
+                    ImageOpened?.Invoke(this, e);
+                };
+                bitmap.ImageFailed += (sender, e) =>
+                {
+                    ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
+                };
                 _image.Source = bitmap;
             }
         }
@@ -239,6 +261,10 @@ namespace BingoWallpaper.Uwp.Controls
         private void SetLocalSource(Uri uri)
         {
             var bitmap = new BitmapImage(uri);
+            bitmap.ImageOpened += (sender, e) =>
+            {
+                ImageOpened?.Invoke(this, e);
+            };
             bitmap.ImageFailed += (sender, e) =>
             {
                 ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
