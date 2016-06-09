@@ -9,23 +9,14 @@ namespace BingoWallpaper.Uwp.Animations
 {
     public sealed class ConnectedAnimationService
     {
+        internal readonly Dictionary<string, ConnectedAnimation> Animations = new Dictionary<string, ConnectedAnimation>();
+
+        private static ConnectedAnimationService _currentView;
+
         private ConnectedAnimationService()
         {
             DefaultDuration = TimeSpan.FromSeconds(0.3);
         }
-
-        private static ConnectedAnimationService _currentView;
-
-        public static ConnectedAnimationService GetForCurrentView()
-        {
-            if (_currentView == null)
-            {
-                _currentView = new ConnectedAnimationService();
-            }
-            return _currentView;
-        }
-
-        internal readonly Dictionary<string, ConnectedAnimation> Animations = new Dictionary<string, ConnectedAnimation>();
 
         public TimeSpan DefaultDuration
         {
@@ -37,6 +28,15 @@ namespace BingoWallpaper.Uwp.Animations
         {
             get;
             set;
+        }
+
+        public static ConnectedAnimationService GetForCurrentView()
+        {
+            if (_currentView == null)
+            {
+                _currentView = new ConnectedAnimationService();
+            }
+            return _currentView;
         }
 
         public ConnectedAnimation GetAnimation(string key)

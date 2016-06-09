@@ -12,6 +12,34 @@ namespace BingoWallpaper.Uwp.Animations
     {
         private static Canvas _animationContainer;
 
+        internal static UIElement AddToAnimationLayer(RenderTargetBitmap elementScreenShot)
+        {
+            if (elementScreenShot == null)
+            {
+                throw new ArgumentNullException(nameof(elementScreenShot));
+            }
+
+            if (GetAnimationContainer() != null)
+            {
+                var transformGroup = new TransformGroup();
+                transformGroup.Children.Add(new ScaleTransform());
+                transformGroup.Children.Add(new TranslateTransform());
+
+                var image = new Image()
+                {
+                    Source = elementScreenShot,
+                    RenderTransform = transformGroup
+                };
+
+                GetAnimationContainer().Children.Add(image);
+                return image;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         internal static Panel GetAnimationContainer()
         {
             if (_animationContainer == null)
@@ -42,34 +70,6 @@ namespace BingoWallpaper.Uwp.Animations
                 };
             }
             return _animationContainer;
-        }
-
-        internal static UIElement AddToAnimationLayer(RenderTargetBitmap elementScreenShot)
-        {
-            if (elementScreenShot == null)
-            {
-                throw new ArgumentNullException(nameof(elementScreenShot));
-            }
-
-            if (GetAnimationContainer() != null)
-            {
-                var transformGroup = new TransformGroup();
-                transformGroup.Children.Add(new ScaleTransform());
-                transformGroup.Children.Add(new TranslateTransform());
-
-                var image = new Image()
-                {
-                    Source = elementScreenShot,
-                    RenderTransform = transformGroup
-                };
-
-                GetAnimationContainer().Children.Add(image);
-                return image;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         internal static void RemoveFromAnimationLayer(RenderTargetBitmap elementScreenShot)
