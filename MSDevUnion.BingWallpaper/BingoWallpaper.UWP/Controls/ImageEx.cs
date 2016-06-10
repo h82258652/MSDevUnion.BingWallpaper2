@@ -165,10 +165,7 @@ namespace BingoWallpaper.Uwp.Controls
 
         private static StorageFolder GetCacheFolder()
         {
-            if (_cacheFolder == null)
-            {
-                _cacheFolder = ApplicationData.Current.LocalFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
-            }
+            _cacheFolder = _cacheFolder ?? ApplicationData.Current.LocalCacheFolder.CreateFolderAsync(DefaultCacheFolderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
             return _cacheFolder;
         }
 

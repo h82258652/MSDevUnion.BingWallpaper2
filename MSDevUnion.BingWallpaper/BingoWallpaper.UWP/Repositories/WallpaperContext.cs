@@ -1,5 +1,7 @@
 ﻿using BingoWallpaper.Models;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using Windows.Storage;
 
 namespace BingoWallpaper.Uwp.Repositories
 {
@@ -21,7 +23,8 @@ namespace BingoWallpaper.Uwp.Repositories
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite($"Filename={Constants.DatabaseName}");
+            var connectionString = "Data Source=" + Path.Combine(ApplicationData.Current.LocalFolder.Path, Constants.DatabaseName);
+            optionsBuilder.UseSqlite(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

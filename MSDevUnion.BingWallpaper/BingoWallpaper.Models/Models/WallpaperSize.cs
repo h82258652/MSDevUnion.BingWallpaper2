@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BingoWallpaper.Models
 {
@@ -31,7 +30,7 @@ namespace BingoWallpaper.Models
 
         public override int GetHashCode()
         {
-            return Width.GetHashCode() ^ Height.GetHashCode();
+            return ToString().GetHashCode();
         }
 
         public override string ToString()

@@ -1,14 +1,22 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Services;
+using System;
+using System.Globalization;
+using System.Linq;
+using Windows.Devices.Input;
+using Windows.Graphics.Display;
 using Windows.Storage;
 
 namespace BingoWallpaper.Configuration
 {
     public class BingoWallpaperSettings : AppSettingsBase, IBingoWallpaperSettings
     {
-        public static IBingoWallpaperSettings Current
+        private readonly IWallpaperService _wallpaperService;
+
+        public BingoWallpaperSettings(IWallpaperService wallpaperService)
         {
-            get;
-        } = new BingoWallpaperSettings();
+            _wallpaperService = wallpaperService;
+        }
 
         public bool AutoUpdateLockScreen
         {
@@ -40,8 +48,15 @@ namespace BingoWallpaper.Configuration
         {
             get
             {
-                // TODO
-                return Get(nameof(SelectedArea), () => "", ApplicationDataLocality.Roaming);
+                return Get(nameof(SelectedArea), () =>
+                {
+                    var currentCulture = CultureInfo.CurrentCulture.Name;
+                    if (_wallpaperService.GetSupportedAreas().Contains(currentCulture, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return currentCulture;
+                    }
+                    return "en-US";
+                }, ApplicationDataLocality.Roaming);
             }
             set
             {
@@ -78,7 +93,21 @@ namespace BingoWallpaper.Configuration
                     }
                 }
 
-                // TODO
+                #region 获取屏幕宽度
+
+                var rect = PointerDevice.GetPointerDevices().Last().ScreenRect;
+                var scale = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+                var screenWidth = (int)(rect.Width * scale);
+
+                #endregion 获取屏幕宽度
+
+                var sizes = _wallpaperService.GetSupportedWallpaperSizes().Where(temp => temp.Width == screenWidth).ToList();// 寻找适合的尺寸。
+                if (sizes.Any())
+                {
+                    return sizes.First();
+                }
+
+                // 无法匹配，默认返回 800x480。
                 return new WallpaperSize(800, 480);
             }
             set
