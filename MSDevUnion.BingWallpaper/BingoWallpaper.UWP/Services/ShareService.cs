@@ -1,4 +1,5 @@
-﻿using MicroMsg.sdk;
+﻿using BingoWallpaper.Services;
+using MicroMsg.sdk;
 using System;
 using System.Threading.Tasks;
 
