@@ -21,8 +21,6 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<IBingoWallpaperSettings>(() => BingoWallpaperSettings.Current);
-
             SimpleIoc.Default.Register<INavigationService>(CreateNavigationService);
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -33,6 +31,8 @@ namespace BingoWallpaper.Uwp.ViewModels
                 SimpleIoc.Default.Register<IWallpaperService, WallpaperWithCacheService>();
             }
             SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
+
+            SimpleIoc.Default.Register<IBingoWallpaperSettings, BingoWallpaperSettings>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DetailViewModel>();
