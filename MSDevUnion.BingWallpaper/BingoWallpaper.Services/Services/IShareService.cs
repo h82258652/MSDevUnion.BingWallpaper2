@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BingoWallpaper.Uwp.Services
+namespace BingoWallpaper.Services
 {
     public interface IShareService
     {
