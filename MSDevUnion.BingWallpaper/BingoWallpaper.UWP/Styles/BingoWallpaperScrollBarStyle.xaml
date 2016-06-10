@@ -6,21 +6,21 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ScrollBar">
                     <Grid x:Name="Root">
-                        <Grid.Resources></Grid.Resources>
+                        <Grid.Resources />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"></VisualState>
-                                <VisualState x:Name="PointerOver"></VisualState>
-                                <VisualState x:Name="Disabled"></VisualState>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="ScrollingIndicatorStates">
-                                <VisualState x:Name="TouchIndicator"></VisualState>
-                                <VisualState x:Name="MouseIndicator"></VisualState>
-                                <VisualState x:Name="NoIndicator"></VisualState>
+                                <VisualState x:Name="TouchIndicator" />
+                                <VisualState x:Name="MouseIndicator" />
+                                <VisualState x:Name="NoIndicator" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid x:Name="HorizontalRoot"
-                              IsHitTestVisible="False"></Grid>
+                              IsHitTestVisible="False" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -7,8 +7,8 @@
                 <ControlTemplate TargetType="controls:ImageEx">
                     <Grid>
                         <Image x:Name="PART_Image"
-                               Stretch="{TemplateBinding Stretch}"
-                               NineGrid="{TemplateBinding NineGrid}" />
+                               NineGrid="{TemplateBinding NineGrid}"
+                               Stretch="{TemplateBinding Stretch}" />
                         <ContentControl x:Name="PART_PlaceholderContentControl"
                                         ContentTemplate="{TemplateBinding PlaceholderTemplate}"
                                         Visibility="Collapsed" />
