@@ -21,6 +21,7 @@ namespace BingoWallpaper.Uwp.Services
         {
             if (UserProfilePersonalizationSettings.IsSupported())
             {
+                // TODO
                 return await UserProfilePersonalizationSettings.Current.TrySetLockScreenImageAsync(null);
             }
             return false;
@@ -30,6 +31,7 @@ namespace BingoWallpaper.Uwp.Services
         {
             if (UserProfilePersonalizationSettings.IsSupported())
             {
+                // TODO
                 return await UserProfilePersonalizationSettings.Current.TrySetWallpaperImageAsync(null);
             }
             return false;

@@ -14,10 +14,10 @@ namespace BingoWallpaper.Uwp.Services
 
         public async Task ShareToWechatAsync()
         {
-            // TODO
             const int scene = SendMessageToWX.Req.WXSceneChooseByUser;
             var message = new WXImageMessage()
             {
+                // TODO
                 Title = "TODO",
                 ImageData = null
             };

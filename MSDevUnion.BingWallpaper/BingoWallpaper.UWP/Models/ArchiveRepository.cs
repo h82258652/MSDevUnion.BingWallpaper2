@@ -12,7 +12,6 @@ namespace BingoWallpaper.Uwp.Models
             set;
         }
 
-        [JsonProperty("date")]
         public string Date
         {
             get;

@@ -11,7 +11,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
       xmlns:models="using:BingoWallpaper.Models"
-      xmlns:foundation="using:Windows.Foundation"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=Main}"
       mc:Ignorable="d">
@@ -114,7 +113,7 @@
                         </StackPanel>
                         <!--#region 背景图片-->
                         <Image Opacity="0.5"
-                               Source="{Binding Path=[0],Converter={StaticResource WallpaperUrlConverter},ConverterParameter='1920,1080'}"></Image>
+                               Source="{Binding Path=[0], Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920,1080'}" />
                         <!--#endregion-->
                         <GridView ItemsSource="{x:Bind}">
                             <GridView.ItemTemplate>
