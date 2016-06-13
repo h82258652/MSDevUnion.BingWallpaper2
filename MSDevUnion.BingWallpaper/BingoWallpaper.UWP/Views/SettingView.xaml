@@ -66,6 +66,8 @@
                 <ToggleSwitch x:Uid="/Setting/AutoUpdateLockScreen"
                               Margin="10,10,10,0"
                               IsOn="{x:Bind ViewModel.AutoUpdateLockScreen}" />
+                <Button Margin="10,10,10,0"
+                        Command="{x:Bind ViewModel.ClearDataCacheCommand}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

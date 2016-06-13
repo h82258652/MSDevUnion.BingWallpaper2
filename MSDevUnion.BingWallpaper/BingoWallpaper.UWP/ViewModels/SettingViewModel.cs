@@ -2,6 +2,7 @@
 using BingoWallpaper.Models;
 using BingoWallpaper.Services;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,5 +94,19 @@ namespace BingoWallpaper.Uwp.ViewModels
         }
 
         public IReadOnlyList<WallpaperSize> WallpaperSizes => _wallpaperService.GetSupportedWallpaperSizes();
+
+        private RelayCommand _clearDataCacheCommand;
+
+        public RelayCommand ClearDataCacheCommand
+        {
+            get
+            {
+                _clearDataCacheCommand = _clearDataCacheCommand ?? new RelayCommand(() =>
+                {
+                    // TODO
+                });
+                return _clearDataCacheCommand;
+            }
+        }
     }
 }
