@@ -120,6 +120,12 @@
   <data name="Area.Header" xml:space="preserve">
     <value>国家/地区</value>
   </data>
+  <data name="AutoUpdateLockScreen.Header" xml:space="preserve">
+    <value>自动更新锁屏</value>
+  </data>
+  <data name="AutoUpdateWallpaper.Header" xml:space="preserve">
+    <value>自动更新壁纸</value>
+  </data>
   <data name="SaveLocation.Header" xml:space="preserve">
     <value>保存位置</value>
   </data>

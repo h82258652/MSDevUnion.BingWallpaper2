@@ -126,4 +126,10 @@
   <data name="WallpaperSize.Header" xml:space="preserve">
     <value>Wallpaper Size</value>
   </data>
+  <data name="AutoUpdateLockScreen.Header" xml:space="preserve">
+    <value>Auto update lockscreen</value>
+  </data>
+  <data name="AutoUpdateWallpaper" xml:space="preserve">
+    <value>Auto update wallpaper</value>
+  </data>
 </root>

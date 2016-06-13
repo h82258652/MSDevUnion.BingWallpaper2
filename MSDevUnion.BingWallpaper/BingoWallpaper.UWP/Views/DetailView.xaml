@@ -38,5 +38,7 @@
             <AppBarButton x:Uid="/Detail/Share" />
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image></Image>
+    </Grid>
 </local:ViewBase>

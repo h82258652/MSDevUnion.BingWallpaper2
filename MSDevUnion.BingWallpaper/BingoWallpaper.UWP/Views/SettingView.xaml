@@ -35,7 +35,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <ComboBox x:Uid="/Setting/WallpaperSize"
-                          Margin="10,10,10,0" />
+                          Margin="10,10,10,0"
+                          ItemsSource="{Binding Path=WallpaperSizes}"
+                          SelectedItem="{Binding Path=SelectedWallpaperSize,Mode=TwoWay}" />
                 <ComboBox x:Uid="/Setting/Area"
                           Margin="10,10,10,0"
                           ItemsSource="{x:Bind ViewModel.Areas}"
@@ -47,7 +49,8 @@
                                        RelativePanel.AlignLeftWithPanel="True"
                                        RelativePanel.AlignVerticalCenterWithPanel="True"
                                        Source="{Binding Converter={StaticResource StringFormatConverter},
-                                                        ConverterParameter='ms-appx:///Assets/Images/flags/{0}.png'}" />
+                                                        ConverterParameter='ms-appx:///Assets/Images/flags/{0}.png'}"
+                                       Stretch="None" />
                                 <TextBlock Margin="5,0,0,0"
                                            RelativePanel.AlignVerticalCenterWith="FlagImage"
                                            RelativePanel.RightOf="FlagImage"

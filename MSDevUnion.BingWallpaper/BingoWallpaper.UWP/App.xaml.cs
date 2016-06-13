@@ -1,5 +1,4 @@
 ﻿using BingoWallpaper.Uwp.Models;
-using BingoWallpaper.Uwp.Repositories;
 using BingoWallpaper.Uwp.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
