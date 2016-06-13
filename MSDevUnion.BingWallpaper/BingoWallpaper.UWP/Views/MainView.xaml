@@ -115,17 +115,19 @@
                         <controls:ImageEx Opacity="0.5"
                                           Source="{Binding Path=[0], Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920,1080'}" />
                         <!--#endregion-->
-                        <GridView ItemsSource="{x:Bind}">
+                        <GridView ItemsSource="{x:Bind}"
+                                  SelectionMode="None"
+                                  IsItemClickEnabled="True">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="models:Wallpaper">
                                     <TextBlock Text="{x:Bind}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
-                            <!--<interactivity:Interaction.Behaviors>
+                            <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
-                                    <core:InvokeCommandAction Command="{Binding}"></core:InvokeCommandAction>
+                                    <core:InvokeCommandAction Command="{Binding Source={StaticResource Locator},Path=Main.ClickCommand}" />
                                 </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
+                            </interactivity:Interaction.Behaviors>
                         </GridView>
                     </Grid>
                 </DataTemplate>

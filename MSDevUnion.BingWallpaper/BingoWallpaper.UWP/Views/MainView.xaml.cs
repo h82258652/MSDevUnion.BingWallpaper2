@@ -1,6 +1,7 @@
 ﻿using BingoWallpaper.Uwp.ViewModels;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace BingoWallpaper.Uwp.Views
 {
@@ -35,6 +36,10 @@ namespace BingoWallpaper.Uwp.Views
                 angle -= 360d;
             }
             RefreshIconRotateTransform.Angle = angle;
+        }
+
+        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        {
         }
     }
 }

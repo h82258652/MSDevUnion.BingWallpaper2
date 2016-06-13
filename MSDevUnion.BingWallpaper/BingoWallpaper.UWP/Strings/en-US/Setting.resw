@@ -129,7 +129,7 @@
   <data name="AutoUpdateLockScreen.Header" xml:space="preserve">
     <value>Auto update lockscreen</value>
   </data>
-  <data name="AutoUpdateWallpaper" xml:space="preserve">
+  <data name="AutoUpdateWallpaper.Header" xml:space="preserve">
     <value>Auto update wallpaper</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Xaml.Controls;
 
 namespace BingoWallpaper.Uwp.ViewModels
 {
@@ -18,7 +19,7 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private readonly IWallpaperService _wallpaperService;
 
-        private RelayCommand<Wallpaper> _clickCommand;
+        private RelayCommand<ItemClickEventArgs> _clickCommand;
 
         private bool _isBusy;
 
@@ -42,12 +43,13 @@ namespace BingoWallpaper.Uwp.ViewModels
             WallpaperCollections = wallpaperCollections;
         }
 
-        public RelayCommand<Wallpaper> ClickCommand
+        public RelayCommand<ItemClickEventArgs> ClickCommand
         {
             get
             {
-                _clickCommand = _clickCommand ?? new RelayCommand<Wallpaper>(wallpaper =>
+                _clickCommand = _clickCommand ?? new RelayCommand<ItemClickEventArgs>(e =>
                 {
+                    var wallpaper = (Wallpaper)e.ClickedItem;
                     _navigationService.NavigateTo(ViewModelLocator.DetailViewKey, wallpaper);
                 });
                 return _clickCommand;
