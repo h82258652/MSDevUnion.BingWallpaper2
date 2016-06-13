@@ -48,7 +48,7 @@ namespace BingoWallpaper.Uwp
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                DebugSettings.EnableFrameRateCounter = true;
+                //DebugSettings.EnableFrameRateCounter = true;
             }
 
             Frame rootFrame = Window.Current.Content as Frame;

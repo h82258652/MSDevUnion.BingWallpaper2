@@ -12,6 +12,10 @@
                      Color="#C0000000" />
     <SolidColorBrush x:Key="BingoWallpaperFlipViewButtonForegroundBrush"
                      Color="Black" />
+    <SolidColorBrush x:Key="BingoWallpaperFlipViewButtonPointerOverForegroundBrush"
+                     Color="#E3E3E3" />
+    <SolidColorBrush x:Key="BingoWallpaperFlipViewButtonPressedForegroundBrush"
+                     Color="White" />
     <Style x:Key="BingoWallpaperFlipViewStyle"
            TargetType="FlipView">
         <Setter Property="Background"
@@ -64,18 +68,23 @@
                                             <VisualState x:Name="PointerOver">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
-                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                             <VisualState x:Name="Pressed">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <uwp:FontAwesome HorizontalAlignment="Center"
+                                    <uwp:FontAwesome x:Name="Icon"
+                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      FontSize="12"
                                                      Foreground="{StaticResource BingoWallpaperFlipViewButtonForegroundBrush}"
@@ -95,18 +104,23 @@
                                             <VisualState x:Name="PointerOver">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
-                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                             <VisualState x:Name="Pressed">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <uwp:FontAwesome HorizontalAlignment="Center"
+                                    <uwp:FontAwesome x:Name="Icon"
+                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      FontSize="12"
                                                      Foreground="{StaticResource BingoWallpaperFlipViewButtonForegroundBrush}"
@@ -127,17 +141,22 @@
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                             <VisualState x:Name="Pressed">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <uwp:FontAwesome HorizontalAlignment="Center"
+                                    <uwp:FontAwesome x:Name="Icon"
+                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      FontSize="12"
                                                      Foreground="{StaticResource BingoWallpaperFlipViewButtonForegroundBrush}"
@@ -158,17 +177,22 @@
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPointerOverForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                             <VisualState x:Name="Pressed">
                                                 <VisualState.Setters>
                                                     <Setter Target="Root.Background"
                                                             Value="{StaticResource BingoWallpaperFlipViewButtonPressedBackgroundBrush}" />
+                                                    <Setter Target="Icon.Foreground"
+                                                            Value="{StaticResource BingoWallpaperFlipViewButtonPressedForegroundBrush}" />
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
-                                    <uwp:FontAwesome HorizontalAlignment="Center"
+                                    <uwp:FontAwesome x:Name="Icon"
+                                                     HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      FontSize="12"
                                                      Foreground="{StaticResource BingoWallpaperFlipViewButtonForegroundBrush}"
