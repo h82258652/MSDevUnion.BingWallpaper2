@@ -117,14 +117,19 @@
     <Compile Include="Converters\BooleanInverseConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\WallpaperUrlConverter.cs" />
     <Compile Include="Design\WallpaperService.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Helpers\ScrollViewerHelper.cs" />
-    <Compile Include="Migrations\20160601162849_MyFirstMigration.cs" />
-    <Compile Include="Migrations\20160601162849_MyFirstMigration.designer.cs">
-      <DependentUpon>20160601162849_MyFirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20160613085704_MyFirstMigration.cs" />
+    <Compile Include="Migrations\20160613085704_MyFirstMigration.designer.cs">
+      <DependentUpon>20160613085704_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\WallpaperContextModelSnapshot.cs" />
+    <Compile Include="Models\ArchiveRepository.cs" />
+    <Compile Include="Models\ImageRepository.cs" />
+    <Compile Include="Models\IWallpaperContext.cs" />
+    <Compile Include="Models\WallpaperContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\WallpaperContext.cs" />
     <Compile Include="Services\ISystemSettingService.cs" />

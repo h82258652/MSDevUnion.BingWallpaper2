@@ -81,13 +81,14 @@ namespace BingoWallpaper.Uwp.ViewModels
             {
                 if (_selectedWallpaperCollection == null)
                 {
-                    _selectedWallpaperCollection = WallpaperCollections.LastOrDefault();
+                    SelectedWallpaperCollection = WallpaperCollections.LastOrDefault();
                 }
                 return _selectedWallpaperCollection;
             }
             set
             {
                 Set(ref _selectedWallpaperCollection, value);
+                RefreshExecute();
             }
         }
 
@@ -110,7 +111,7 @@ namespace BingoWallpaper.Uwp.ViewModels
                     selectedWallpaperCollection.Add(wallpaper);
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 // TODO
             }

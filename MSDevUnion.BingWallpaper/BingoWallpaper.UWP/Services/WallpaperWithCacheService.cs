@@ -1,6 +1,6 @@
 ﻿using BingoWallpaper.Models;
 using BingoWallpaper.Services;
-using BingoWallpaper.Uwp.Repositories;
+using BingoWallpaper.Uwp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,13 +18,13 @@ namespace BingoWallpaper.Uwp.Services
 
             using (var db = new WallpaperContext())
             {
-                var result = await db.Archives.Where(temp => temp.Market == area && temp.Date.StartsWith(viewMonth.ToString("yyyyMM"))).OrderByDescending(temp => temp.Date).ToListAsync();
+                var result = await db.Archives.Where(temp => temp.Area == area && temp.Date.StartsWith(viewMonth.ToString("yyyyMM"))).OrderByDescending(temp => temp.Date).ToListAsync();
                 if (result.Count >= DateTime.DaysInMonth(year, month))
                 {
                     // 该月数据已全部在缓存当中。
                     return new LeanCloudResultCollection<Archive>()
                     {
-                        Results = result
+                        Results = result.Select(temp => (Archive)temp).ToList()
                     };
                 }
 
@@ -33,9 +33,9 @@ namespace BingoWallpaper.Uwp.Services
                 var entityAdded = false;
                 foreach (var archive in collection)
                 {
-                    if (await db.Archives.AnyAsync(temp => temp.ObjectId == archive.ObjectId) == false)
+                    if (await db.Archives.AnyAsync(temp => temp.Id == archive.ObjectId) == false)
                     {
-                        db.Archives.Add(archive);
+                        db.Archives.Add((ArchiveRepository)archive);
                         entityAdded = true;
                     }
                 }
@@ -61,16 +61,16 @@ namespace BingoWallpaper.Uwp.Services
 
             using (var db = new WallpaperContext())
             {
-                var image = await db.Images.FirstOrDefaultAsync(temp => temp.ObjectId == objectId);
-                if (image != null)
+                var imageRepository = await db.Images.FirstOrDefaultAsync(temp => temp.Id == objectId);
+                if (imageRepository != null)
                 {
-                    return image;
+                    return (Image)imageRepository;
                 }
 
-                image = await base.GetImageAsync(objectId);
-                if (await db.Images.AnyAsync(temp => temp.ObjectId == objectId) == false)
+                var image = await base.GetImageAsync(objectId);
+                if (await db.Images.AnyAsync(temp => temp.Id == objectId) == false)
                 {
-                    db.Images.Add(image);
+                    db.Images.Add((ImageRepository)image);
                     await db.SaveChangesAsync();
                 }
                 return image;
@@ -87,25 +87,25 @@ namespace BingoWallpaper.Uwp.Services
             var objectIdArray = objectIds as string[] ?? objectIds.ToArray();
             using (var db = new WallpaperContext())
             {
-                var images = await db.Images.Where(temp => objectIdArray.Contains(temp.ObjectId)).ToListAsync();
+                var images = await db.Images.Where(temp => objectIdArray.Contains(temp.Id)).ToListAsync();
                 if (images.Count >= objectIdArray.Length)
                 {
                     // 请求的数据已全部缓存，直接返回。
                     return new LeanCloudResultCollection<Image>()
                     {
-                        Results = images
+                        Results = images.Select(temp => (Image)temp).ToList()
                     };
                 }
 
                 // 筛选未缓存的 Id。
-                var uncacheImageIds = objectIdArray.Where(objectId => images.Any(image => image.ObjectId == objectId) == false);
+                var uncacheImageIds = objectIdArray.Where(objectId => images.Any(image => image.Id == objectId) == false);
                 var uncacheImageCollection = await base.GetImagesAsync(uncacheImageIds);
                 var entityAdded = false;
                 foreach (var image in uncacheImageCollection)
                 {
-                    if (await db.Images.AnyAsync(temp => temp.ObjectId == image.ObjectId) == false)
+                    if (await db.Images.AnyAsync(temp => temp.Id == image.ObjectId) == false)
                     {
-                        db.Images.Add(image);
+                        db.Images.Add((ImageRepository)image);
                         entityAdded = true;
                     }
                 }
@@ -115,7 +115,7 @@ namespace BingoWallpaper.Uwp.Services
                 }
 
                 var resuls = uncacheImageCollection.Results;
-                uncacheImageCollection.Results = images.Concat(resuls).ToList();
+                uncacheImageCollection.Results = images.Select(temp => (Image)temp).Concat(resuls).ToList();
                 return uncacheImageCollection;
             }
         }

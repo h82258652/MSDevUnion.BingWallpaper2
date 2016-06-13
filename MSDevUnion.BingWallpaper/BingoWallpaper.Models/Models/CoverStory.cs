@@ -1,18 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace BingoWallpaper.Models
 {
     [JsonObject]
     public class CoverStory
     {
-        [JsonIgnore]
-        public Guid Id
-        {
-            get;
-            set;
-        }
-
         [JsonProperty("date")]
         public string Date
         {

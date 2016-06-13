@@ -1,18 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace BingoWallpaper.Models
 {
     [JsonObject]
     public class Message
     {
-        [JsonIgnore]
-        public Guid Id
-        {
-            get;
-            set;
-        }
-
         [JsonProperty("link")]
         public string Link
         {

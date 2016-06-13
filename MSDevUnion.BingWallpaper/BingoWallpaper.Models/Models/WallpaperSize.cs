@@ -4,14 +4,22 @@ namespace BingoWallpaper.Models
 {
     public struct WallpaperSize : IEquatable<WallpaperSize>
     {
-        public int Height;
-
-        public int Width;
-
         public WallpaperSize(int width, int height)
         {
             Width = width;
             Height = height;
+        }
+
+        public int Height
+        {
+            get;
+            set;
+        }
+
+        public int Width
+        {
+            get;
+            set;
         }
 
         public override bool Equals(object obj)

@@ -8,9 +8,10 @@ using BingoWallpaper.Uwp.Models;
 namespace BingoWallpaper.Uwp.Migrations
 {
     [DbContext(typeof(WallpaperContext))]
-    partial class WallpaperContextModelSnapshot : ModelSnapshot
+    [Migration("20160613085704_MyFirstMigration")]
+    partial class MyFirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");

@@ -128,7 +128,7 @@ namespace BingoWallpaper.Services
 
         public async Task<IEnumerable<Wallpaper>> GetWallpapersAsync(int year, int month, string area)
         {
-            var archives = await GetArchivesAsync(year, month, area);
+            var archives = (await GetArchivesAsync(year, month, area)).ToList();
             var imageIds = archives.Select(temp => temp.Image.ObjectId);
             var images = await GetImagesAsync(imageIds);
             return from archive in archives

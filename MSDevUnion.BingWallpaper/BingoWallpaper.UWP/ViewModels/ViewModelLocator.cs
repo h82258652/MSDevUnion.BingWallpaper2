@@ -1,5 +1,6 @@
 ﻿using BingoWallpaper.Configuration;
 using BingoWallpaper.Services;
+using BingoWallpaper.Uwp.Models;
 using BingoWallpaper.Uwp.Services;
 using BingoWallpaper.Uwp.Views;
 using GalaSoft.MvvmLight;
@@ -38,6 +39,8 @@ namespace BingoWallpaper.Uwp.ViewModels
             SimpleIoc.Default.Register<DetailViewModel>();
             SimpleIoc.Default.Register<SettingViewModel>();
             SimpleIoc.Default.Register<AboutViewModel>();
+
+            SimpleIoc.Default.Register<IWallpaperContext, WallpaperContext>();
         }
 
         public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
