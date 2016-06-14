@@ -8,15 +8,12 @@ namespace BingoWallpaper.Uwp.Extensions
     {
         public static async Task WriteAllBytesAsync(string path, byte[] bytes)
         {
-            using (await StringTaskLocker.GetLockerAsync(path))
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
-                {
-                    var directory = Path.GetDirectoryName(path);
-                    Directory.CreateDirectory(directory);
-                    File.WriteAllBytes(path, bytes);
-                });
-            }
+                var directory = Path.GetDirectoryName(path);
+                Directory.CreateDirectory(directory);
+                File.WriteAllBytes(path, bytes);
+            });
         }
     }
 }

@@ -19,7 +19,8 @@ namespace BingoWallpaper.Uwp.Animations
                 throw new ArgumentNullException(nameof(elementScreenShot));
             }
 
-            if (GetAnimationContainer() != null)
+            var animationContainer = GetAnimationContainer();
+            if (animationContainer != null)
             {
                 var transformGroup = new TransformGroup();
                 transformGroup.Children.Add(new ScaleTransform());
@@ -31,7 +32,7 @@ namespace BingoWallpaper.Uwp.Animations
                     RenderTransform = transformGroup
                 };
 
-                GetAnimationContainer().Children.Add(image);
+                animationContainer.Children.Add(image);
                 return image;
             }
             else
@@ -79,11 +80,12 @@ namespace BingoWallpaper.Uwp.Animations
                 throw new ArgumentNullException(nameof(elementScreenShot));
             }
 
-            var image = GetAnimationContainer()?.Children.OfType<Image>().FirstOrDefault(temp => ReferenceEquals(temp.Source, elementScreenShot));
+            var animationContainer = GetAnimationContainer();
+            var image = animationContainer?.Children.OfType<Image>().FirstOrDefault(temp => ReferenceEquals(temp.Source, elementScreenShot));
             if (image != null)
             {
                 image.Source = null;
-                GetAnimationContainer().Children.Remove(image);
+                animationContainer.Children.Remove(image);
             }
         }
     }

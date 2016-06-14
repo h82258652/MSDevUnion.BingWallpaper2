@@ -6,7 +6,7 @@ namespace BingoWallpaper.Uwp.Utils
 {
     public static class HashHelper
     {
-        public static string GenerateMd5Hash(string input)
+        public static string GenerateMd5Hash(string input, string prefix = "", string suffix = "")
         {
             if (input == null)
             {
@@ -14,7 +14,7 @@ namespace BingoWallpaper.Uwp.Utils
             }
 
             var alg = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
-            var data = CryptographicBuffer.ConvertStringToBinary(input, BinaryStringEncoding.Utf8);
+            var data = CryptographicBuffer.ConvertStringToBinary(prefix + input + suffix, BinaryStringEncoding.Utf8);
             var hash = alg.HashData(data);
             return CryptographicBuffer.EncodeToHexString(hash);
         }
