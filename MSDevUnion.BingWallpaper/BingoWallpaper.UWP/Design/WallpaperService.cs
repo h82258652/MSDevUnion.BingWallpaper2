@@ -20,7 +20,7 @@ namespace BingoWallpaper.Uwp.Design
 
         public Task<LeanCloudResultCollection<Image>> GetImagesAsync(params string[] objectIds)
         {
-            throw new NotImplementedException();
+            return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
         public Task<LeanCloudResultCollection<Image>> GetImagesAsync(IEnumerable<string> objectIds)
@@ -40,12 +40,34 @@ namespace BingoWallpaper.Uwp.Design
 
         public IReadOnlyList<string> GetSupportedAreas()
         {
-            throw new NotImplementedException();
+            return new[]
+              {
+                "de-DE",
+                "en-AU",
+                "en-CA",
+                "en-GB",
+                "en-IN",
+                "en-US",
+                "fr-CA",
+                "fr-FR",
+                "ja-JP",
+                "pt-BR",
+                "zh-CN",
+            };
         }
 
         public IReadOnlyList<WallpaperSize> GetSupportedWallpaperSizes()
         {
-            throw new NotImplementedException();
+            return new[]
+            {
+                new WallpaperSize(480,800),
+                new WallpaperSize(768,1280),
+                new WallpaperSize(800,480),
+                new WallpaperSize(1080,1920),
+                new WallpaperSize(1366,768),
+                new WallpaperSize(1920,1080),
+                new WallpaperSize(1920,1200),
+            };
         }
 
         public string GetUrl(Image image, WallpaperSize size)
