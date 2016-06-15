@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BingoWallpaper.Uwp.Design
 {
-    public class WallpaperService : IWallpaperService
+    public class LeanCloudWallpaperService : ILeanCloudWallpaperService
     {
         public Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
         {

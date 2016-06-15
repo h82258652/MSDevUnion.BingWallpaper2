@@ -17,7 +17,7 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private readonly IBingoWallpaperSettings _settings;
 
-        private readonly IWallpaperService _wallpaperService;
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
         private RelayCommand<ItemClickEventArgs> _clickCommand;
 
@@ -27,10 +27,10 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private WallpaperCollection _selectedWallpaperCollection;
 
-        public MainViewModel(INavigationService navigationService, IWallpaperService wallpaperService, IBingoWallpaperSettings settings)
+        public MainViewModel(INavigationService navigationService, ILeanCloudWallpaperService leanCloudWallpaperService, IBingoWallpaperSettings settings)
         {
             _navigationService = navigationService;
-            _wallpaperService = wallpaperService;
+            _leanCloudWallpaperService = leanCloudWallpaperService;
             _settings = settings;
 
             var wallpaperCollections = new List<WallpaperCollection>();
@@ -107,7 +107,7 @@ namespace BingoWallpaper.Uwp.ViewModels
                 var selectedWallpaperCollection = SelectedWallpaperCollection;
                 selectedWallpaperCollection.Clear();
 
-                var wallpapers = await _wallpaperService.GetWallpapersAsync(selectedWallpaperCollection.Year, selectedWallpaperCollection.Month, _settings.SelectedArea);
+                var wallpapers = await _leanCloudWallpaperService.GetWallpapersAsync(selectedWallpaperCollection.Year, selectedWallpaperCollection.Month, _settings.SelectedArea);
                 foreach (var wallpaper in wallpapers)
                 {
                     selectedWallpaperCollection.Add(wallpaper);

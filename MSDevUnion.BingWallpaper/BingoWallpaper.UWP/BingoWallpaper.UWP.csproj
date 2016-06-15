@@ -118,7 +118,7 @@
     <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\WallpaperUrlConverter.cs" />
-    <Compile Include="Design\WallpaperService.cs" />
+    <Compile Include="Design\LeanCloudWallpaperService.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="Helpers\ScrollViewerHelper.cs" />
     <Compile Include="Migrations\20160613085704_MyFirstMigration.cs" />
@@ -134,7 +134,7 @@
     <Compile Include="Services\ISystemSettingService.cs" />
     <Compile Include="Services\ShareService.cs" />
     <Compile Include="Services\SystemSettingService.cs" />
-    <Compile Include="Services\WallpaperWithCacheService.cs" />
+    <Compile Include="Services\LeanCloudWallpaperWithCacheService.cs" />
     <Compile Include="Utils\HashHelper.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />

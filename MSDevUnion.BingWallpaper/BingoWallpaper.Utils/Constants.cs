@@ -4,7 +4,7 @@ namespace BingoWallpaper
 {
     public static class Constants
     {
-        public const string BingUrlBase = @"http://www.bing.com";
+        public const string BingUrlBase = @"http://global.bing.com";
 
         public const string DatabaseName = @"bingowallpaper.db";
 

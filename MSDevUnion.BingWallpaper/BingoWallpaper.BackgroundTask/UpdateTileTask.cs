@@ -10,13 +10,13 @@ namespace BingoWallpaper.BackgroundTask
 
         private readonly ITileService _tileService;
 
-        private readonly IWallpaperService _wallpaperService;
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
         public UpdateTileTask()
         {
-            _wallpaperService = new WallpaperService();
-            _settings = new BingoWallpaperSettings(_wallpaperService);
-            _tileService = new TileService(_wallpaperService);
+            _leanCloudWallpaperService = new LeanCloudWallpaperService();
+            _settings = new BingoWallpaperSettings(_leanCloudWallpaperService);
+            _tileService = new TileService(_leanCloudWallpaperService);
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -24,7 +24,7 @@ namespace BingoWallpaper.BackgroundTask
             var deferral = taskInstance.GetDeferral();
             try
             {
-                var wallpaper = await _wallpaperService.GetNewestWallpaperAsync(_settings.SelectedArea);
+                var wallpaper = await _leanCloudWallpaperService.GetNewestWallpaperAsync(_settings.SelectedArea);
                 _tileService.UpdatePrimaryTile(wallpaper);
             }
             finally

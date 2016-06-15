@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Models.LeanCloud;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 

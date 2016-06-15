@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace BingoWallpaper.Models
+namespace BingoWallpaper.Models.LeanCloud
 {
     [JsonObject]
     public class Archive : AVObject

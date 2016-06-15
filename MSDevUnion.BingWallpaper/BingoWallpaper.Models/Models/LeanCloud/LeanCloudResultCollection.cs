@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BingoWallpaper.Models
+namespace BingoWallpaper.Models.LeanCloud
 {
     [JsonObject]
     public class LeanCloudResultCollection<T> : LeanCloudResultBase, IEnumerable<T> where T : AVObject

@@ -1,4 +1,4 @@
-﻿namespace BingoWallpaper.Models
+﻿namespace BingoWallpaper.Models.LeanCloud
 {
     public class Wallpaper
     {

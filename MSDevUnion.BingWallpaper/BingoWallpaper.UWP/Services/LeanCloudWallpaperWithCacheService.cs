@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BingoWallpaper.Uwp.Services
 {
-    public class WallpaperWithCacheService : WallpaperService
+    public class LeanCloudWallpaperWithCacheService : LeanCloudWallpaperService
     {
         public override async Task<LeanCloudResultCollection<Archive>> GetArchivesAsync(int year, int month, string area)
         {
@@ -118,35 +119,6 @@ namespace BingoWallpaper.Uwp.Services
                 uncacheImageCollection.Results = images.Select(temp => (Image)temp).Concat(resuls).ToList();
                 return uncacheImageCollection;
             }
-        }
-
-        public override IReadOnlyList<WallpaperSize> GetSupportedWallpaperSizes()
-        {
-            return new[]
-            {
-                new WallpaperSize(480,800),
-                new WallpaperSize(768,1280),
-                new WallpaperSize(800,480),
-                new WallpaperSize(1080,1920),
-                new WallpaperSize(1366,768),
-                new WallpaperSize(1920,1080),
-                new WallpaperSize(1920,1200),
-            };
-        }
-
-        public override string GetUrl(Image image, WallpaperSize size)
-        {
-            if (image == null)
-            {
-                throw new ArgumentNullException(nameof(image));
-            }
-
-            if (GetSupportedWallpaperSizes().Contains(size) == false)
-            {
-                throw new NotSupportedException($"not supported this wallpaper size {size}");
-            }
-
-            return Constants.QiNiuUrlBase + image.UrlBase + "_" + size.ToString() + ".jpg";
         }
     }
 }

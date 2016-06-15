@@ -25,11 +25,11 @@ namespace BingoWallpaper.Uwp.ViewModels
             SimpleIoc.Default.Register<INavigationService>(CreateNavigationService);
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<IWallpaperService, Design.WallpaperService>();
+                SimpleIoc.Default.Register<ILeanCloudWallpaperService, Design.LeanCloudWallpaperService>();
             }
             else
             {
-                SimpleIoc.Default.Register<IWallpaperService, WallpaperWithCacheService>();
+                SimpleIoc.Default.Register<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
             }
             SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace BingoWallpaper.Models
+namespace BingoWallpaper.Models.LeanCloud
 {
     public class WallpaperCollection : ObservableCollection<Wallpaper>
     {

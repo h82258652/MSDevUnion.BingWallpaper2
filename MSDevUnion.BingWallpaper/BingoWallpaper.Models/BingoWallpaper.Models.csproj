@@ -39,18 +39,22 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Archive.cs" />
-    <Compile Include="Models\AVObject.cs" />
-    <Compile Include="Models\CoverStory.cs" />
+    <Compile Include="Models\Bing\BingResult.cs" />
+    <Compile Include="Models\IImage.cs" />
+    <Compile Include="Models\LeanCloud\Archive.cs" />
+    <Compile Include="Models\Bing\Image.cs" />
+    <Compile Include="Models\Bing\Tooltips.cs" />
+    <Compile Include="Models\LeanCloud\AVObject.cs" />
+    <Compile Include="Models\LeanCloud\CoverStory.cs" />
     <Compile Include="Models\Hotspot.cs" />
-    <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\LeanCloudPointer.cs" />
-    <Compile Include="Models\LeanCloudResultBase.cs" />
-    <Compile Include="Models\LeanCloudResultCollection.cs" />
+    <Compile Include="Models\LeanCloud\Image.cs" />
+    <Compile Include="Models\LeanCloud\LeanCloudPointer.cs" />
+    <Compile Include="Models\LeanCloud\LeanCloudResultBase.cs" />
+    <Compile Include="Models\LeanCloud\LeanCloudResultCollection.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\SaveLocation.cs" />
-    <Compile Include="Models\Wallpaper.cs" />
-    <Compile Include="Models\WallpaperCollection.cs" />
+    <Compile Include="Models\LeanCloud\Wallpaper.cs" />
+    <Compile Include="Models\LeanCloud\WallpaperCollection.cs" />
     <Compile Include="Models\WallpaperSize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

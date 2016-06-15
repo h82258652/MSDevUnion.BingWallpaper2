@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace BingoWallpaper.Models
+namespace BingoWallpaper.Models.LeanCloud
 {
     [JsonObject]
-    public class Image : AVObject
+    public class Image : AVObject, IImage
     {
         [JsonProperty("urlbase")]
         public string UrlBase

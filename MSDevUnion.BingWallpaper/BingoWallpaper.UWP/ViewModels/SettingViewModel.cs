@@ -13,15 +13,15 @@ namespace BingoWallpaper.Uwp.ViewModels
     {
         private readonly IBingoWallpaperSettings _settings;
 
-        private readonly IWallpaperService _wallpaperService;
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
-        public SettingViewModel(IWallpaperService wallpaperService, IBingoWallpaperSettings settings)
+        public SettingViewModel(ILeanCloudWallpaperService leanCloudWallpaperService, IBingoWallpaperSettings settings)
         {
-            _wallpaperService = wallpaperService;
+            _leanCloudWallpaperService = leanCloudWallpaperService;
             _settings = settings;
         }
 
-        public IReadOnlyList<string> Areas => _wallpaperService.GetSupportedAreas();
+        public IReadOnlyList<string> Areas => _leanCloudWallpaperService.GetSupportedAreas();
 
         public bool AutoUpdateLockScreen
         {
@@ -93,7 +93,7 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
-        public IReadOnlyList<WallpaperSize> WallpaperSizes => _wallpaperService.GetSupportedWallpaperSizes();
+        public IReadOnlyList<WallpaperSize> WallpaperSizes => _leanCloudWallpaperService.GetSupportedWallpaperSizes();
 
         private RelayCommand _clearDataCacheCommand;
 

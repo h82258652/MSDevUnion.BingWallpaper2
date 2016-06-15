@@ -7,12 +7,12 @@ namespace BingoWallpaper.Services.UnitTests
     [TestFixture]
     public class WallpaperServiceTest
     {
-        private IWallpaperService _service;
+        private ILeanCloudWallpaperService _service;
 
         [SetUp]
         public void SetUp()
         {
-            _service = new WallpaperService();
+            _service = new LeanCloudWallpaperService();
         }
 
         [Test]

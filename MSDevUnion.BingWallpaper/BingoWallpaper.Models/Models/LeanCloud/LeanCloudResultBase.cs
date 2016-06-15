@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace BingoWallpaper.Models
+namespace BingoWallpaper.Models.LeanCloud
 {
     [JsonObject]
     public abstract class LeanCloudResultBase

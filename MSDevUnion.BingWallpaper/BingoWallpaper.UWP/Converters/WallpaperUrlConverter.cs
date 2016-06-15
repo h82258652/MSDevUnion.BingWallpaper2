@@ -1,4 +1,5 @@
 ﻿using BingoWallpaper.Models;
+using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -19,7 +20,7 @@ namespace BingoWallpaper.Uwp.Converters
             var args = (parameter as string)?.Split('x', ',');
             if (image != null && args != null && args.Length == 2)
             {
-                var wallpaperService = ServiceLocator.Current.GetInstance<IWallpaperService>();
+                var wallpaperService = ServiceLocator.Current.GetInstance<ILeanCloudWallpaperService>();
                 return wallpaperService.GetUrl(image, new WallpaperSize(int.Parse(args[0]), int.Parse(args[1])));
             }
             return value;

@@ -11,11 +11,11 @@ namespace BingoWallpaper.Configuration
 {
     public class BingoWallpaperSettings : AppSettingsBase, IBingoWallpaperSettings
     {
-        private readonly IWallpaperService _wallpaperService;
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
-        public BingoWallpaperSettings(IWallpaperService wallpaperService)
+        public BingoWallpaperSettings(ILeanCloudWallpaperService leanCloudWallpaperService)
         {
-            _wallpaperService = wallpaperService;
+            _leanCloudWallpaperService = leanCloudWallpaperService;
         }
 
         public bool AutoUpdateLockScreen
@@ -51,7 +51,7 @@ namespace BingoWallpaper.Configuration
                 return Get(nameof(SelectedArea), () =>
                 {
                     var currentCulture = CultureInfo.CurrentCulture.Name;
-                    if (_wallpaperService.GetSupportedAreas().Contains(currentCulture, StringComparer.OrdinalIgnoreCase))
+                    if (_leanCloudWallpaperService.GetSupportedAreas().Contains(currentCulture, StringComparer.OrdinalIgnoreCase))
                     {
                         return currentCulture;
                     }
@@ -101,7 +101,7 @@ namespace BingoWallpaper.Configuration
 
                 #endregion 获取屏幕宽度
 
-                var sizes = _wallpaperService.GetSupportedWallpaperSizes().Where(temp => temp.Width == screenWidth).ToList();// 寻找适合的尺寸。
+                var sizes = _leanCloudWallpaperService.GetSupportedWallpaperSizes().Where(temp => temp.Width == screenWidth).ToList();// 寻找适合的尺寸。
                 if (sizes.Any())
                 {
                     return sizes.First();

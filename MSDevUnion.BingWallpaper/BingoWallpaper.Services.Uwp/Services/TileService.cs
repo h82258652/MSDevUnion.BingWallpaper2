@@ -6,11 +6,11 @@ namespace BingoWallpaper.Services
 {
     public class TileService : ITileService
     {
-        private readonly IWallpaperService _wallpaperService;
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
-        public TileService(IWallpaperService wallpaperService)
+        public TileService(ILeanCloudWallpaperService leanCloudWallpaperService)
         {
-            _wallpaperService = wallpaperService;
+            _leanCloudWallpaperService = leanCloudWallpaperService;
         }
 
         public void UpdatePrimaryTile(Wallpaper wallpaper)
@@ -34,7 +34,7 @@ namespace BingoWallpaper.Services
 
                 // image
                 var image = document.CreateElement("image");
-                image.SetAttribute("src", _wallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(150, 150)));
+                image.SetAttribute("src", _leanCloudWallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(150, 150)));
                 image.SetAttribute("placement", "background");
                 binding.AppendChild(image);
 
@@ -54,7 +54,7 @@ namespace BingoWallpaper.Services
 
                 // image
                 var image = document.CreateElement("image");
-                image.SetAttribute("src", _wallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(310, 150)));
+                image.SetAttribute("src", _leanCloudWallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(310, 150)));
                 image.SetAttribute("placement", "background");
                 binding.AppendChild(image);
 
