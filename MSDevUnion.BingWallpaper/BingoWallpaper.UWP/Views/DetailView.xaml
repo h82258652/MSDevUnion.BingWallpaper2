@@ -39,6 +39,6 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image></Image>
+        <Image />
     </Grid>
 </local:ViewBase>
