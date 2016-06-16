@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace BingoWallpaper.Services.UnitTests
 {
     [TestFixture]
-    public class WallpaperServiceTest
+    public class LeanCloudWallpaperServiceTest
     {
         private ILeanCloudWallpaperService _service;
 

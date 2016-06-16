@@ -59,7 +59,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="WallpaperServiceTest.cs" />
+    <Compile Include="BingoWallpaperServiceTest.cs" />
+    <Compile Include="LeanCloudWallpaperServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

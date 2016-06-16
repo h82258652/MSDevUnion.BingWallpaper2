@@ -1,5 +1,6 @@
 ﻿using BingoWallpaper.Configuration;
 using BingoWallpaper.Models;
+using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

@@ -19,14 +19,14 @@ namespace BingoWallpaper.Uwp.Design
             throw new NotImplementedException();
         }
 
-        public Task<LeanCloudResultCollection<Image>> GetImagesAsync(params string[] objectIds)
-        {
-            return GetImagesAsync((IEnumerable<string>)objectIds);
-        }
-
         public Task<LeanCloudResultCollection<Image>> GetImagesAsync(IEnumerable<string> objectIds)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<LeanCloudResultCollection<Image>> GetImagesAsync(params string[] objectIds)
+        {
+            return GetImagesAsync((IEnumerable<string>)objectIds);
         }
 
         public Task<Archive> GetNewestArchiveAsync(string area)
@@ -71,7 +71,7 @@ namespace BingoWallpaper.Uwp.Design
             };
         }
 
-        public string GetUrl(Image image, WallpaperSize size)
+        public string GetUrl(IImage image, WallpaperSize size)
         {
             throw new NotImplementedException();
         }

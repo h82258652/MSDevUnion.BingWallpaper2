@@ -13,6 +13,15 @@ namespace BingoWallpaper.Services
     {
         public async Task<BingResult> GetAsync(int daysAgo, int count, string area)
         {
+            if (count <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+            if (area == null)
+            {
+                throw new ArgumentNullException(nameof(area));
+            }
+
             string url = $"http://www.bing.com/hpimagearchive.aspx?format=js&idx={daysAgo}&n={count}&mkt={area}";
 
             using (var client = new HttpClient())

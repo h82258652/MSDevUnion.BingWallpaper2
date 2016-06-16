@@ -10,7 +10,7 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
-      xmlns:models="using:BingoWallpaper.Models"
+      xmlns:leanCloud="using:BingoWallpaper.Models.LeanCloud"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=Main}"
       mc:Ignorable="d">
@@ -103,7 +103,7 @@
                                          Mode=TwoWay}"
                   Style="{StaticResource BingoWallpaperFlipViewStyle}">
             <FlipView.ItemTemplate>
-                <DataTemplate x:DataType="models:WallpaperCollection">
+                <DataTemplate x:DataType="leanCloud:WallpaperCollection">
                     <Grid>
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
@@ -119,7 +119,7 @@
                                   ItemsSource="{x:Bind}"
                                   SelectionMode="None">
                             <GridView.ItemTemplate>
-                                <DataTemplate x:DataType="models:Wallpaper">
+                                <DataTemplate x:DataType="leanCloud:Wallpaper">
                                     <TextBlock Text="{x:Bind}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
