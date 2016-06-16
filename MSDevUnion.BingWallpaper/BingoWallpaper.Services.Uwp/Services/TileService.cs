@@ -6,14 +6,14 @@ namespace BingoWallpaper.Services
 {
     public class TileService : ITileService
     {
-        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
+        private readonly IWallpaperService _wallpaperService;
 
-        public TileService(ILeanCloudWallpaperService leanCloudWallpaperService)
+        public TileService(IWallpaperService wallpaperService)
         {
-            _leanCloudWallpaperService = leanCloudWallpaperService;
+            _wallpaperService = wallpaperService;
         }
 
-        public void UpdatePrimaryTile(Wallpaper wallpaper)
+        public void UpdatePrimaryTile(IImage image, string text)
         {
             var document = new XmlDocument();
 
@@ -33,16 +33,16 @@ namespace BingoWallpaper.Services
                 visual.AppendChild(binding);
 
                 // image
-                var image = document.CreateElement("image");
-                image.SetAttribute("src", _leanCloudWallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(150, 150)));
-                image.SetAttribute("placement", "background");
-                binding.AppendChild(image);
+                var imageElement = document.CreateElement("image");
+                imageElement.SetAttribute("src", _wallpaperService.GetUrl(image, new WallpaperSize(150, 150)));
+                imageElement.SetAttribute("placement", "background");
+                binding.AppendChild(imageElement);
 
                 // text
-                var text = document.CreateElement("text");
-                text.AppendChild(document.CreateTextNode(wallpaper.Archive.Info));
-                text.SetAttribute("hint-wrap", "true");
-                binding.AppendChild(text);
+                var textElement = document.CreateElement("text");
+                textElement.AppendChild(document.CreateTextNode(text));
+                textElement.SetAttribute("hint-wrap", "true");
+                binding.AppendChild(textElement);
             }
 
             // Wide, 310x150。
@@ -53,16 +53,16 @@ namespace BingoWallpaper.Services
                 visual.AppendChild(binding);
 
                 // image
-                var image = document.CreateElement("image");
-                image.SetAttribute("src", _leanCloudWallpaperService.GetUrl(wallpaper.Image, new WallpaperSize(310, 150)));
-                image.SetAttribute("placement", "background");
-                binding.AppendChild(image);
+                var imageElement = document.CreateElement("image");
+                imageElement.SetAttribute("src", _wallpaperService.GetUrl(image, new WallpaperSize(310, 150)));
+                imageElement.SetAttribute("placement", "background");
+                binding.AppendChild(imageElement);
 
                 // text
-                var text = document.CreateElement("text");
-                text.AppendChild(document.CreateTextNode(wallpaper.Archive.Info));
-                text.SetAttribute("hint-wrap", "true");
-                binding.AppendChild(text);
+                var textElement = document.CreateElement("text");
+                textElement.AppendChild(document.CreateTextNode(text));
+                textElement.SetAttribute("hint-wrap", "true");
+                binding.AppendChild(textElement);
             }
 
             var tileNotification = new TileNotification(document);

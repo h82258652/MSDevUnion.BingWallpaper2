@@ -4,6 +4,6 @@ namespace BingoWallpaper.Services
 {
     public interface ITileService
     {
-        void UpdatePrimaryTile(Wallpaper wallpaper);
+        void UpdatePrimaryTile(IImage image, string text);
     }
 }

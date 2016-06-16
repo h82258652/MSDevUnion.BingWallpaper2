@@ -1,22 +1,24 @@
 ﻿using BingoWallpaper.Configuration;
 using BingoWallpaper.Services;
+using System;
+using System.Linq;
 using Windows.ApplicationModel.Background;
 
 namespace BingoWallpaper.BackgroundTask
 {
     public sealed class UpdateTileTask : IBackgroundTask
     {
+        private readonly IBingWallpaperService _bingWallpaperService;
+
         private readonly IBingoWallpaperSettings _settings;
 
         private readonly ITileService _tileService;
 
-        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
-
         public UpdateTileTask()
         {
-            _leanCloudWallpaperService = new LeanCloudWallpaperService();
-            _settings = new BingoWallpaperSettings(_leanCloudWallpaperService);
-            _tileService = new TileService(_leanCloudWallpaperService);
+            _bingWallpaperService = new BingWallpaperService();
+            _settings = new BingoWallpaperSettings(_bingWallpaperService);
+            _tileService = new TileService(_bingWallpaperService);
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -24,8 +26,25 @@ namespace BingoWallpaper.BackgroundTask
             var deferral = taskInstance.GetDeferral();
             try
             {
-                var wallpaper = await _leanCloudWallpaperService.GetNewestWallpaperAsync(_settings.SelectedArea);
-                _tileService.UpdatePrimaryTile(wallpaper);
+                var result = await _bingWallpaperService.GetAsync(0, 1, _settings.SelectedArea);
+                var image = result?.Images.FirstOrDefault();
+                if (image != null)
+                {
+                    var copyright = image.Copyright;
+                    var index = copyright.LastIndexOf("(©", StringComparison.Ordinal);
+                    var text = index <= -1 ? copyright : copyright.Substring(0, index).Trim();
+                    _tileService.UpdatePrimaryTile(image, text);
+
+                    if (_settings.AutoUpdateWallpaper)
+                    {
+                        // TODO
+                    }
+
+                    if (_settings.AutoUpdateLockScreen)
+                    {
+                        // TODO
+                    }
+                }
             }
             finally
             {

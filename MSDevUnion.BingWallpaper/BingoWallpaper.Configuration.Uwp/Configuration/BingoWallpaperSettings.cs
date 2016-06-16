@@ -11,9 +11,9 @@ namespace BingoWallpaper.Configuration
 {
     public class BingoWallpaperSettings : AppSettingsBase, IBingoWallpaperSettings
     {
-        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
+        private readonly IWallpaperService _leanCloudWallpaperService;
 
-        public BingoWallpaperSettings(ILeanCloudWallpaperService leanCloudWallpaperService)
+        public BingoWallpaperSettings(IWallpaperService leanCloudWallpaperService)
         {
             _leanCloudWallpaperService = leanCloudWallpaperService;
         }
