@@ -1,5 +1,4 @@
-﻿using BingoWallpaper.Models;
-using BingoWallpaper.Models.LeanCloud;
+﻿using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Models;
 using Microsoft.EntityFrameworkCore;

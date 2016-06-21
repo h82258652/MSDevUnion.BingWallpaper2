@@ -17,6 +17,20 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         public const string SettingViewKey = @"Setting";
 
+        static ViewModelLocator()
+        {
+            var serviceLocator = new UnityServiceLocator(ConfigureUnityContainer());
+            ServiceLocator.SetLocatorProvider(() => serviceLocator);
+        }
+
+        public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
+
+        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
+
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public SettingViewModel Setting => ServiceLocator.Current.GetInstance<SettingViewModel>();
+
         private static IUnityContainer ConfigureUnityContainer()
         {
             var unityContainer = new UnityContainer();
@@ -45,43 +59,6 @@ namespace BingoWallpaper.Uwp.ViewModels
 
             return unityContainer;
         }
-
-        static ViewModelLocator()
-        {
-            var serviceLocator = new UnityServiceLocator(ConfigureUnityContainer());
-            ServiceLocator.SetLocatorProvider(() => serviceLocator);
-
-            //ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            //SimpleIoc.Default.Register(CreateNavigationService);
-            //if (ViewModelBase.IsInDesignModeStatic)
-            //{
-            //    SimpleIoc.Default.Register<IWallpaperService, Design.LeanCloudWallpaperService>();
-            //}
-            //else
-            //{
-            //    SimpleIoc.Default.Register<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
-            //    SimpleIoc.Default.Register<IWallpaperService, LeanCloudWallpaperWithCacheService>();
-            //}
-            //SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
-
-            //SimpleIoc.Default.Register<IBingoWallpaperSettings, BingoWallpaperSettings>();
-
-            //SimpleIoc.Default.Register<MainViewModel>();
-            //SimpleIoc.Default.Register<DetailViewModel>();
-            //SimpleIoc.Default.Register<SettingViewModel>();
-            //SimpleIoc.Default.Register<AboutViewModel>();
-
-            //SimpleIoc.Default.Register<IWallpaperContext, WallpaperContext>();
-        }
-
-        public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
-
-        public DetailViewModel Detail => ServiceLocator.Current.GetInstance<DetailViewModel>();
-
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
-
-        public SettingViewModel Setting => ServiceLocator.Current.GetInstance<SettingViewModel>();
 
         private static INavigationService CreateNavigationService()
         {

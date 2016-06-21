@@ -11,9 +11,11 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class SettingViewModel : ViewModelBase
     {
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
+
         private readonly IBingoWallpaperSettings _settings;
 
-        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
+        private RelayCommand _clearDataCacheCommand;
 
         public SettingViewModel(ILeanCloudWallpaperService leanCloudWallpaperService, IBingoWallpaperSettings settings)
         {
@@ -46,6 +48,18 @@ namespace BingoWallpaper.Uwp.ViewModels
             {
                 _settings.AutoUpdateWallpaper = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        public RelayCommand ClearDataCacheCommand
+        {
+            get
+            {
+                _clearDataCacheCommand = _clearDataCacheCommand ?? new RelayCommand(() =>
+                {
+                    // TODO
+                });
+                return _clearDataCacheCommand;
             }
         }
 
@@ -94,19 +108,5 @@ namespace BingoWallpaper.Uwp.ViewModels
         }
 
         public IReadOnlyList<WallpaperSize> WallpaperSizes => _leanCloudWallpaperService.GetSupportedWallpaperSizes();
-
-        private RelayCommand _clearDataCacheCommand;
-
-        public RelayCommand ClearDataCacheCommand
-        {
-            get
-            {
-                _clearDataCacheCommand = _clearDataCacheCommand ?? new RelayCommand(() =>
-                {
-                    // TODO
-                });
-                return _clearDataCacheCommand;
-            }
-        }
     }
 }

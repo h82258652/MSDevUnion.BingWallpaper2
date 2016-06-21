@@ -1,5 +1,4 @@
 ﻿using BingoWallpaper.Configuration;
-using BingoWallpaper.Models;
 using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using GalaSoft.MvvmLight;
@@ -14,11 +13,11 @@ namespace BingoWallpaper.Uwp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
+
         private readonly INavigationService _navigationService;
 
         private readonly IBingoWallpaperSettings _settings;
-
-        private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
         private RelayCommand<ItemClickEventArgs> _clickCommand;
 
