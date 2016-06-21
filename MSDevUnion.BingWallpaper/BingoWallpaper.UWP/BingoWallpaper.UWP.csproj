@@ -138,7 +138,9 @@
     <Compile Include="Utils\HashHelper.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />
+    <Compile Include="ViewModels\INavigable.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NavigableViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\AboutView.xaml.cs">

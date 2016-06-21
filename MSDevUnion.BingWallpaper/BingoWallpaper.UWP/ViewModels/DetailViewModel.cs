@@ -1,11 +1,11 @@
-﻿using BingoWallpaper.Services;
+﻿using BingoWallpaper.Models.LeanCloud;
+using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
 namespace BingoWallpaper.Uwp.ViewModels
 {
-    public class DetailViewModel : ViewModelBase
+    public class DetailViewModel : NavigableViewModel
     {
         private readonly IShareService _shareService;
 
@@ -85,6 +85,14 @@ namespace BingoWallpaper.Uwp.ViewModels
                 });
                 return _setWallpaperCommand;
             }
+        }
+
+        public override void OnNavigatedTo(object parameter)
+        {
+            base.OnNavigatedTo(parameter);
+
+            var wallpaper = (Wallpaper)parameter;
+            // TODO
         }
     }
 }

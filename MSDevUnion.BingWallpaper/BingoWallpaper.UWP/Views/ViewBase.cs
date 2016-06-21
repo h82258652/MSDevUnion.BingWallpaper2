@@ -1,4 +1,6 @@
-﻿using Windows.Phone.UI.Input;
+﻿using BingoWallpaper.Uwp.ViewModels;
+using Windows.Foundation.Metadata;
+using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Input;
 using Windows.UI.Xaml.Controls;
@@ -15,10 +17,14 @@ namespace BingoWallpaper.Uwp.Views
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             SystemNavigationManager.GetForCurrentView().BackRequested -= SystemNavigationManager_BackRequested;
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
             }
+
+            var navigableViewModel = DataContext as INavigable;
+            navigableViewModel?.OnNavigatedFrom();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -27,9 +33,23 @@ namespace BingoWallpaper.Uwp.Views
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = Frame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            }
+
+            var navigableViewModel = DataContext as INavigable;
+            navigableViewModel?.OnNavigatedTo(e.Parameter);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            var navigableViewModel = DataContext as INavigable;
+            if (navigableViewModel != null)
+            {
+                e.Cancel = navigableViewModel.OnNavigatingFrom();
             }
         }
 
@@ -64,7 +84,7 @@ namespace BingoWallpaper.Uwp.Views
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.BackPressedEventArgs"))
+            if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.BackPressedEventArgs"))
             {
                 OnNavigationBackRequested(new NavigationBackRequestedEventArgs(e));
             }
