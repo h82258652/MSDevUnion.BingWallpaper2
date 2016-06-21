@@ -113,8 +113,10 @@
                         </StackPanel>
                         <!--#region 背景图片-->
                         <controls:ImageEx Opacity="0.5"
-                                          Stretch="UniformToFill"
-                                          Source="{Binding Path=[0], Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
+                                          Source="{Binding Path=[0],
+                                                           Converter={StaticResource WallpaperUrlConverter},
+                                                           ConverterParameter='1920x1080'}"
+                                          Stretch="UniformToFill" />
                         <!--#endregion-->
                         <GridView IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind}"
@@ -124,7 +126,7 @@
                                     <controls:WallpaperItem Width="160"
                                                             Height="96"
                                                             Text="{x:Bind Archive.Info}"
-                                                            Url="{x:Bind Image,Converter={StaticResource WallpaperUrlConverter},ConverterParameter='1920x1080'}" />
+                                                            Url="{x:Bind Image, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                             <interactivity:Interaction.Behaviors>
