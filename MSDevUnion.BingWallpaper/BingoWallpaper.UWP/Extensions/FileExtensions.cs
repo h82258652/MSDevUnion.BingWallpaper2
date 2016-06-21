@@ -1,5 +1,4 @@
-﻿using BingoWallpaper.Utils;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace BingoWallpaper.Uwp.Extensions

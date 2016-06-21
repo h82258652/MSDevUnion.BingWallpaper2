@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -205,13 +206,17 @@ namespace BingoWallpaper.Uwp.Controls
                         {
                             var task = client.GetBufferAsync(uri);
                             DownloadPercent = 0;
-                            task.Progress = (info, progressInfo) =>
+                            task.Progress = async (info, progressInfo) =>
                             {
-                                DownloadProgress?.Invoke(this, new HttpDownloadProgressEventArgs(progressInfo));
-                                if (progressInfo.TotalBytesToReceive.HasValue)
+                                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                                 {
-                                    DownloadPercent = progressInfo.BytesReceived * 100d / progressInfo.TotalBytesToReceive.Value;
-                                }
+                                    DownloadProgress?.Invoke(this, new HttpDownloadProgressEventArgs(progressInfo));
+                                    if (progressInfo.TotalBytesToReceive.HasValue)
+                                    {
+                                        DownloadPercent = progressInfo.BytesReceived * 100d /
+                                                          progressInfo.TotalBytesToReceive.Value;
+                                    }
+                                });
                             };
                             var buffer = await task;
                             bytes = buffer.ToArray();

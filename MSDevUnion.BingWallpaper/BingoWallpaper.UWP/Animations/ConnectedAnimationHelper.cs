@@ -43,6 +43,7 @@ namespace BingoWallpaper.Uwp.Animations
 
         internal static Panel GetAnimationContainer()
         {
+            // TODO
             if (_animationContainer == null)
             {
                 var currentWindow = Window.Current;

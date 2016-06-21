@@ -64,6 +64,7 @@ namespace BingoWallpaper.Uwp.Controls
 
         protected override Size ArrangeOverride(Size finalSize)
         {
+            // TODO
             if (Orientation == Orientation.Horizontal)
             {
             }
@@ -73,6 +74,8 @@ namespace BingoWallpaper.Uwp.Controls
 
         protected override Size MeasureOverride(Size availableSize)
         {
+            // TODO
+
             if (Orientation == Orientation.Horizontal)
             {
                 var itemWidth = availableSize.Width / RowsOrColumns;
@@ -93,18 +96,22 @@ namespace BingoWallpaper.Uwp.Controls
 
         private static void ItemHeightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // TODO
         }
 
         private static void ItemWidthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // TODO
         }
 
         private static void OrientationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // TODO
         }
 
         private static void RowsOrColumnsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            // TODO
         }
     }
 }

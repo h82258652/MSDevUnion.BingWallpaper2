@@ -4,7 +4,16 @@
     <Style TargetType="controls:WallpaperItem">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:WallpaperItem"></ControlTemplate>
+                <ControlTemplate TargetType="controls:WallpaperItem">
+                    <Grid>
+                        <controls:ImageEx Source="{TemplateBinding Url}" />
+                        <Border VerticalAlignment="Bottom"
+                                Background="#80808080">
+                            <TextBlock Text="{TemplateBinding Text}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>

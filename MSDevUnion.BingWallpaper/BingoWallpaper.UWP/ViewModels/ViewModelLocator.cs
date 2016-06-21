@@ -1,12 +1,11 @@
 ﻿using BingoWallpaper.Configuration;
 using BingoWallpaper.Services;
-using BingoWallpaper.Uwp.Models;
 using BingoWallpaper.Uwp.Services;
 using BingoWallpaper.Uwp.Views;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 
 namespace BingoWallpaper.Uwp.ViewModels
 {
@@ -18,29 +17,59 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         public const string SettingViewKey = @"Setting";
 
-        static ViewModelLocator()
+        private static IUnityContainer ConfigureUnityContainer()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            var unityContainer = new UnityContainer();
 
-            SimpleIoc.Default.Register(CreateNavigationService);
+            unityContainer.RegisterInstance(CreateNavigationService());
+
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<ILeanCloudWallpaperService, Design.LeanCloudWallpaperService>();
+                // TODO
             }
             else
             {
-                SimpleIoc.Default.Register<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
+                unityContainer.RegisterType<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
+                unityContainer.RegisterType<IWallpaperService, LeanCloudWallpaperWithCacheService>();
             }
-            SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
 
-            SimpleIoc.Default.Register<IBingoWallpaperSettings, BingoWallpaperSettings>();
+            unityContainer.RegisterType<IBingoWallpaperSettings, BingoWallpaperSettings>();
 
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<DetailViewModel>();
-            SimpleIoc.Default.Register<SettingViewModel>();
-            SimpleIoc.Default.Register<AboutViewModel>();
+            unityContainer.RegisterType<MainViewModel>();
+            unityContainer.RegisterType<DetailViewModel>();
+            unityContainer.RegisterType<SettingViewModel>();
+            unityContainer.RegisterType<AboutViewModel>();
 
-            SimpleIoc.Default.Register<IWallpaperContext, WallpaperContext>();
+            return unityContainer;
+        }
+
+        static ViewModelLocator()
+        {
+            var serviceLocator = new UnityServiceLocator(ConfigureUnityContainer());
+            ServiceLocator.SetLocatorProvider(() => serviceLocator);
+
+            //ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            //SimpleIoc.Default.Register(CreateNavigationService);
+            //if (ViewModelBase.IsInDesignModeStatic)
+            //{
+            //    SimpleIoc.Default.Register<IWallpaperService, Design.LeanCloudWallpaperService>();
+            //}
+            //else
+            //{
+            //    SimpleIoc.Default.Register<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
+            //    SimpleIoc.Default.Register<IWallpaperService, LeanCloudWallpaperWithCacheService>();
+            //}
+            //SimpleIoc.Default.Register<ISystemSettingService, SystemSettingService>();
+
+            //SimpleIoc.Default.Register<IBingoWallpaperSettings, BingoWallpaperSettings>();
+
+            //SimpleIoc.Default.Register<MainViewModel>();
+            //SimpleIoc.Default.Register<DetailViewModel>();
+            //SimpleIoc.Default.Register<SettingViewModel>();
+            //SimpleIoc.Default.Register<AboutViewModel>();
+
+            //SimpleIoc.Default.Register<IWallpaperContext, WallpaperContext>();
         }
 
         public AboutViewModel About => ServiceLocator.Current.GetInstance<AboutViewModel>();
