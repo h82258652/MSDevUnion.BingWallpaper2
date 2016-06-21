@@ -17,7 +17,7 @@
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperFlipViewStyle.xaml" />
+                <ResourceDictionary Source="/Styles/BingoWallpaperFlipViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:BooleanInverseConverter x:Key="BooleanInverseConverter" />
             <converters:StringFormatConverter x:Key="StringFormatConverter" />

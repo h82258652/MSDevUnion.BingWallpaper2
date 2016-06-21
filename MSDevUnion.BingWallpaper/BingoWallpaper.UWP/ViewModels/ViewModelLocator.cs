@@ -25,13 +25,16 @@ namespace BingoWallpaper.Uwp.ViewModels
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                // TODO
+                unityContainer.RegisterType<ILeanCloudWallpaperService, Design.LeanCloudWallpaperService>();
+                unityContainer.RegisterType<IWallpaperService, Design.LeanCloudWallpaperService>();
             }
             else
             {
                 unityContainer.RegisterType<ILeanCloudWallpaperService, LeanCloudWallpaperWithCacheService>();
                 unityContainer.RegisterType<IWallpaperService, LeanCloudWallpaperWithCacheService>();
             }
+            unityContainer.RegisterType<ISystemSettingService, SystemSettingService>();
+            unityContainer.RegisterType<IShareService, ShareService>();
 
             unityContainer.RegisterType<IBingoWallpaperSettings, BingoWallpaperSettings>();
 

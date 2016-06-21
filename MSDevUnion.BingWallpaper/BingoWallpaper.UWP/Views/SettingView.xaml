@@ -51,7 +51,7 @@
                                        RelativePanel.AlignLeftWithPanel="True"
                                        RelativePanel.AlignVerticalCenterWithPanel="True"
                                        Source="{Binding Converter={StaticResource StringFormatConverter},
-                                                        ConverterParameter='ms-appx:///Assets/Images/flags/{0}.png'}" />
+                                                        ConverterParameter='/Assets/Images/flags/{0}.png'}" />
                                 <TextBlock Margin="5,0,0,0"
                                            RelativePanel.AlignVerticalCenterWith="FlagImage"
                                            RelativePanel.RightOf="FlagImage"

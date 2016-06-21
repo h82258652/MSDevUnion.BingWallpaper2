@@ -32,10 +32,13 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton x:Uid="/Detail/SetWallpaper"
-                          Command="{x:Bind ViewModel.SetWallpaperCommand}" />
+                          Command="{x:Bind ViewModel.SetWallpaperCommand}"
+                          Icon="Accept" />
             <AppBarButton x:Uid="/Detail/SetLockScreen"
-                          Command="{x:Bind ViewModel.SetLockScreenCommand}" />
-            <AppBarButton x:Uid="/Detail/Share" />
+                          Command="{x:Bind ViewModel.SetLockScreenCommand}"
+                          Icon="Accept" />
+            <AppBarButton x:Uid="/Detail/Share"
+                          Icon="Accept" />
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

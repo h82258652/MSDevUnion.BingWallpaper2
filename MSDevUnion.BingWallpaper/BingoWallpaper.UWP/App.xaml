@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Styles/BingoWallpaperBrushStyle.xaml" />
+                <ResourceDictionary Source="/Styles/BingoWallpaperBrushStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <viewModels:ViewModelLocator x:Key="Locator" />
         </ResourceDictionary>
