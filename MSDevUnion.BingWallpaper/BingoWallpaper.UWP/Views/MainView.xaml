@@ -8,9 +8,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:fa="using:FontAwesome.UWP"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:leanCloud="using:BingoWallpaper.Models.LeanCloud"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
-      xmlns:leanCloud="using:BingoWallpaper.Models.LeanCloud"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=Main}"
       mc:Ignorable="d">

@@ -3,6 +3,6 @@
                     xmlns:controls="using:BingoWallpaper.Uwp.Controls"
                     xmlns:local="using:BingoWallpaper.Uwp">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Themes/ImageEx.xaml" />
+        <ResourceDictionary Source="/Themes/ImageEx.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
