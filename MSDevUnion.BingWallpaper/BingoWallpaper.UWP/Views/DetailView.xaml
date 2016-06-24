@@ -32,13 +32,21 @@
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton x:Uid="/Detail/SetWallpaper"
-                          Command="{x:Bind ViewModel.SetWallpaperCommand}"
-                          Icon="Accept" />
+                          Command="{x:Bind ViewModel.SetWallpaperCommand}">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets"
+                              Glyph="&#xE771;" />
+                </AppBarButton.Icon>
+            </AppBarButton>
             <AppBarButton x:Uid="/Detail/SetLockScreen"
                           Command="{x:Bind ViewModel.SetLockScreenCommand}"
-                          Icon="Accept" />
-            <AppBarButton x:Uid="/Detail/Share"
-                          Icon="Accept" />
+                          Icon="SetLockScreen"></AppBarButton>
+            <AppBarButton x:Uid="/Detail/Share">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="ms-appx:/Assets/Fonts/iconfont.ttf#iconfont"
+                              Glyph="&#xE672;"></FontIcon>
+                </AppBarButton.Icon>
+            </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

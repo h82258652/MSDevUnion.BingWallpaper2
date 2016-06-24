@@ -21,6 +21,8 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private RelayCommand _setWallpaperCommand;
 
+        private Wallpaper _wallpaper;
+
         public DetailViewModel(ISystemSettingService systemSettingService, IShareService shareService)
         {
             _systemSettingService = systemSettingService;
@@ -87,12 +89,23 @@ namespace BingoWallpaper.Uwp.ViewModels
             }
         }
 
+        public Wallpaper Wallpaper
+        {
+            get
+            {
+                return _wallpaper;
+            }
+            private set
+            {
+                Set(ref _wallpaper, value);
+            }
+        }
+
         public override void OnNavigatedTo(object parameter)
         {
             base.OnNavigatedTo(parameter);
 
-            var wallpaper = (Wallpaper)parameter;
-            // TODO
+            Wallpaper = (Wallpaper)parameter;
         }
     }
 }
