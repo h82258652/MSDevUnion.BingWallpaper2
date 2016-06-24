@@ -13,14 +13,14 @@ namespace BingoWallpaper.Uwp.ViewModels
     {
         private readonly ILeanCloudWallpaperService _leanCloudWallpaperService;
 
-        private readonly IBingoWallpaperSettings _settings;
+        private readonly IBingoWallpaperSettings _bingoWallpaperSettings;
 
         private RelayCommand _clearDataCacheCommand;
 
-        public SettingViewModel(ILeanCloudWallpaperService leanCloudWallpaperService, IBingoWallpaperSettings settings)
+        public SettingViewModel(ILeanCloudWallpaperService leanCloudWallpaperService, IBingoWallpaperSettings bingoWallpaperSettings)
         {
             _leanCloudWallpaperService = leanCloudWallpaperService;
-            _settings = settings;
+            _bingoWallpaperSettings = bingoWallpaperSettings;
         }
 
         public IReadOnlyList<string> Areas => _leanCloudWallpaperService.GetSupportedAreas();
@@ -29,11 +29,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.AutoUpdateLockScreen;
+                return _bingoWallpaperSettings.AutoUpdateLockScreen;
             }
             set
             {
-                _settings.AutoUpdateLockScreen = value;
+                _bingoWallpaperSettings.AutoUpdateLockScreen = value;
                 RaisePropertyChanged();
             }
         }
@@ -42,11 +42,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.AutoUpdateWallpaper;
+                return _bingoWallpaperSettings.AutoUpdateWallpaper;
             }
             set
             {
-                _settings.AutoUpdateWallpaper = value;
+                _bingoWallpaperSettings.AutoUpdateWallpaper = value;
                 RaisePropertyChanged();
             }
         }
@@ -72,11 +72,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.SelectedArea;
+                return _bingoWallpaperSettings.SelectedArea;
             }
             set
             {
-                _settings.SelectedArea = value;
+                _bingoWallpaperSettings.SelectedArea = value;
                 RaisePropertyChanged();
             }
         }
@@ -85,11 +85,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.SelectedSaveLocation;
+                return _bingoWallpaperSettings.SelectedSaveLocation;
             }
             set
             {
-                _settings.SelectedSaveLocation = value;
+                _bingoWallpaperSettings.SelectedSaveLocation = value;
                 RaisePropertyChanged();
             }
         }
@@ -98,11 +98,11 @@ namespace BingoWallpaper.Uwp.ViewModels
         {
             get
             {
-                return _settings.SelectedWallpaperSize;
+                return _bingoWallpaperSettings.SelectedWallpaperSize;
             }
             set
             {
-                _settings.SelectedWallpaperSize = value;
+                _bingoWallpaperSettings.SelectedWallpaperSize = value;
                 RaisePropertyChanged();
             }
         }

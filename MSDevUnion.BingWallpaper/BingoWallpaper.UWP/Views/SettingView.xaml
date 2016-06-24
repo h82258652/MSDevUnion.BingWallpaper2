@@ -41,8 +41,8 @@
                                                  Mode=TwoWay}" />
                 <ComboBox x:Uid="/Setting/Area"
                           Margin="10,10,10,0"
-                          ItemsSource="{x:Bind ViewModel.Areas}"
-                          SelectedItem="{x:Bind ViewModel.SelectedArea, Mode=TwoWay}">
+                          ItemsSource="{Binding Path=Areas}"
+                          SelectedItem="{Binding Path=SelectedArea,Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="system:String">
                             <RelativePanel>
@@ -62,7 +62,7 @@
                 </ComboBox>
                 <ToggleSwitch x:Uid="/Setting/AutoUpdateWallpaper"
                               Margin="10,10,10,0"
-                              IsOn="{x:Bind ViewModel.AutoUpdateWallpaper}" />
+                              IsOn="{Binding Path=AutoUpdateWallpaper,Mode=TwoWay}" />
                 <ToggleSwitch x:Uid="/Setting/AutoUpdateLockScreen"
                               Margin="10,10,10,0"
                               IsOn="{x:Bind ViewModel.AutoUpdateLockScreen}" />

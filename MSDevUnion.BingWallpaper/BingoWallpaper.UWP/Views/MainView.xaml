@@ -38,8 +38,8 @@
                 <StackPanel Grid.Column="0" />
                 <AppBarButton x:Uid="/Main/Refresh"
                               Grid.Column="1"
-                              Command="{x:Bind ViewModel.RefreshCommand}"
-                              IsCompact="{x:Bind AppBar.IsOpen, Converter={StaticResource BooleanInverseConverter}, Mode=OneWay}">
+                              Command="{Binding Path=RefreshCommand}"
+                              IsCompact="{Binding ElementName=AppBar,Path=IsOpen,Converter={StaticResource BooleanInverseConverter}}">
                     <AppBarButton.Icon>
                         <PathIcon HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
@@ -65,7 +65,7 @@
                 </AppBarButton>
                 <AppBarButton x:Uid="/Main/Setting"
                               Grid.Column="2"
-                              IsCompact="{x:Bind AppBar.IsOpen, Converter={StaticResource BooleanInverseConverter}, Mode=OneWay}">
+                              IsCompact="{Binding ElementName=AppBar,Path=IsOpen,Converter={StaticResource BooleanInverseConverter}}">
                     <AppBarButton.Icon>
                         <PathIcon HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
@@ -79,7 +79,7 @@
                 </AppBarButton>
                 <AppBarButton x:Uid="/Main/About"
                               Grid.Column="3"
-                              IsCompact="{x:Bind AppBar.IsOpen, Converter={StaticResource BooleanInverseConverter}, Mode=OneWay}">
+                              IsCompact="{Binding ElementName=AppBar,Path=IsOpen,Converter={StaticResource BooleanInverseConverter}}">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                   Glyph="&#xE946;" />
@@ -113,13 +113,13 @@
                                           Stretch="UniformToFill" />
                         <!--#endregion-->
                         <GridView IsItemClickEnabled="True"
-                                  ItemsSource="{x:Bind}"
+                                  ItemsSource="{Binding}"
                                   SelectionMode="None">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="leanCloud:Wallpaper">
                                     <controls:WallpaperItem Width="160"
                                                             Height="96"
-                                                            Text="{x:Bind Archive.Info}"
+                                                            Text="{Binding Path=Archive.Info}"
                                                             Url="{x:Bind Image, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>

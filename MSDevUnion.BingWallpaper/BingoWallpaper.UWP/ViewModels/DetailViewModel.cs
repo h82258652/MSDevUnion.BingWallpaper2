@@ -1,4 +1,5 @@
-﻿using BingoWallpaper.Models.LeanCloud;
+﻿using BingoWallpaper.Configuration;
+using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Services;
 using GalaSoft.MvvmLight.Command;
@@ -23,10 +24,13 @@ namespace BingoWallpaper.Uwp.ViewModels
 
         private Wallpaper _wallpaper;
 
-        public DetailViewModel(ISystemSettingService systemSettingService, IShareService shareService)
+        private readonly IBingoWallpaperSettings _bingoWallpaperSettings;
+
+        public DetailViewModel(ISystemSettingService systemSettingService, IShareService shareService, IBingoWallpaperSettings bingoWallpaperSettings)
         {
             _systemSettingService = systemSettingService;
             _shareService = shareService;
+            _bingoWallpaperSettings = bingoWallpaperSettings;
         }
 
         public RelayCommand OpenLockScreenSettingCommand
@@ -59,6 +63,11 @@ namespace BingoWallpaper.Uwp.ViewModels
             {
                 _saveCommand = _saveCommand ?? new RelayCommand(() =>
                 {
+                    // TODO
+                    switch (_bingoWallpaperSettings.SelectedSaveLocation)
+                    {
+                    }
+
                     // TODO
                 });
                 return _saveCommand;
