@@ -59,6 +59,16 @@
                           x:Name="Image"
                           VerticalAlignment="Center"
                           ImageOpened="ImageEx_OnImageOpened"
-                          Source="{Binding Path=Wallpaper, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
+                          Source="{Binding Path=Wallpaper, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1366x768'}">
+            <controls:ImageEx.PlaceholderTemplate>
+                <DataTemplate>
+                    <ProgressBar Width="300"
+                                 VerticalAlignment="Center"
+                                 Value="{Binding ElementName=Image,Path=DownloadPercent}"
+                                 Minimum="0"
+                                 Maximum="100"></ProgressBar>
+                </DataTemplate>
+            </controls:ImageEx.PlaceholderTemplate>
+        </controls:ImageEx>
     </Grid>
 </local:ViewBase>

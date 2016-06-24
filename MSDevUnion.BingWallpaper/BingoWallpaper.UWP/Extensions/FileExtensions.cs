@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BingoWallpaper.Uwp.Extensions
@@ -7,11 +8,18 @@ namespace BingoWallpaper.Uwp.Extensions
     {
         public static async Task WriteAllBytesAsync(string path, byte[] bytes)
         {
+            // TODO
             await Task.Run(() =>
             {
                 var directory = Path.GetDirectoryName(path);
                 Directory.CreateDirectory(directory);
-                File.WriteAllBytes(path, bytes);
+                try
+                {
+                    File.WriteAllBytes(path, bytes);
+                }
+                catch (IOException)
+                {
+                }
             });
         }
     }

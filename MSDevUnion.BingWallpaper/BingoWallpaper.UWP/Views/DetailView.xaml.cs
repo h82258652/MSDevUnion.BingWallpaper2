@@ -40,18 +40,18 @@ namespace BingoWallpaper.Uwp.Views
 
         private void ImageEx_OnImageOpened(object sender, RoutedEventArgs e)
         {
-            var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("WallpaperAnimation");
-            if (animation != null)
-            {
-                if (animation.TryStart(Image))
-                {
-                    Image.Visibility = Visibility.Collapsed;
-                    animation.Completed += delegate
-                    {
-                        Image.Visibility = Visibility.Visible;
-                    };
-                }
-            }
+            //var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("WallpaperAnimation");
+            //if (animation != null)
+            //{
+            //    if (animation.TryStart(Image))
+            //    {
+            //        Image.Visibility = Visibility.Collapsed;
+            //        animation.Completed += delegate
+            //        {
+            //            Image.Visibility = Visibility.Visible;
+            //        };
+            //    }
+            //}
         }
     }
 }

@@ -134,7 +134,14 @@ namespace BingoWallpaper.Uwp.Controls
 
         public static void RemoveAllCache()
         {
-            Directory.Delete(GetCacheFolder().Path, true);
+            // TODO
+            try
+            {
+                Directory.Delete(GetCacheFolder().Path, true);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public static void RemoveCache(Uri uri)
@@ -191,83 +198,82 @@ namespace BingoWallpaper.Uwp.Controls
         {
             var cacheFileName = GetCacheFileName(uri);
 
-            using (await StringTaskLocker.GetLockerAsync(cacheFileName))
+            // TODO
+            ImageEx.RemoveAllCache();
+            if (File.Exists(cacheFileName) == false)
             {
-                if (File.Exists(cacheFileName) == false)
+                _image.Source = null;
+                _image.Visibility = Visibility.Collapsed;
+                _placeholderContentControl.Visibility = Visibility.Visible;
+
+                byte[] bytes;
+                using (var client = new HttpClient())
                 {
-                    _image.Source = null;
-                    _image.Visibility = Visibility.Collapsed;
-                    _placeholderContentControl.Visibility = Visibility.Visible;
-
-                    byte[] bytes;
-                    using (var client = new HttpClient())
-                    {
-                        try
-                        {
-                            var task = client.GetBufferAsync(uri);
-                            DownloadPercent = 0;
-                            task.Progress = async (info, progressInfo) =>
-                            {
-                                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                                {
-                                    DownloadProgress?.Invoke(this, new HttpDownloadProgressEventArgs(progressInfo));
-                                    if (progressInfo.TotalBytesToReceive.HasValue)
-                                    {
-                                        DownloadPercent = progressInfo.BytesReceived * 100d /
-                                                          progressInfo.TotalBytesToReceive.Value;
-                                    }
-                                });
-                            };
-                            var buffer = await task;
-                            bytes = buffer.ToArray();
-                            DownloadPercent = 100;
-                        }
-                        catch (Exception ex)
-                        {
-                            ImageFailed?.Invoke(this, new ExceptionEventArgs(ex.Message));
-                            _image.Visibility = Visibility.Visible;
-                            _placeholderContentControl.Visibility = Visibility.Collapsed;
-                            return;
-                        }
-                    }
-
-                    // 保存图片。
                     try
                     {
-                        await FileExtensions.WriteAllBytesAsync(cacheFileName, bytes);
+                        var task = client.GetBufferAsync(uri);
+                        DownloadPercent = 0;
+                        task.Progress = async (info, progressInfo) =>
+                        {
+                            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                            {
+                                DownloadProgress?.Invoke(this, new HttpDownloadProgressEventArgs(progressInfo));
+                                if (progressInfo.TotalBytesToReceive.HasValue)
+                                {
+                                    DownloadPercent = progressInfo.BytesReceived * 100d /
+                                                      progressInfo.TotalBytesToReceive.Value;
+                                }
+                            });
+                        };
+                        var buffer = await task;
+                        bytes = buffer.ToArray();
+                        DownloadPercent = 100;
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // ignored
+                        ImageFailed?.Invoke(this, new ExceptionEventArgs(ex.Message));
+                        _image.Visibility = Visibility.Visible;
+                        _placeholderContentControl.Visibility = Visibility.Collapsed;
+                        return;
                     }
+                }
 
-                    var bitmap = new BitmapImage();
-                    bitmap.ImageOpened += (sender, e) =>
-                    {
-                        ImageOpened?.Invoke(this, e);
-                    };
-                    bitmap.ImageFailed += (sender, e) =>
-                    {
-                        ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
-                    };
-                    await bitmap.SetSourceAsync(new MemoryStream(bytes).AsRandomAccessStream());
-                    _image.Source = bitmap;
-                    _image.Visibility = Visibility.Visible;
-                    _placeholderContentControl.Visibility = Visibility.Collapsed;
-                }
-                else
+                // 保存图片。
+                try
                 {
-                    var bitmap = new BitmapImage(new Uri(cacheFileName, UriKind.Absolute));
-                    bitmap.ImageOpened += (sender, e) =>
-                    {
-                        ImageOpened?.Invoke(this, e);
-                    };
-                    bitmap.ImageFailed += (sender, e) =>
-                    {
-                        ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
-                    };
-                    _image.Source = bitmap;
+                    await FileExtensions.WriteAllBytesAsync(cacheFileName, bytes);
                 }
+                catch
+                {
+                    // ignored
+                }
+
+                var bitmap = new BitmapImage();
+                bitmap.ImageOpened += (sender, e) =>
+                {
+                    ImageOpened?.Invoke(this, e);
+                };
+                bitmap.ImageFailed += (sender, e) =>
+                {
+                    ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
+                };
+                await bitmap.SetSourceAsync(new MemoryStream(bytes).AsRandomAccessStream());
+                _image.Source = bitmap;
+                _image.Visibility = Visibility.Visible;
+                _placeholderContentControl.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var bitmap = new BitmapImage(new Uri(cacheFileName, UriKind.Absolute));
+                bitmap.ImageOpened += (sender, e) =>
+                {
+                    ImageOpened?.Invoke(this, e);
+                };
+                bitmap.ImageFailed += (sender, e) =>
+                {
+                    ImageFailed?.Invoke(this, new ExceptionEventArgs(e.ErrorMessage));
+                };
+                _image.Source = bitmap;
             }
         }
 
