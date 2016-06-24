@@ -1,7 +1,10 @@
-﻿using BingoWallpaper.Uwp.ViewModels;
+﻿using BingoWallpaper.Uwp.Animations;
+using BingoWallpaper.Uwp.ViewModels;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using WinRTXamlToolkit.Controls.Extensions;
 
 namespace BingoWallpaper.Uwp.Views
 {
@@ -17,15 +20,11 @@ namespace BingoWallpaper.Uwp.Views
         public MainView()
         {
             InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
             _timer.Tick += Timer_Tick;
         }
 
         public MainViewModel ViewModel => (MainViewModel)DataContext;
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            ViewModel.IsBusy = ViewModel.IsBusy == false;
-        }
 
         private void Timer_Tick(object sender, object e)
         {
@@ -38,8 +37,16 @@ namespace BingoWallpaper.Uwp.Views
             RefreshIconRotateTransform.Angle = angle;
         }
 
-        private void ListViewBase_OnItemClick(object sender, ItemClickEventArgs e)
+        private async void WallpaperItem_Click(object sender, ItemClickEventArgs e)
         {
+            var view = (ItemsControl)sender;
+            var wallpaperItem = view.ContainerFromItem(e.ClickedItem);
+            var image = wallpaperItem.GetFirstDescendantOfType<Image>();
+            if (image != null)
+            {
+                await ConnectedAnimationService.GetForCurrentView().PrepareToAnimateAsync("WallpaperAnimation", image);
+            }
+            Frame.Navigate(typeof(DetailView), e.ClickedItem);
         }
     }
 }

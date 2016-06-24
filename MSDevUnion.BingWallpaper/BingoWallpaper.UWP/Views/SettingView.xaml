@@ -65,9 +65,9 @@
                               IsOn="{Binding Path=AutoUpdateWallpaper,Mode=TwoWay}" />
                 <ToggleSwitch x:Uid="/Setting/AutoUpdateLockScreen"
                               Margin="10,10,10,0"
-                              IsOn="{x:Bind ViewModel.AutoUpdateLockScreen}" />
+                              IsOn="{Binding Path=AutoUpdateLockScreen,Mode=TwoWay}" />
                 <Button Margin="10,10,10,0"
-                        Command="{x:Bind ViewModel.ClearDataCacheCommand}" />
+                        Command="{Binding Path=ClearDataCacheCommand}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

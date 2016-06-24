@@ -6,6 +6,7 @@
                 xmlns:local="using:BingoWallpaper.Uwp.Views"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:uwp="using:FontAwesome.UWP"
+                xmlns:controls="using:BingoWallpaper.Uwp.Controls"
                 DataContext="{Binding Source={StaticResource Locator},
                                       Path=Detail}"
                 mc:Ignorable="d">
@@ -54,6 +55,10 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image Source="{Binding Path=Wallpaper, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
+        <controls:ImageEx HorizontalAlignment="Center"
+                          x:Name="Image"
+                          VerticalAlignment="Center"
+                          ImageOpened="ImageEx_OnImageOpened"
+                          Source="{Binding Path=Wallpaper, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1920x1080'}" />
     </Grid>
 </local:ViewBase>
