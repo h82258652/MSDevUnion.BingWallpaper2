@@ -5,7 +5,7 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C689CC5E-E392-4B2D-82F0-A62DD31A673C}</ProjectGuid>
+    <ProjectGuid>{1C6118CD-08F9-46F9-914F-AE629E1B7DF6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BingoWallpaper</RootNamespace>

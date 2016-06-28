@@ -255,7 +255,7 @@
       <Name>BingoWallpaper.Configuration.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\BingoWallpaper.Configuration\BingoWallpaper.Configuration.csproj">
-      <Project>{c689cc5e-e392-4b2d-82f0-a62dd31a673c}</Project>
+      <Project>{1c6118cd-08f9-46f9-914f-ae629e1b7df6}</Project>
       <Name>BingoWallpaper.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\BingoWallpaper.Models\BingoWallpaper.Models.csproj">
