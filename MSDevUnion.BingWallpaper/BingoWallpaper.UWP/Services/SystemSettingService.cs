@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.System;
 using Windows.System.UserProfile;
 
@@ -21,8 +22,10 @@ namespace BingoWallpaper.Uwp.Services
         {
             if (UserProfilePersonalizationSettings.IsSupported())
             {
-                // TODO
-                return await UserProfilePersonalizationSettings.Current.TrySetLockScreenImageAsync(null);
+                // TODO file name
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("lockscreen.jpg", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteBytesAsync(file, imageBytes);
+                return await UserProfilePersonalizationSettings.Current.TrySetLockScreenImageAsync(file);
             }
             return false;
         }
@@ -31,8 +34,10 @@ namespace BingoWallpaper.Uwp.Services
         {
             if (UserProfilePersonalizationSettings.IsSupported())
             {
-                // TODO
-                return await UserProfilePersonalizationSettings.Current.TrySetWallpaperImageAsync(null);
+                // TODO file name
+                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync("wallpaper.jpg", CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteBytesAsync(file, imageBytes);
+                return await UserProfilePersonalizationSettings.Current.TrySetWallpaperImageAsync(file);
             }
             return false;
         }
