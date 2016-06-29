@@ -121,8 +121,7 @@
                         <!--#endregion-->
                         <GridView IsItemClickEnabled="True"
                                   ItemsSource="{Binding}"
-                                  SelectionMode="None"
-                                  ItemClick="WallpaperItem_Click">
+                                  SelectionMode="None">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="leanCloud:Wallpaper">
                                     <controls:WallpaperItem Width="160"
@@ -131,11 +130,11 @@
                                                             Url="{Binding Path=Image,Converter={StaticResource WallpaperUrlConverter},ConverterParameter='1920x1080'}" />
                                 </DataTemplate>
                             </GridView.ItemTemplate>
-                            <!--<interactivity:Interaction.Behaviors>
+                            <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Main.ClickCommand}" />
                                 </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
+                            </interactivity:Interaction.Behaviors>
                         </GridView>
                     </Grid>
                 </DataTemplate>

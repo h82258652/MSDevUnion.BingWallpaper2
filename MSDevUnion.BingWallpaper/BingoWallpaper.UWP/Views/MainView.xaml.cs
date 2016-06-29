@@ -36,17 +36,5 @@ namespace BingoWallpaper.Uwp.Views
             }
             RefreshIconRotateTransform.Angle = angle;
         }
-
-        private async void WallpaperItem_Click(object sender, ItemClickEventArgs e)
-        {
-            var view = (ItemsControl)sender;
-            var wallpaperItem = view.ContainerFromItem(e.ClickedItem);
-            var image = wallpaperItem.GetFirstDescendantOfType<Image>();
-            if (image != null)
-            {
-                await ConnectedAnimationService.GetForCurrentView().PrepareToAnimateAsync("WallpaperAnimation", image);
-            }
-            Frame.Navigate(typeof(DetailView), e.ClickedItem);
-        }
     }
 }

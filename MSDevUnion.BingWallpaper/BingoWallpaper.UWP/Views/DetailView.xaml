@@ -13,7 +13,7 @@
     <Page.Resources>
         <converters:WallpaperUrlConverter x:Key="WallpaperUrlConverter" />
     </Page.Resources>
-    <!--<Page.Transitions>
+    <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
                 <NavigationThemeTransition.DefaultNavigationTransitionInfo>
@@ -21,7 +21,7 @@
                 </NavigationThemeTransition.DefaultNavigationTransitionInfo>
             </NavigationThemeTransition>
         </TransitionCollection>
-    </Page.Transitions>-->
+    </Page.Transitions>
     <Page.BottomAppBar>
         <CommandBar Background="{ThemeResource SystemAccentBrush}">
             <CommandBar.SecondaryCommands>
@@ -58,7 +58,6 @@
         <controls:ImageEx HorizontalAlignment="Center"
                           x:Name="Image"
                           VerticalAlignment="Center"
-                          ImageOpened="ImageEx_OnImageOpened"
                           Source="{Binding Path=Wallpaper, Converter={StaticResource WallpaperUrlConverter}, ConverterParameter='1366x768'}">
             <controls:ImageEx.PlaceholderTemplate>
                 <DataTemplate>
