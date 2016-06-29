@@ -40,8 +40,8 @@ namespace BingoWallpaper.BackgroundTask
 
                     if (_settings.AutoUpdateWallpaper || _settings.AutoUpdateLockScreen)
                     {
-                        var width = await _screenService.GetWidthAsync();
-                        var height = await _screenService.GetHeightAsync();
+                        var width = await _screenService.GetScreenWidthInRawPixelsAsync();
+                        var height = await _screenService.GetScreenHeightInRawPixelsAsync();
 
                         // 判断当前 Service 是否包含此尺寸。
                         // TODO

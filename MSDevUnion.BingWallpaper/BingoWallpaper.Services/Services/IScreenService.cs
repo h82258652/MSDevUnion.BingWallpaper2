@@ -4,8 +4,8 @@ namespace BingoWallpaper.Services
 {
     public interface IScreenService
     {
-        Task<int> GetWidthAsync();
+        Task<uint> GetScreenHeightInRawPixelsAsync();
 
-        Task<int> GetHeightAsync();
+        Task<uint> GetScreenWidthInRawPixelsAsync();
     }
 }
