@@ -1,8 +1,10 @@
 ﻿using BingoWallpaper.Configuration;
+using BingoWallpaper.Models;
 using BingoWallpaper.Models.LeanCloud;
 using BingoWallpaper.Services;
 using BingoWallpaper.Uwp.Services;
 using GalaSoft.MvvmLight.Command;
+using System;
 
 namespace BingoWallpaper.Uwp.ViewModels
 {
@@ -66,6 +68,20 @@ namespace BingoWallpaper.Uwp.ViewModels
                     // TODO
                     switch (_bingoWallpaperSettings.SelectedSaveLocation)
                     {
+                        case SaveLocation.PictureLibrary:
+                            // TODO
+                            break;
+
+                        case SaveLocation.ChooseEveryTime:
+                            // TODO
+                            break;
+
+                        case SaveLocation.SavedPictures:
+                            // TODO
+                            break;
+
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
 
                     // TODO
