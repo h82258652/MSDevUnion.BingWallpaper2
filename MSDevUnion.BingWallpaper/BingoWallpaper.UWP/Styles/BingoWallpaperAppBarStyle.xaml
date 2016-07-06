@@ -11,5 +11,68 @@
                 </interactivity:BehaviorCollection>
             </Setter.Value>
         </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="AppBar">
+                    <Grid x:Name="LayoutRoot">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl Grid.Column="0"
+                                            Content="{TemplateBinding Content}"
+                                            IsTabStop="False" />
+                            <Button Grid.Column="1"
+                                    MinHeight="{ThemeResource AppBarThemeCompactHeight}"
+                                    Padding="16,23,16,0">
+                                <FontIcon x:Name="EllipsisIcon"
+                                          Height="{ThemeResource AppBarExpandButtonCircleDiameter}"
+                                          VerticalAlignment="Center"
+                                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                          FontSize="16"
+                                          Glyph="&#xE10C;"
+                                          RenderTransformOrigin="0.5,0.5">
+                                    <FontIcon.RenderTransform>
+                                        <TransformGroup>
+                                            <RotateTransform />
+                                        </TransformGroup>
+                                    </FontIcon.RenderTransform>
+                                </FontIcon>
+                            </Button>
+                        </Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="DisplayModeStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.467"
+                                                      From="CompactClosed"
+                                                      To="CompactOpenUp">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="EllipsisIcon"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(RotateTransform.Angle)"
+                                                             From="0"
+                                                             To="180" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="CompactClosed" />
+                                <VisualState x:Name="CompactOpenUp" />
+                                <VisualState x:Name="CompactOpenDown" />
+                                <VisualState x:Name="MinimalClosed" />
+                                <VisualState x:Name="MinimalOpenUp" />
+                                <VisualState x:Name="MinimalOpenDown" />
+                                <VisualState x:Name="HiddenClosed" />
+                                <VisualState x:Name="HiddenOpenUp" />
+                                <VisualState x:Name="HiddenOpenDown" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
