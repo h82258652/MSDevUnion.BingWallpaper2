@@ -58,6 +58,39 @@
                                                              To="180" />
                                         </Storyboard>
                                     </VisualTransition>
+                                    <VisualTransition From="CompactOpenUp"
+                                                      To="CompactClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
+                                    <VisualTransition From="CompactClosed"
+                                                      To="CompactOpenDown"
+                                                      GeneratedDuration="0:0:0.467"></VisualTransition>
+                                    <VisualTransition From="CompactOpenDown"
+                                                      To="CompactClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
+                                    <VisualTransition From="MinimalClosed"
+                                                      To="MinimalOpenUp"
+                                                      GeneratedDuration="0:0:0.467"></VisualTransition>
+                                    <VisualTransition From="MinimalOpenUp"
+                                                      To="MinimalClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
+                                    <VisualTransition From="MinimalClosed"
+                                                      To="MinimalOpenDown"
+                                                      GeneratedDuration="0:0:0.467"></VisualTransition>
+                                    <VisualTransition From="MinimalOpenDown"
+                                                      To="MinimalClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
+                                    <VisualTransition From="HiddenClosed"
+                                                      To="HiddenOpenUp"
+                                                      GeneratedDuration="0:0:0.467"></VisualTransition>
+                                    <VisualTransition From="HiddenOpenUp"
+                                                      To="HiddenClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
+                                    <VisualTransition From="HiddenClosed"
+                                                      To="HiddenOpenDown"
+                                                      GeneratedDuration="0:0:0.467"></VisualTransition>
+                                    <VisualTransition From="HiddenOpenDown"
+                                                      To="HiddenClosed"
+                                                      GeneratedDuration="0:0:0.167"></VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="CompactClosed" />
                                 <VisualState x:Name="CompactOpenUp" />

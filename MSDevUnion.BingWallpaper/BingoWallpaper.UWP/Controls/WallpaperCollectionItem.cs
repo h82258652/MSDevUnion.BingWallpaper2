@@ -62,8 +62,11 @@ namespace BingoWallpaper.Uwp.Controls
 
         private void Canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            GaussianBlurEffect blur = new GaussianBlurEffect();
-            blur.Source = _backgroundBitmap;
+            var blur = new GaussianBlurEffect
+            {
+                Source = _backgroundBitmap,
+                Optimization = EffectOptimization.Speed
+            };
             args.DrawingSession.DrawImage(blur);
 
             throw new NotImplementedException();
