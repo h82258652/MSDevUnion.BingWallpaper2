@@ -110,6 +110,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviors\BingoWallpaperAppBarBehavior.cs" />
     <Compile Include="Controls\HttpDownloadProgressEventArgs.cs" />
     <Compile Include="Controls\ExceptionEventArgs.cs" />
     <Compile Include="Controls\FirstDoubleSizePanel.cs" />
