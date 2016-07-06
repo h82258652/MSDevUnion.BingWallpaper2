@@ -11,6 +11,7 @@
       xmlns:leanCloud="using:BingoWallpaper.Models.LeanCloud"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:media="using:Microsoft.Xaml.Interactions.Media"
+      xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=Main}"
       mc:Ignorable="d">
@@ -118,6 +119,7 @@
                                                            Converter={StaticResource WallpaperUrlConverter},
                                                            ConverterParameter='1920x1080'}"
                                           Stretch="UniformToFill" />
+                        <canvas:CanvasControl Draw="CanvasControl_Draw"></canvas:CanvasControl>
                         <!--#endregion-->
                         <GridView IsItemClickEnabled="True"
                                   ItemsSource="{Binding}"

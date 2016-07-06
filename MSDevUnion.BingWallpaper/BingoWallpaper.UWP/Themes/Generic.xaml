@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/ImageEx.xaml" />
+        <ResourceDictionary Source="/Themes/WallpaperCollectionItem.xaml" />
         <ResourceDictionary Source="/Themes/WallpaperItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

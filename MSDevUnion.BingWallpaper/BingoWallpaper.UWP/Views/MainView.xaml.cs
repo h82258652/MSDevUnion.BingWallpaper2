@@ -1,5 +1,6 @@
 ﻿using BingoWallpaper.Uwp.Animations;
 using BingoWallpaper.Uwp.ViewModels;
+using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,6 +36,10 @@ namespace BingoWallpaper.Uwp.Views
                 angle -= 360d;
             }
             RefreshIconRotateTransform.Angle = angle;
+        }
+
+        private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
         }
     }
 }
