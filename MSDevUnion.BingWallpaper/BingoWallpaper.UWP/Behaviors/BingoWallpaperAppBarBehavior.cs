@@ -23,7 +23,7 @@ namespace BingoWallpaper.Uwp.Behaviors
 
         private void AppBar_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            // TODO
         }
     }
 }
