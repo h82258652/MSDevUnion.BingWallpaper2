@@ -34,6 +34,7 @@
                             <Button x:Name="ExpandButton"
                                     Grid.Column="1"
                                     MinHeight="{ThemeResource AppBarThemeCompactHeight}"
+                                    Foreground="{TemplateBinding Foreground}"
                                     Padding="16,23,16,0">
                                 <FontIcon x:Name="EllipsisIcon"
                                           Height="{ThemeResource AppBarExpandButtonCircleDiameter}"
