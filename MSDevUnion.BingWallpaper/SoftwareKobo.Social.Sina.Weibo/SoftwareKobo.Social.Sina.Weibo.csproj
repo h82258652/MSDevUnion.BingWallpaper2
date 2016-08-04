@@ -110,7 +110,6 @@
     <Compile Include="WeiboAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeiboClient.cs" />
-    <Compile Include="WeiboService.cs" />
     <EmbeddedResource Include="Properties\SoftwareKobo.Social.Sina.Weibo.rd.xml" />
   </ItemGroup>
   <ItemGroup>
